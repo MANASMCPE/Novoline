@@ -1643,7 +1643,7 @@ if spec.id=='nvfps'then for _,p in spec.pieces do if p.type=='stat'and p.label==
 'FPS Counter'then p.label='FPS'made=true end end end end if not seededFps then
 local has=false for _,spec in store.list do if spec.id=='nvfps'then has=true
 break end end if not has and#store.list<WG.MAX then store.list[#store.list+1]={
-id='nvfps',pieces={{type='heading',text='MonK'},{type='stat',stat='fps',
+id='nvfps',pieces={{type='heading',text='Novoline'},{type='stat',stat='fps',
 label='FPS'}}}end seededFps=true made=true end local stale=type(raw)=='table'and
 raw.v~=2 if WG.assignSlots(store.list)or made or stale then store.save()end end
 function store.save()local keep={}for _,spec in store.list do if#spec.pieces>0
@@ -2665,7 +2665,7 @@ EasingStyle.Quad,Enum.EasingDirection.Out)}local wrapSg=createInstance(
 ZIndexBehavior=Enum.ZIndexBehavior.Sibling,DisplayOrder=55})_G.
 _nv_stealthParent(wrapSg)wrapSg.Destroying:Connect(_G._nv_previewCleanup)_nvL.
 wrap=createInstance('Frame',{Parent=wrapSg,Name='Wrap'})_nvL.wrap:SetAttribute(
-'LayoutRevision','MonK / upstream 9 merge')_nvL.wrap:SetAttribute('Expanded'
+'LayoutRevision','Novoline / upstream 9 merge')_nvL.wrap:SetAttribute('Expanded'
 ,false)_nvL.wrap.AnchorPoint=Vector2.new(0.5,1)_nvL.wrap.Position=UDim2.new(0.5,
 0,1,-24)_nvL.wrap.Size=UDim2.fromOffset(pill.closedW,pill.closedH)_nvL.wrap.
 BackgroundColor3=Color3.new(1,1,1)_nvL.wrap.BackgroundTransparency=0.06 _nvL.
@@ -6673,7 +6673,7 @@ _nv_toastLift)or 0))/T.MS end function T.width(s,size,font)if s==''then return 0
 end local ok,v=pcall(function()return T.ts:GetTextSize(s,size,font,Vector2.new(
 4000,400)).X end)return ok and v or#s*size*0.55 end function T.build(spec)local
 holder=T.gui()local o={hovered=false,gone=false}local title=tostring(spec.title
-or'MonK')local text=tostring(spec.text or'')local plain=(title:gsub(
+or'Novoline')local text=tostring(spec.text or'')local plain=(title:gsub(
 '<[^>]+>',''))local actions=type(spec.actions)=='table'and spec.actions or nil
 local side=T.TEXT_X+T.PAD_R+(spec.closable and 30 or 0)+(actions and#actions*36
 or 0)local widest=math.max(T.width(plain,13,Enum.Font.GothamBold),T.width(text,
@@ -6805,11 +6805,11 @@ and soundId~='')and soundId or nil local numericSound=tonumber(soundId)local
 iconPx=tonumber(opts.iconSize)task.spawn(function()task.spawn(function()local
 sid=customSound if not sid then if opts.skipSfx then return end sid=
 'rbxassetid://'..tostring(numericSound or 255881176)end local snd=
-createInstance('Sound',{Name='MonKNotify',SoundId=sid,Volume=customSound and
+createInstance('Sound',{Name='NovolineNotify',SoundId=sid,Volume=customSound and
 1 or 0.6,RollOffMaxDistance=0})pcall(function()snd.Parent=game:GetService(
 'SoundService')end)pcall(function()snd:Play()end)game:GetService('Debris'):
 AddItem(snd,customSound and 16 or 4)end)local T=_nvToast local rawTitle=
-tostring(title or'MonK')local body=text~=nil and tostring(text)or''local
+tostring(title or'Novoline')local body=text~=nil and tostring(text)or''local
 image,fluent=T.icon(iconId)local tint,cat=T.pick((rawTitle:gsub('<[^>]+>','')),
 body)local o=T.build({title=rawTitle,text=body,image=image,fluent=fluent or cat,
 tint=tint,iconPx=iconPx,timed=true,actions=panelAction and{panelAction}or nil})T
@@ -16560,7 +16560,7 @@ return hum~=nil and hum.RigType==Enum.HumanoidRigType.R15 end,toClipboard=
 function(txt)if setclipboard then setclipboard(tostring(txt))pluginNotify(
 'Clipboard','Copied to clipboard')end end,COREGUI=game:GetService('CoreGui'),
 IYMouse=_nvL.lp:GetMouse(),PlayerGui=_nvL.lp:FindFirstChildWhichIsA('PlayerGui')
-,MonK={Panel=function(title,width)return newPanel(info,title,width)end,
+,Novoline={Panel=function(title,width)return newPanel(info,title,width)end,
 Overlay=function(width,height,onMoved)return newOverlay(info,width,height,
 onMoved)end,Notify=pluginNotify,Run=runCommand}}return setmetatable(env,{__index
 =function(_,k)local v=base[k]if v==nil and type(k)=='string'and k:match('^%u')
@@ -16696,7 +16696,7 @@ customEmptyLbl=createInstance('TextLabel',{Parent=scroll,BackgroundTransparency=
 .SUB customEmptyLbl.TextWrapped=true customEmptyLbl.TextXAlignment=Enum.
 TextXAlignment.Center customEmptyLbl.Text=
 [[No custom commands found.
-Add .lua or .txt files to MonK/Scripts/ to add.]]
+Add .lua or .txt files to Novoline/Scripts/ to add.]]
 customEmptyLbl.Visible=false customEmptyLbl.ZIndex=13 end local
 invisVisibleParts={}local function invCollectParts()invisVisibleParts={}local
 char=_nvL.lp.Character if not char then return end for _,v in char:
@@ -17347,7 +17347,7 @@ customEmptyLbl then customEmptyLbl.Visible=totalRows==0 if selectedCat=='custom'
 and text:match('^%s*$')then customEmptyLbl.Text=
 [[No custom commands yet.
 Add .lua or .txt files to
-MonK/Scripts/.]]elseif
+Novoline/Scripts/.]]elseif
 hasSpace and word1~=''then customEmptyLbl.Text=
 [[Enter the command arguments above.
 Press Enter when ready to run.]]else
@@ -19915,7 +19915,7 @@ and type(files)=='table'then return files end return nil end local function
 baseName(path)local s=tostring(path):gsub('\\','/')return s:match('([^/]+)$')or
 s end local function pathLow(path)return string.lower(tostring(path):gsub('\\',
 '/'))end local function skipWalk(path)local b=string.lower(baseName(path))if b==
-'MonK'or b=='dex'or b=='client_cache'or b=='serverhistory'or b==
+'novoline'or b=='dex'or b=='client_cache'or b=='serverhistory'or b==
 'static_content'or b=='luaprotv2'or b=='fallen'then return true end return false
 end local customsDirs={}local jsonFiles={}local seen={}local function addDir(
 path)if type(path)~='string'or path==''then return end local k=pathLow(path)if
@@ -20996,7 +20996,7 @@ BorderSizePixel=0,ZIndex=20})_G._nv_setThumb(face,lp.UserId,'AvatarHeadShot',150
 )I.corner(face)local ring=createInstance('UIStroke',{Parent=face,Color=Color3.
 new(1,1,1),Transparency=0.86,Thickness=1})I.name=lp.DisplayName I.hello=I.label(
 pg,'Hello, '..I.name,Enum.Font.GothamBlack,TS(40),C.TEXT,P(24),P(86),W-P(48),P(
-48),CENTER)I.label(pg,'Welcome to MonK '..tostring(_nv_version),Enum.Font.
+48),CENTER)I.label(pg,'Welcome to Novoline '..tostring(_nv_version),Enum.Font.
 GothamBold,TS(16),C.TEXT,P(24),P(138),W-P(48),P(22),CENTER)local b=I.label(pg,
 [[300+ commands, a music player, a player list and a script library, all one ]]
 ..(mobile and'tap'or'key')..' away.',Enum.Font.GothamMedium,TS(14),SUBTLE,P(70),
@@ -21434,7 +21434,7 @@ if not expanded then tween(card,TweenInfo.new(0.12),{BackgroundTransparency=0.93
 })end end)hitbox.MouseLeave:Connect(function()if not expanded then tween(card,
 TweenInfo.new(0.18),{BackgroundTransparency=0.955})end end)rebuildFn()return
 card end builders[7]=function(panel)_G._nv_pageHeader(panel,'Plus',
-'Connected through MonK')panel:SetAttribute('ContentRevision',
+'Connected through Novoline')panel:SetAttribute('ContentRevision',
 'Plus workspace 2')local total=createInstance('TextLabel',{Parent=panel,Name=
 'PlusCommandCount',BackgroundTransparency=1,Position=UDim2.new(1,-138,0,16),Size
 =UDim2.fromOffset(122,18),Font=Enum.Font.GothamMedium,TextSize=12,Text=tostring(
@@ -22266,7 +22266,7 @@ save,onTrail=save})end return end local q=(st.query:match('^%s*(.-)%s*$')or''):
 lower()if q~=''then row({title='Search SoundCloud',sub='For "'..st.query:match(
 '^%s*(.-)%s*$')..'", or press Enter',icon='search',onClick=runSoundCloud})end if
 #tracks==0 then if q==''then empty.Text=
-[[No songs yet. Search SoundCloud above, or drop .mp3, .ogg or .wav files into NOVOLINE/songs.]]
+[[No songs yet. Search SoundCloud above, or drop .mp3, .ogg or .wav files into Novoline/songs.]]
 end return end local shown=0 for i,t in tracks do if q==''or tostring(t.name):
 lower():find(q,1,true)then shown+=1 local name=t.name trackRow(a,t,i,{onClick=
 function()a.usePlaylist(a.playlistFor(name))task.spawn(a.play,i)end,onDelete=
@@ -23098,8 +23098,8 @@ _nv_env().tag_show=v and'false'or'true'end)saveSettings()end),{cat='Music',group
 ='Source',kind='chips',label='Play music from',desc=
 'Spotify needs Spotify Premium',keys=
 'music spotify soundcloud source library player',options=function()return{{
-'MonK','SoundCloud'},{'spotify','Spotify'}}end,get=function()return _G.
-_nv_musicSpotify==true and'spotify'or'MonK'end,set=function(v)local sp=_G.
+'novoline','SoundCloud'},{'spotify','Spotify'}}end,get=function()return _G.
+_nv_musicSpotify==true and'spotify'or'novoline'end,set=function(v)local sp=_G.
 _nv_spotify if v=='spotify'and not(sp and sp.connected())then if _G.
 _nv_openSpotify then _G._nv_openSpotify()end return end if sp then sp.setSource(
 v=='spotify')else _G._nv_musicSpotify=false end end},{cat='Music',group='Source'
@@ -23209,7 +23209,7 @@ and l.Parent then l.Text=statusText(value.Text)end end)end end end local paints=
 {}local function repaint()for i=#paints,1,-1 do local p=paints[i]if not p.inst:
 IsDescendantOf(game)then table.remove(paints,i)else pcall(p.fn)end end end
 local function commit(spec,v)local ok,err=pcall(spec.set,v)if not ok then warn(
-'MonK settings '..tostring(spec.label)..': '..tostring(err))end repaint()end
+'Novoline settings '..tostring(spec.label)..': '..tostring(err))end repaint()end
 local build={}local ROW_H,COMPACT_H=56,40 function build.live(inst,fn)paints[#
 paints+1]={inst=inst,fn=fn}end function build.corner(obj,r)createInstance(
 'UICorner',{Parent=obj,CornerRadius=UDim.new(0,r)})end function build.tile(
@@ -23636,8 +23636,8 @@ freeze={'snowflake',Color3.fromRGB(13,40,51),Color3.fromRGB(64,186,255)},bring={
 GAP=113,128,12 for n,cmd in cmdList()do local col,row=(n-1)%4,(n-1)//4 if row>1
 then break end local spec=TILE[cmd.name]or{'flash'}local t={cmd=cmd,sentUntil=0,
 tinted=spec[2]~=nil}t.button=kit.softButton(actions,16+col*(TW+GAP),76+row*(TH+
-GAP),TW,TH,function()if not S.perm then _nvL.notify('MonK Plus',
-[[Plus commands need MonK Plus. Get it at novoline.pro/purchase]],4)return
+GAP),TW,TH,function()if not S.perm then _nvL.notify('Novoline Plus',
+[[Plus commands need Novoline Plus. Get it at novoline.pro/purchase]],4)return
 end if not t.ok or not S.selected then return end local p=P()if not p then
 return end local payload={}for k,v in cmd.payload or{}do payload[k]=v end p.
 fire(S.selected,cmd.name,payload)t.sentUntil=os.clock()+1.2 local lift=t.button:
@@ -24670,7 +24670,7 @@ _nv_setWrapVisible,true)end task.delay(0.08,function()if type(_nvL.setActiveTab)
 'Giveaways, early updates and help',btn='Copy invite',doneBtn='Copied',doneSub=
 'Invite copied, paste it in Discord'},{key='plus',icon='sparkle',btnIcon=
 'sparkle',chip='Plus',bg=Color3.fromRGB(38,28,62),fg=Color3.fromRGB(168,120,255)
-,title='MonK Plus',sub='Exclusive commands, perks and early features',btn=
+,title='Novoline Plus',sub='Exclusive commands, perks and early features',btn=
 'Get Plus',doneBtn='Link copied',doneSub='Open novoline.pro/purchase'},{key=
 'tags',icon='verified',btnIcon='link',chip='Nametags',bg=Color3.fromRGB(56,46,12
 ),fg=Color3.fromRGB(245,197,66),title='Custom nametags',sub=
@@ -24835,14 +24835,14 @@ if tail then slides[#slides+1]=tail end P.build()for _,s in slides do P.
 buildSlide(s)end P.buildRow()P.wire()P.state='live'P.show(1)P.conn=game:
 GetService('RunService').RenderStepped:Connect(function(dt)if not gui.Parent
 then P.stop()return end local ok,err=pcall(frame,dt)if not ok and not P.warned
-then P.warned=true warn('MonK promo: '..tostring(err))end end)end task.
+then P.warned=true warn('Novoline promo: '..tostring(err))end end)end task.
 spawn(function()local t0=os.clock()while gui.Parent and not(type(_G._nvBoot)==
 'table'and _G._nvBoot.welcomeDone)and os.clock()-t0<50 do task.wait(0.25)end
 task.wait(1)local t1=os.clock()while gui.Parent and os.clock()-t1<300 and(_G.
 _nvDiscordHoldUi==true or(type(_G._nvBoot)=='table'and _G._nvBoot.tutorialOpen==
 true))do task.wait(0.25)end task.wait(gatedRun and 2.5 or 1.2)if not gui.Parent
 then return end local ok,err=pcall(P.start)if not ok then warn(
-'MonK promo: '..tostring(err))pcall(P.stop)end end)gui.Destroying:Connect(
+'Novoline promo: '..tostring(err))pcall(P.stop)end end)gui.Destroying:Connect(
 function()pcall(P.stop)end)end end function __DARKLUA_BUNDLE_MODULES.aW():
 typeof(__modImpl())local v=__DARKLUA_BUNDLE_MODULES.cache.aW if not v then v={c=
 __modImpl()}__DARKLUA_BUNDLE_MODULES.cache.aW=v end return v.c end end do
@@ -26532,7 +26532,7 @@ if type(qot)=='function'then local _s={104,116,116,112,115,58,47,47,110,111,118,
 111,108,105,110,101,46,112,114,111}local _u=''for _,v in _s do _u=_u..string.
 char(v)end qot(
 [[            do
-                local LOCK = "MonK/.exec_lock"
+                local LOCK = "Novoline/.exec_lock"
                 local now = os.time()
                 local ok, raw = pcall(readfile, LOCK)
                 if ok and tonumber(raw) and (now - tonumber(raw)) < 10 then return end
@@ -26666,7 +26666,7 @@ BackgroundTransparency=1,AnchorPoint=Vector2.new(0,0.5),Position=UDim2.new(0,11,
 ImageColor3=Color3.fromRGB(255,255,255),ScaleType=Enum.ScaleType.Fit,ZIndex=201}
 )do local label=createInstance('TextLabel',{Parent=_fab,BackgroundTransparency=1
 ,AnchorPoint=Vector2.new(0,0.5),Position=UDim2.new(0,35,0.5,0),Size=UDim2.new(1,
--46,1,0),Font=Enum.Font.GothamBold,TextSize=13,text='MonK',TextColor3=Color3
+-46,1,0),Font=Enum.Font.GothamBold,TextSize=13,Text='Novoline',TextColor3=Color3
 .fromRGB(255,255,255),TextXAlignment=Enum.TextXAlignment.Left,ZIndex=201})
 _fabIcon:GetPropertyChangedSignal('ImageColor3'):Connect(function()label.
 TextColor3=_fabIcon.ImageColor3 end)end do local _fabBtn=createInstance(
@@ -26785,7 +26785,7 @@ _nv_unloadTab(i)end end local function _nv_ensureTabBuilt(idx)if _tabBuilt[idx]
 then return true end local cf=contentFrames[idx]if not cf or not cf.Parent then
 return false end if not builders[idx]then return false end _tabBuilt[idx]=true
 local _ok,_err=pcall(builders[idx],cf)if not _ok then _tabBuilt[idx]=false warn(
-'MonK: Tab builder error for '..tostring(ICONS[idx]and ICONS[idx].name)..
+'Novoline: Tab builder error for '..tostring(ICONS[idx]and ICONS[idx].name)..
 ': '..tostring(_err))return false end task.defer(function()pcall(_nvL.
 applyThemeTo,cf)end)task.defer(function()if _G._nv_scrollFadeAll then pcall(_G.
 _nv_scrollFadeAll,cf)end end)return true end _G._nv_tabMotionToken=0 do function
