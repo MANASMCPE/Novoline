@@ -139,7 +139,7 @@ _nv_ls_fade=fade _G._nv_bootPulse=os.clock()task.spawn(function()while gui.
 Parent and not dying and not _G._nv_bootDone do task.wait(3)if dying or _G.
 _nv_bootDone or not gui.Parent then return end if os.clock()-(_G._nv_bootPulse
 or 0)>20 then fade()return end end end)pcall(function()runService.Heartbeat:
-Wait()end)end)if not _nvLoadOk then warn('Novoline loader: '..tostring(
+Wait()end)end)if not _nvLoadOk then warn('MonK loader: '..tostring(
 _nvLoadResult))end if _nvLoadOk and _nvLoadResult==false then error('aborted',0)
 end end end function __DARKLUA_BUNDLE_MODULES.b():typeof(__modImpl())local v=
 __DARKLUA_BUNDLE_MODULES.cache.b if not v then v={c=__modImpl()}
@@ -863,10 +863,10 @@ value or''):match('^%s*(.-)%s*$')if value==''then return''end if value:match(
 '^%d+$')then return'rbxassetid://'..value end if value:match('^rbxassetid://')or
 value:match('^rbxthumb://')or value:match('^rbxasset://')then return value end
 if value:match('^https?://')then local ok,asset=false,nil pcall(function()if
-isfolder and not isfolder('Novoline')and makefolder then makefolder('Novoline')
+isfolder and not isfolder('MonK')and makefolder then makefolder('MonK')
 end local ext=value:lower():match('%.(%a+)$')or'png'ext=(ext=='jpg'or ext==
 'jpeg'or ext=='png'or ext=='webp')and ext or'png'local file=
-'Novoline/wallpaper_'..tostring(#value)..'.'..ext if not(isfile and isfile(file)
+'MonK/wallpaper_'..tostring(#value)..'.'..ext if not(isfile and isfile(file)
 )then local body=_nvL._nvHttpGet and _nvL._nvHttpGet(value,{minLen=64,retries=2,
 retryDelay=0.6})if type(body)~='string'or#body<64 then pcall(function()if type(
 game.HttpGet)=='function'then body=game:HttpGet(value)end end)end if type(body)
@@ -926,14 +926,14 @@ BackgroundTransparency=1 c.BorderSizePixel=0 if not asFrame then pill.setFade(c,
 1)end if not bare then _G._nv_glass(c,h<=60 and math.floor(h/2)or 28)if kit.
 makeDraggable and h>48 then kit.makeDraggable(c)end end if asFrame then pill.
 setFade(c,1)end table.insert(deck,c)return c end local LAYOUT_FILE=
-'Novoline/layout.json'local hs=game:GetService('HttpService')local saved={}
+'MonK/layout.json'local hs=game:GetService('HttpService')local saved={}
 pcall(function()if isfile and isfile(LAYOUT_FILE)then saved=hs:JSONDecode(
 readfile(LAYOUT_FILE))or{}end end)local function cardKey(c)local wid=c:
 GetAttribute('WidgetId')if type(wid)=='string'then return'w/'..wid end for idx,
 deck in pill.decks do for n,other in deck do if other==c then return tostring(
 idx)..'/'..n..'/'..c.Name end end end return end local function saveLayout()
-pcall(function()if isfolder and not isfolder('Novoline')then makefolder(
-'Novoline')end writefile(LAYOUT_FILE,hs:JSONEncode(saved))end)end local function
+pcall(function()if isfolder and not isfolder('MonK')then makefolder(
+'MonK')end writefile(LAYOUT_FILE,hs:JSONEncode(saved))end)end local function
 remember(c)local key=cardKey(c)if not key then return end saved[key]={c:
 GetAttribute('DragDX')or 0,c:GetAttribute('DragDY')or 0,c:GetAttribute('Zoom')or
 1,c:GetAttribute('RestW'),c:GetAttribute('RestH'),c:GetAttribute('LayoutRev')}
@@ -1195,11 +1195,11 @@ e[3])or 1 local w,h=tonumber(e[4]),tonumber(e[5])if not(w and h)then return e[1]
 or 0,e[2]or 0,bw,bh end return e[1]or 0,e[2]or 0,w*z,h*z end function LY.matches
 (e,dx,dy,w,h,bw,bh)local tx,ty,tw,th=LY.target(e,bw,bh)return math.abs(dx-tx)<=
 0.5 and math.abs(dy-ty)<=0.5 and math.abs(w-tw)<=0.5 and math.abs(h-th)<=0.5 end
-local layoutStore={}local LAYOUTS_FILE='Novoline/layouts.json'layoutStore.data={
+local layoutStore={}local LAYOUTS_FILE='MonK/layouts.json'layoutStore.data={
 list={},last=nil}function layoutStore.load()local raw pcall(function()if isfile
 and isfile(LAYOUTS_FILE)then raw=hs:JSONDecode(readfile(LAYOUTS_FILE))end end)
 layoutStore.data=LY.sanitize(raw)end function layoutStore.save()pcall(function()
-if isfolder and not isfolder('Novoline')then makefolder('Novoline')end
+if isfolder and not isfolder('MonK')then makefolder('MonK')end
 writefile(LAYOUTS_FILE,hs:JSONEncode({v=1,last=layoutStore.data.last,list=
 layoutStore.data.list}))end)end layoutStore.load()local function glideCard(c,dx,
 dy,w,h,delay,instant)c:SetAttribute('DragDX',dx)c:SetAttribute('DragDY',dy)if
@@ -1569,7 +1569,7 @@ then return nil end s=trim(s)if s:match('^https?://%S+$')then return'url',s end
 local n=s:match('^%d+$')or s:match('^rbxassetid://(%d+)$')if n then return'id',n
 end return nil end function WG.hash(s)local h=2166136261 for i=1,#s do h=bit32.
 bxor(h,s:byte(i))h=(bit32.lshift(h,24)+h*403)%4294967296 end return string.
-format('%08x',h)end function WG.imageFile(url,fmt)return'Novoline/images/'..WG.
+format('%08x',h)end function WG.imageFile(url,fmt)return'MonK/images/'..WG.
 hash(url)..'.'..fmt end function WG.imageSize(iw,ih)if not(type(iw)=='number'and
 type(ih)=='number'and iw>0 and ih>0)then return 200,200 end local r=math.clamp(
 iw/ih,1/3,3)if r>=1 then return 240,math.floor(240/r+0.5)end return math.floor(
@@ -1634,7 +1634,7 @@ local ka,va=WG.classifySrc(a)local kb,vb=WG.classifySrc(b)return ka~=nil and ka
 =='table'and spec.pieces or{}return#pieces==1 and pieces[1].type=='image'end
 local store={}store.list={}local seededFps=false local kit,lp=pill.kit,players.
 LocalPlayer local SUBTLE=kit.SUBTLE local hs=game:GetService('HttpService')local
-FILE='Novoline/widgets.json'local function newId()return(hs:GenerateGUID(false):
+FILE='MonK/widgets.json'local function newId()return(hs:GenerateGUID(false):
 gsub('-','')):sub(1,8):lower()end function store.load()local raw,made=nil,false
 pcall(function()if isfile and isfile(FILE)then raw=hs:JSONDecode(readfile(FILE))
 end end)store.list=WG.sanitize(raw,function()made=true return newId()end)
@@ -1648,7 +1648,7 @@ label='FPS'}}}end seededFps=true made=true end local stale=type(raw)=='table'and
 raw.v~=2 if WG.assignSlots(store.list)or made or stale then store.save()end end
 function store.save()local keep={}for _,spec in store.list do if#spec.pieces>0
 then keep[#keep+1]=spec end end pcall(function()if isfolder and not isfolder(
-'Novoline')then makefolder('Novoline')end writefile(FILE,hs:JSONEncode({v=2,
+'MonK')then makefolder('MonK')end writefile(FILE,hs:JSONEncode({v=2,
 seededFps=seededFps,list=keep}))end)end function store.find(id)for n,s in store.
 list do if s.id==id then return s,n end end return nil,nil end function store.
 add(spec)if#store.list>=WG.MAX then return nil end store.list[#store.list+1]=
@@ -1678,8 +1678,8 @@ nil,nil,"Couldn't download that link")return end if#body>8*1024*1024 then done(
 false,nil,nil,nil,'That image is over 8 MB')return end end local fmt,w,h=WG.
 imageInfo(body)if not fmt then done(false,nil,nil,nil,IMAGE_FAIL[w]or IMAGE_FAIL
 .unknown)return end if not file then file=WG.imageFile(value,fmt)local saved=
-pcall(function()if not isfolder('Novoline')then makefolder('Novoline')end if not
-isfolder('Novoline/images')then makefolder('Novoline/images')end writefile(file,
+pcall(function()if not isfolder('MonK')then makefolder('MonK')end if not
+isfolder('MonK/images')then makefolder('MonK/images')end writefile(file,
 body)end)if not saved then done(false,nil,nil,nil,"Couldn't save that image")
 return end end local ok,asset=pcall(getcustomasset,file)if not ok or type(asset)
 ~='string'or asset==''then done(false,nil,nil,nil,"Couldn't load that image")
@@ -1792,7 +1792,7 @@ pieces do local ph=heightOf(p)local f=createInstance('Frame',{Parent=stack,Name=
 'Piece',BackgroundTransparency=1,BorderSizePixel=0,Size=UDim2.new(1,0,0,ph),
 LayoutOrder=i,ZIndex=3})f:SetAttribute('NoFlex',true)local ok,err=pcall(build[p.
 type],f,p,out,editing)if ok then heights[#heights+1]=ph else warn(
-'Novoline widget piece: '..tostring(err))f:Destroy()end end out.w,out.h=230,WG.
+'MonK widget piece: '..tostring(err))f:Destroy()end end out.w,out.h=230,WG.
 stackHeight(heights)return out end local function mount(spec)local deck=pill.
 decks[1]if not deck or mounted[spec.id]then return nil end local slot=spec.slot
 or 0 local w,h=sizeOf(spec)local homeFps=spec.id=='nvfps'if homeFps then w=230
@@ -2055,7 +2055,7 @@ tween(pillCard,quick,{Position=UDim2.fromOffset(0,98),GroupTransparency=1})task.
 delay(0.22,function()if not pillShown then pillCard.Visible=false end end)end
 end local basePaint=pill.paintReset pill.paintReset=function()if basePaint then
 basePaint()end paintPill()end store.load()local function mountOne(spec)local ok,
-err=pcall(mount,spec)if not ok then warn('Novoline widget: '..tostring(err))end
+err=pcall(mount,spec)if not ok then warn('MonK widget: '..tostring(err))end
 end for _,spec in store.list do if spec.id=='nvfps'then mountOne(spec)end end
 for _,spec in store.list do if spec.id~='nvfps'then mountOne(spec)end end end
 end function __DARKLUA_BUNDLE_MODULES.n():typeof(__modImpl())local v=
@@ -2167,14 +2167,14 @@ catBar,0,0,w,28,function()category=cat[1]paintCats()refreshList()end,nil,14)b.
 LayoutOrder=n local l=kit.text(b,cat[2],Enum.Font.GothamBold,12,C.TEXT,0,0,w,28,
 Enum.TextXAlignment.Center)l.ZIndex=22 catButtons[cat[1] ]={button=b,label=l}end
 paintCats()local function query()return(box.Text:match('^%s*(%S*)')or''):lower()
-end local P={path='Novoline/pinned_cmds.json'}P.set=type(_G._nv_pinnedCmds)==
+end local P={path='MonK/pinned_cmds.json'}P.set=type(_G._nv_pinnedCmds)==
 'table'and _G._nv_pinnedCmds or{}_G._nv_pinnedCmds=P.set function P.load()pcall(
 function()if not(isfile and isfile(P.path))then return end local hs=game:
 GetService('HttpService')local ok,data=pcall(hs.JSONDecode,hs,readfile(P.path))
 if ok and type(data)=='table'then _nvClear(P.set)for _,v in data do if type(v)==
 'string'then P.set[v]=true end end end end)end function P.save()pcall(function()
-local hs=game:GetService('HttpService')if not isfolder('Novoline')then
-makefolder('Novoline')end local arr={}for k,on in P.set do if on then arr[#arr+1
+local hs=game:GetService('HttpService')if not isfolder('MonK')then
+makefolder('MonK')end local arr={}for k,on in P.set do if on then arr[#arr+1
 ]=k end end table.sort(arr)writefile(P.path,hs:JSONEncode(arr))end)end P.load()
 local L={rows={},tog={},togAt=0,MAX=100,away=true}local B={SHORT={RightAlt=
 'RAlt',LeftAlt='LAlt',RightControl='RCtrl',LeftControl='LCtrl',RightShift=
@@ -2183,7 +2183,7 @@ PageDown='PgDn',Insert='Ins',Delete='Del'}}function B.short(k)return B.SHORT[k]
 or(#k<=6 and k or k:sub(1,5))end function B.keyFor(name)for k,v in _nvL.
 _nv_binds do if v==name then return k end end return nil end function B.save()
 pcall(function()local hs=game:GetService('HttpService')if not isfolder(
-'Novoline')then makefolder('Novoline')end writefile('Novoline/binds.json',hs:
+'MonK')then makefolder('MonK')end writefile('MonK/binds.json',hs:
 JSONEncode(_nvL._nv_binds))end)end function B.listen(r)local name=r.cmd if not
 name or _nvL.keybindListening or B.busy then return end B.busy=true _nvL.
 keybindListening=true B.token=(B.token or 0)+1 local token=B.token r.listenFor=
@@ -2665,7 +2665,7 @@ EasingStyle.Quad,Enum.EasingDirection.Out)}local wrapSg=createInstance(
 ZIndexBehavior=Enum.ZIndexBehavior.Sibling,DisplayOrder=55})_G.
 _nv_stealthParent(wrapSg)wrapSg.Destroying:Connect(_G._nv_previewCleanup)_nvL.
 wrap=createInstance('Frame',{Parent=wrapSg,Name='Wrap'})_nvL.wrap:SetAttribute(
-'LayoutRevision','Novoline / upstream 9 merge')_nvL.wrap:SetAttribute('Expanded'
+'LayoutRevision','MonK / upstream 9 merge')_nvL.wrap:SetAttribute('Expanded'
 ,false)_nvL.wrap.AnchorPoint=Vector2.new(0.5,1)_nvL.wrap.Position=UDim2.new(0.5,
 0,1,-24)_nvL.wrap.Size=UDim2.fromOffset(pill.closedW,pill.closedH)_nvL.wrap.
 BackgroundColor3=Color3.new(1,1,1)_nvL.wrap.BackgroundTransparency=0.06 _nvL.
@@ -3127,7 +3127,7 @@ __DARKLUA_BUNDLE_MODULES.m()({C=C,_nvL=_nvL,createInstance=createInstance,pill=
 pill,players=players,wrapSg=wrapSg})end)()xpcall(function()return
 __DARKLUA_BUNDLE_MODULES.n()({C=C,_nvL=_nvL,createInstance=createInstance,pill=
 pill,players=players,runService=runService,tween=tween,userInputService=
-userInputService,wrapSg=wrapSg})end,function(err)warn('Novoline widgets: '..
+userInputService,wrapSg=wrapSg})end,function(err)warn('MonK widgets: '..
 tostring(err))end)do local queued,opened,busy={},{},{}local function warmPanel(
 idx)if _tabBuilt[idx]or not builders[idx]then return end if not contentFrames[
 idx]or not contentFrames[idx].Parent then _nv_createTabFrame(idx,false)end
@@ -3135,13 +3135,13 @@ _nv_ensureTabBuilt(idx)local cf=contentFrames[idx]if cf and _nvL.activeIndex~=
 idx then cf.Visible=false end end _G._nv_buildTab=function(idx)if type(idx)~=
 'number'or idx<=1 then return true end if busy[idx]then return false end opened[
 idx]=true busy[idx]=true local job=queued[idx]queued[idx]=nil if job then local
-ok,err=pcall(job)if not ok then warn('Novoline: tab '..tostring(idx)..
+ok,err=pcall(job)if not ok then warn('MonK: tab '..tostring(idx)..
 ' failed to load: '..tostring(err))end end pcall(warmPanel,idx)busy[idx]=false
 if(job or pill.deckMode~=idx)and pill.expanded and _nvL.activeIndex==idx and
 pill.showDeck then pcall(pill.showDeck,true)end return true end _G._nv_queueTab=
 function(idx,job)if type(job)~='function'then return end if type(idx)~='number'
 or idx<=1 or opened[idx]then local ok,err=pcall(job)if not ok then warn(
-'Novoline: tab '..tostring(idx)..' failed to load: '..tostring(err))end if type(
+'MonK: tab '..tostring(idx)..' failed to load: '..tostring(err))end if type(
 idx)=='number'and idx>1 and _nvL.activeIndex==idx and pill.showDeck then pcall(
 pill.showDeck,true)end return end queued[idx]=job end _G._nv_tabsPrimed=false
 task.spawn(function()while not _G._nv_homeReady and _nvL.wrap and _nvL.wrap.
@@ -3164,8 +3164,8 @@ _nvNavTabSound if not(snd and snd.Parent)then snd=createInstance('Sound',{Name=
 'NV_NavTab',Volume=0.8,SoundId=_G._nvNavTabSoundId,Parent=game:GetService(
 'SoundService')})_G._nvNavTabSound=snd end snd.TimePosition=0 pcall(function()
 snd:Play()end)end _G._nvCmdClickSoundUrl='https://pomf2.lain.la/f/fw30ngxi.mp3'
-task.spawn(function()pcall(function()local file='Novoline/sfx_forward.mp3'if not
-isfile(file)then if not isfolder('Novoline')then makefolder('Novoline')end local
+task.spawn(function()pcall(function()local file='MonK/sfx_forward.mp3'if not
+isfile(file)then if not isfolder('MonK')then makefolder('MonK')end local
 body=_nvL._nvHttpGet and _nvL._nvHttpGet(_G._nvCmdClickSoundUrl,{minLen=1024,
 retries=2,retryDelay=0.6})if type(body)~='string'or#body<1024 then return end
 writefile(file,body)end _G._nvCmdClickSound=createInstance('Sound',{Name=
@@ -3253,15 +3253,15 @@ function __DARKLUA_BUNDLE_MODULES.q():typeof(__modImpl())local v=
 __DARKLUA_BUNDLE_MODULES.cache.q if not v then v={c=__modImpl()}
 __DARKLUA_BUNDLE_MODULES.cache.q=v end return v.c end end do local function
 __modImpl()return function(env)local _genv=env._genv local createInstance=env.
-createInstance local sg=env.sg local config=type(_genv.NovolineArtwork)=='table'
-and _genv.NovolineArtwork or{}if config.Home==nil or tostring(config.Home)==
+createInstance local sg=env.sg local config=type(_genv.MonKArtwork)=='table'
+and _genv.MonKArtwork or{}if config.Home==nil or tostring(config.Home)==
 '89236563974501'then config.Home='85244670418453'end if config.Commands==nil
 then config.Commands='120223375054209'end if config.Players==nil then config.
 Players='114083460578812'end if config.Scripts==nil or tostring(config.Scripts)
 =='135455094990784'then config.Scripts='136676339842489'end if config.Music==nil
 then config.Music='128097812233685'end if config.Plus==nil then config.Plus=
 '127643409918546'end if config.Settings==nil then config.Settings=
-'134506767373593'end _genv.NovolineArtwork=config local cache={}local function
+'134506767373593'end _genv.MonKArtwork=config local cache={}local function
 resolve(source)if type(source)~='string'and type(source)~='number'then return
 nil end source=tostring(source):match('^%s*(.-)%s*$')if source==''then return
 nil end local id=source:match('^%d+$')or source:match('^rbxassetid://(%d+)$')if
@@ -3271,13 +3271,13 @@ getcustomasset or getcustomasset local write=_genv.writefile or writefile local
 exists=_genv.isfile or isfile local mkdir=_genv.makefolder or makefolder if
 type(asset)~='function'or type(write)~='function'or type(exists)~='function'then
 return nil end local hash=5381 for i=1,#source do hash=(hash*33+source:byte(i))%
-4294967296 end local prefix='Novoline/artwork_'..string.format('%08x',hash)for _
+4294967296 end local prefix='MonK/artwork_'..string.format('%08x',hash)for _
 ,ext in{'png','jpg','webp'}do local path=prefix..'.'..ext if exists(path)then
 cache[source]=asset(path)return cache[source]end end local body=game:HttpGet(
 source)if type(body)~='string'or#body>16*1024*1024 then return nil end local ext
 =body:sub(1,8)=='\137PNG\r\n\26\n'and'png'or body:sub(1,3)=='\255\216\255'and
 'jpg'or body:sub(1,4)=='RIFF'and body:sub(9,12)=='WEBP'and'webp'if not ext then
-return nil end if type(mkdir)=='function'then pcall(mkdir,'Novoline')end local
+return nil end if type(mkdir)=='function'then pcall(mkdir,'MonK')end local
 path=prefix..'.'..ext write(path,body)cache[source]=asset(path)return cache[
 source]end local entries={}local retained=createInstance('Folder',{Parent=sg,
 Name='ArtworkCache'})local stopped=false sg.Destroying:Connect(function()stopped
@@ -3369,10 +3369,10 @@ local v=__DARKLUA_BUNDLE_MODULES.cache.r if not v then v={c=__modImpl()}
 __DARKLUA_BUNDLE_MODULES.cache.r=v end return v.c end end do local function
 __modImpl()return function(env)local C=env.C local _nvL=env._nvL local
 createInstance=env.createInstance local tweenService=env.tweenService local
-ACC_FILE='Novoline/last_account.txt'local _prevAcc=nil pcall(function()if isfile
+ACC_FILE='MonK/last_account.txt'local _prevAcc=nil pcall(function()if isfile
 and isfile(ACC_FILE)then _prevAcc=readfile(ACC_FILE)end end)local _curAcc=
 tostring(_nvL.lp.UserId)pcall(function()if makefolder and isfolder and not
-isfolder('Novoline')then makefolder('Novoline')end if writefile then writefile(
+isfolder('MonK')then makefolder('MonK')end if writefile then writefile(
 ACC_FILE,_curAcc)end end)if _prevAcc~=_curAcc then local _toast=createInstance(
 'Frame',{Name='SignedInToast',AnchorPoint=Vector2.new(0,1),Position=UDim2.new(0,
 18,1,-18),Size=UDim2.new(0,198,0,52),BackgroundColor3=C.PANEL,
@@ -3672,7 +3672,7 @@ userChange,value)end end return handle end end function __DARKLUA_BUNDLE_MODULES
 local function __modImpl()return function(env)local _nvL=env._nvL local
 SPOTIFY_REDIRECT='http://127.0.0.1:8888/callback'local SCOPES=
 [[user-read-playback-state user-modify-playback-state user-read-currently-playing user-library-read user-library-modify playlist-read-private playlist-read-collaborative user-read-recently-played]]
-local SP={file='Novoline/spotify.json',cfg={},st={},art={},queueList={},queueRev
+local SP={file='MonK/spotify.json',cfg={},st={},art={},queueList={},queueRev
 =0,lists={},listRev=0,liked={},redirect=SPOTIFY_REDIRECT,dashboard=
 'https://developer.spotify.com/dashboard'}_G._nv_spotify=SP local hs=game:
 GetService('HttpService')local K={0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,
@@ -3718,7 +3718,7 @@ type(body)~='string'or body==''then return nil end local ok,data=pcall(hs.
 JSONDecode,hs,body)return ok and data or nil end function SP.load()local data
 pcall(function()if isfile(SP.file)then data=decode(readfile(SP.file))end end)SP.
 cfg=type(data)=='table'and data or{}end function SP.save()pcall(function()if not
-isfolder('Novoline')then makefolder('Novoline')end writefile(SP.file,hs:
+isfolder('MonK')then makefolder('MonK')end writefile(SP.file,hs:
 JSONEncode(SP.cfg))end)end function SP.connected()return type(SP.cfg.refresh)==
 'string'and SP.cfg.refresh~=''end function SP.needsReconnect()return SP.
 connected()and not tostring(SP.cfg.scope or''):find('user-library-read',1,true)
@@ -3880,11 +3880,11 @@ names,', ')}end if#list>=30 then break end end local sig={}for _,t in list do
 sig[#sig+1]=t.title end sig=table.concat(sig,'|')if sig~=SP.queueSig then SP.
 queueSig,SP.queueList,SP.queueRev=sig,list,SP.queueRev+1 end end function SP.
 fetchArt(key,url)if SP.art[key]~=nil then return end SP.art[key]=false task.
-spawn(function()local path='Novoline/spotify/art/'..key:gsub('[^%w_]','')..
+spawn(function()local path='MonK/spotify/art/'..key:gsub('[^%w_]','')..
 '.jpg'pcall(function()if isfile(path)then return end local res=SP.send({Url=url,
 Method='GET'})if not(res and res.StatusCode==200 and type(res.Body)=='string'and
-#res.Body>200)then return end for _,dir in{'Novoline','Novoline/spotify',
-'Novoline/spotify/art'}do if not isfolder(dir)then makefolder(dir)end end
+#res.Body>200)then return end for _,dir in{'MonK','MonK/spotify',
+'MonK/spotify/art'}do if not isfolder(dir)then makefolder(dir)end end
 writefile(path,res.Body)end)local ok,asset=pcall(getcustomasset,path)if ok and
 type(asset)=='string'and asset~=''then SP.art[key]=asset bump()else task.delay(
 20,function()if SP.art[key]==false then SP.art[key]=nil end end)end end)end
@@ -3949,7 +3949,7 @@ __DARKLUA_BUNDLE_MODULES.x():typeof(__modImpl())local v=__DARKLUA_BUNDLE_MODULES
 return v.c end end do local function __modImpl()return function(env)local LRCLIB
 ='https://lrclib.net/api'local LY={cache={},waiting={}}_G._nv_lyrics=LY local hs
 =game:GetService('HttpService')local AGENT=
-'Novoline (https://gitlab.com/PrismSoftworks/novoline)'function LY.clean(s)s=
+'MonK (https://gitlab.com/PrismSoftworks/MonK)'function LY.clean(s)s=
 tostring(s or'')s=s:gsub('%b()',''):gsub('%b[]','')s=s:gsub('%s+[Ff]t%.?%s.*$',
 ''):gsub('%s+[Ff]eat%.?%s.*$','')s=s:gsub('%s+%-%s+[Rr]emaster.*$',''):gsub(
 '%s+%-%s+[Ss]ped [Uu]p.*$',''):gsub('%s+%-%s+[Ss]lowed.*$','')return(s:gsub(
@@ -3998,7 +3998,7 @@ end end return at end end end function __DARKLUA_BUNDLE_MODULES.y():typeof(
 __modImpl())local v=__DARKLUA_BUNDLE_MODULES.cache.y if not v then v={c=
 __modImpl()}__DARKLUA_BUNDLE_MODULES.cache.y=v end return v.c end end do
 local function __modImpl()return function(env)local _nvL=env._nvL local PATH=
-'Novoline/configs.json'local MAX=12 local SKIP={['RadarPanel/Radar']=true,[
+'MonK/configs.json'local MAX=12 local SKIP={['RadarPanel/Radar']=true,[
 'FakelagPanel/Fakelag']=true,['AimbotPanel/EspMode']=true,['EspPanel/Hitboxes']=
 true,['EspPanel/Tracers']=true,['AimbotPanel/Tracers']=true}local store={values=
 {},list={},last=nil}pcall(function()if not(isfile and isfile(PATH))then return
@@ -4007,8 +4007,8 @@ readfile(PATH))end)if not(ok and type(d)=='table')then return end store.values=
 type(d.values)=='table'and d.values or{}store.list=type(d.list)=='table'and d.
 list or{}store.last=type(d.last)=='string'and d.last or nil end)local pending=
 false local function save()if pending then return end pending=true task.delay(
-0.5,function()pending=false pcall(function()if not isfolder('Novoline')then
-makefolder('Novoline')end writefile(PATH,game:GetService('HttpService'):
+0.5,function()pending=false pcall(function()if not isfolder('MonK')then
+makefolder('MonK')end writefile(PATH,game:GetService('HttpService'):
 JSONEncode(store))end)end)end local bound,defaults={},{}local cfg={}function cfg
 .key(anchor,label)if typeof(anchor)~='Instance'or type(label)~='string'or label
 ==''then return nil end local p=anchor while p and not p:GetAttribute(
@@ -4178,7 +4178,7 @@ and onOpen then onOpen()else setOpen(not open)end end)setOpen(false)return{
 setOpen=setOpen,button=switch}end end function __DARKLUA_BUNDLE_MODULES.A():
 typeof(__modImpl())local v=__DARKLUA_BUNDLE_MODULES.cache.A if not v then v={c=
 __modImpl()}__DARKLUA_BUNDLE_MODULES.cache.A=v end return v.c end end do
-local function __modImpl()return function()local K={DIR='Novoline/copied',SAMPLE
+local function __modImpl()return function()local K={DIR='MonK/copied',SAMPLE
 =1/30,MAX=60,TEAR=1,LOOSE=3.5,WINDOW=1,SPOOF=4,JUMP=10}K.INDEX=K.DIR..
 '/index.json'function K.match(text,players)text=tostring(text or''):lower():
 gsub('^%s*@?',''):gsub('%s+$','')if text==''then return nil end local best,
@@ -4319,8 +4319,8 @@ function K.list()local out={}for _,rec in readIndex()do if type(rec)=='table'and
 type(rec.name)=='string'and type(rec.path)=='string'then local ok,exists=pcall(
 isfile,rec.path)if ok and exists then out[#out+1]=rec end end end return out end
 function K.save(name,kfs,meta)if type(writefile)~='function'then return nil,
-'writefile not available'end pcall(function()if not isfolder('Novoline')then
-makefolder('Novoline')end if not isfolder(K.DIR)then makefolder(K.DIR)end end)
+'writefile not available'end pcall(function()if not isfolder('MonK')then
+makefolder('MonK')end if not isfolder(K.DIR)then makefolder(K.DIR)end end)
 name=tostring(name or''):gsub('[^%w %-_]',''):gsub('^%s+',''):gsub('%s+$','')if
 name==''then name='Copy'end local base,n=name,2 local path=K.DIR..'/'..name..
 '.lua'while type(isfile)=='function'and isfile(path)and n<=50 do name=base..' '
@@ -4468,7 +4468,7 @@ return true end end return false end function R.inList(list,item)for _,it in
 list or{}do if it==item then return true end end return false end function R.
 refreshKb(name)local list=state.kbRefreshers and state.kbRefreshers[name]if list
 then for _,fn in list do pcall(fn)end end end R.TITLES_FILE,R.titles,R.titleVer=
-'Novoline/reanim_names.json',{},0 pcall(function()if type(isfile)~='function'or
+'MonK/reanim_names.json',{},0 pcall(function()if type(isfile)~='function'or
 not isfile(R.TITLES_FILE)then return end local data=game:GetService(
 'HttpService'):JSONDecode(readfile(R.TITLES_FILE))if type(data)~='table'then
 return end for k,v in data do if type(k)=='string'and type(v)=='string'and v~=''
@@ -4476,8 +4476,8 @@ then R.titles[k]=v end end end)function R.title(name)return R.titles[name]or
 name end function R.setTitle(name,text)if type(name)~='string'then return end
 text=tostring(text or''):gsub('%s+',' '):gsub('^ ',''):gsub(' $',''):sub(1,40)R.
 titles[name]=(text~=''and text~=name)and text or nil R.titleVer+=1 pcall(
-function()if isfolder and not isfolder('Novoline')and makefolder then
-makefolder('Novoline')end writefile(R.TITLES_FILE,game:GetService('HttpService')
+function()if isfolder and not isfolder('MonK')and makefolder then
+makefolder('MonK')end writefile(R.TITLES_FILE,game:GetService('HttpService')
 :JSONEncode(R.titles))end)end function R.kbSig()local parts={}for k,b in state.
 favKeybinds or{}do parts[#parts+1]=k..'='..tostring(b.name)end table.sort(parts)
 return table.concat(parts,',')..'#'..R.titleVer end function R.stateSig()local a
@@ -4568,7 +4568,7 @@ function R.recElapsed()local f=state.recordFrames if type(f)=='table'and#f>0
 then return f[#f].Time or 0 end return 0 end function R.inCustom(rec)for _,it in
 state.customItems or{}do if it.category=='Recorded'and it.name==rec.name then
 return true end end if type(isfile)=='function'then local ok,e=pcall(isfile,(
-state.REANIM_RECORDED_CUSTOM_DIR or'Novoline/custom/Recorded')..'/'..tostring(
+state.REANIM_RECORDED_CUSTOM_DIR or'MonK/custom/Recorded')..'/'..tostring(
 rec.name)..(tostring(rec.path):match('%.%w+$')or'.json'))if ok and e then return
 true end end return false end function R.libraryError()local sc=state.
 reanimScroll if not sc then return false end for _,c in sc:GetChildren()do if c:
@@ -4726,10 +4726,10 @@ local function write(nm)nm=tostring(nm or''):gsub('[^%w %-_]',''):gsub('^%s+',''
 ):gsub('%s+$','')if nm==''then nm='pasted'end local ext='lua'local okJson,
 decoded=pcall(function()return game:GetService('HttpService'):JSONDecode(raw)end
 )if okJson and type(decoded)=='table'then ext='json'end if isfolder and
-makefolder then if not isfolder('Novoline')then makefolder('Novoline')end if not
-isfolder('Novoline/custom')then makefolder('Novoline/custom')end end local base,
-n=nm,2 while isfile and isfile('Novoline/custom/'..nm..'.'..ext)do nm=base..' '
-..n n+=1 end local path='Novoline/custom/'..nm..'.'..ext local wok,werr=pcall(
+makefolder then if not isfolder('MonK')then makefolder('MonK')end if not
+isfolder('MonK/custom')then makefolder('MonK/custom')end end local base,
+n=nm,2 while isfile and isfile('MonK/custom/'..nm..'.'..ext)do nm=base..' '
+..n n+=1 end local path='MonK/custom/'..nm..'.'..ext local wok,werr=pcall(
 writefile,path,raw)if not wok then _nvL.notify('Reanim','Save failed: '..
 tostring(werr))return end data.Text=''setImport(false)if _nvL.reloadCustom then
 task.spawn(_nvL.reloadCustom)end _nvL.notify('Reanim','Saved: '..nm:sub(1,24))
@@ -4842,7 +4842,7 @@ show=#G.items==0 empty.Visible=show if not show then return end local icon,line=
 icon,line='star',
 [[No favorites yet. Tap the star on any animation to keep it here.]]elseif G.
 source=='custom'then icon,line='doclist',
-[[No custom animations yet. Import one or add files to Novoline/custom.]]elseif
+[[No custom animations yet. Import one or add files to MonK/custom.]]elseif
 R.libraryError()then icon,line='library',
 'Could not load the library. Reopen the panel to try again.'else icon,line=
 'library','Loading animations'end end R.glyph(eIcon,icon)if eText.Text~=line
@@ -5721,7 +5721,7 @@ then return end finish(nil)end)end kick()end end function
 __DARKLUA_BUNDLE_MODULES.D():typeof(__modImpl())local v=__DARKLUA_BUNDLE_MODULES
 .cache.D if not v then v={c=__modImpl()}__DARKLUA_BUNDLE_MODULES.cache.D=v end
 return v.c end end do local function __modImpl()return function(env)local tween=
-env.tween local W={file='Novoline/windows.json',panels=setmetatable({},{__mode=
+env.tween local W={file='MonK/windows.json',panels=setmetatable({},{__mode=
 'k'}),pending={}}_G._nv_windows=W local hs=game:GetService('HttpService')
 local function viewport()local cam=workspace.CurrentCamera local vp=cam and cam.
 ViewportSize if not vp or vp.X<1 or vp.Y<1 then return 1280,720 end return vp.X,
@@ -5766,8 +5766,8 @@ ax,ay=W.spotOf(pnl)list[#list+1]={cmd=cmd,title=W.titleOf(pnl)or cmd,x=x,y=y,ax=
 ax,ay=ay,w=pnl.Size.X.Offset,h=pnl.Size.Y.Offset}end end end for _,e in W.
 pending do if not seen[e.cmd]then seen[e.cmd]=true list[#list+1]=e end end
 pcall(function()local json=hs:JSONEncode({windows=list})if json==W.written then
-return end if isfolder and not isfolder('Novoline')and makefolder then
-makefolder('Novoline')end writefile(W.file,json)W.written=json end)end function
+return end if isfolder and not isfolder('MonK')and makefolder then
+makefolder('MonK')end writefile(W.file,json)W.written=json end)end function
 W.changed()if W.dirty or not _G._nv_saveWindows then return end W.dirty=true
 task.delay(1,W.save)end function W.track(pnl)W.panels[pnl]=true pnl:
 GetPropertyChangedSignal('Visible'):Connect(function()if pnl.Visible and _G.
@@ -6805,11 +6805,11 @@ and soundId~='')and soundId or nil local numericSound=tonumber(soundId)local
 iconPx=tonumber(opts.iconSize)task.spawn(function()task.spawn(function()local
 sid=customSound if not sid then if opts.skipSfx then return end sid=
 'rbxassetid://'..tostring(numericSound or 255881176)end local snd=
-createInstance('Sound',{Name='NovolineNotify',SoundId=sid,Volume=customSound and
+createInstance('Sound',{Name='MonKNotify',SoundId=sid,Volume=customSound and
 1 or 0.6,RollOffMaxDistance=0})pcall(function()snd.Parent=game:GetService(
 'SoundService')end)pcall(function()snd:Play()end)game:GetService('Debris'):
 AddItem(snd,customSound and 16 or 4)end)local T=_nvToast local rawTitle=
-tostring(title or'Novoline')local body=text~=nil and tostring(text)or''local
+tostring(title or'MonK')local body=text~=nil and tostring(text)or''local
 image,fluent=T.icon(iconId)local tint,cat=T.pick((rawTitle:gsub('<[^>]+>','')),
 body)local o=T.build({title=rawTitle,text=body,image=image,fluent=fluent or cat,
 tint=tint,iconPx=iconPx,timed=true,actions=panelAction and{panelAction}or nil})T
@@ -6817,7 +6817,7 @@ tint=tint,iconPx=iconPx,timed=true,actions=panelAction and{panelAction}or nil})T
 requestedDuration or waitDuration)end)end _nvL.xnotify=function(title,text,opts)
 if _G._nvQuietNotify then return end opts=type(opts)=='table'and opts or{}local
 persistKey=type(opts.persistKey)=='string'and opts.persistKey~=''and opts.
-persistKey or nil local persistFile=persistKey and('Novoline/xnotify_'..
+persistKey or nil local persistFile=persistKey and('MonK/xnotify_'..
 persistKey..'.txt')or nil local showMute=persistFile~=nil or opts.dontShowAgain
 ==true if persistFile then local hidden=false pcall(function()if isfile and
 isfile(persistFile)then hidden=true end end)if hidden then return end for _,
@@ -6841,8 +6841,8 @@ muting then return end tween(fb,TweenInfo.new(0.18),{TextColor3=C.TEXT})end)fb.
 MouseLeave:Connect(function()if o.gone or muting then return end tween(fb,
 TweenInfo.new(0.22),{TextColor3=T.SUBTLE})end)fb.Activated:Connect(function()if
 o.gone or muting then return end muting=true if persistFile then pcall(function(
-)if makefolder and isfolder and not isfolder('Novoline')then makefolder(
-'Novoline')end if writefile then writefile(persistFile,'1')end end)end fb.Text=
+)if makefolder and isfolder and not isfolder('MonK')then makefolder(
+'MonK')end if writefile then writefile(persistFile,'1')end end)end fb.Text=
 "Won't show this again"tween(fb,TweenInfo.new(0.28,Enum.EasingStyle.Quint),{
 TextColor3=C.TEXT})task.delay(1.85,function()T.dismiss(o)end)end)end T.push(o)
 end)end _G.xnotify=_nvL.xnotify local _nvBootEv=createInstance('BindableEvent')
@@ -6868,11 +6868,11 @@ tostring(_nvL.sidebarKeybind)..'] to hide/toggle the menu.',{persistKey=
 'sidebar_toggle_hint'})end end)_nvAfterBoot(72,function()pcall(function()local
 mobile=false pcall(function()mobile=_isMobile==true end)if mobile then return
 end if type(_nvL.xnotify)~='function'then return end local COUNT_FILE=
-'Novoline/cmdbar_reminder.txt'local shown=0 pcall(function()if type(isfile)==
+'MonK/cmdbar_reminder.txt'local shown=0 pcall(function()if type(isfile)==
 'function'and isfile(COUNT_FILE)and type(readfile)=='function'then shown=
 tonumber(readfile(COUNT_FILE))or 0 end end)if shown>=2 then return end pcall(
 function()if type(makefolder)=='function'then if type(isfolder)~='function'or
-not isfolder('Novoline')then makefolder('Novoline')end end if type(writefile)==
+not isfolder('MonK')then makefolder('MonK')end end if type(writefile)==
 'function'then writefile(COUNT_FILE,tostring(shown+1))end end)local _bind='F6'
 pcall(function()if type(_nvL.cmdBarKeybind)=='string'and _nvL.cmdBarKeybind~=''
 then _bind=_nvL.cmdBarKeybind end end)end)end)players.PlayerAdded:Connect(
@@ -6886,18 +6886,18 @@ __DARKLUA_BUNDLE_MODULES.cache.M=v end return v.c end end do local function
 __modImpl()return function(env)local C=env.C local _nvL=env._nvL local
 createInstance=env.createInstance local screen=env.screen local sfx=env.sfx
 local tween=env.tween _G._nvGameScriptPromptTable=_G._nvGameScriptPromptTable or
-{}_G._nvGameScriptPromptTable[2809202155]={title='Novoline',text=
+{}_G._nvGameScriptPromptTable[2809202155]={title='MonK',text=
 'Game-specific script found, execute?',yes='Yes',url='https://vanta.my/premium'}
-_G._nvGameScriptPromptTable[891852901]={title='Novoline',text=
+_G._nvGameScriptPromptTable[891852901]={title='MonK',text=
 'Game-specific script found, no externals allowed. Execute?',yes='Yes',url=
 [[https://api.xnexus.cc/request/12d2fd60e7a67b48ece6f8fce7167a1d]]}
 local function _nv_showGameDetection(entry,onRun)if _G._nv_gameDetectShown then
 return end _G._nv_gameDetectShown=true local gameName=entry.name if not gameName
-or gameName==''or gameName=='Novoline'then pcall(function()local info=_nvL.
+or gameName==''or gameName=='MonK'then pcall(function()local info=_nvL.
 marketplaceService:GetProductInfo(game.PlaceId)if info and info.Name and info.
 Name~=''then gameName=info.Name end end)end gameName=gameName or
 'Unknown Experience'local subtitleText=entry.description or
-'Novoline found a script for this experience. Run it?'local thumbId=
+'MonK found a script for this experience. Run it?'local thumbId=
 'rbxthumb://type=Asset&id='..tostring(game.PlaceId)..'&w=420&h=420'local CARD_W=
 470 local CARD_H=150 local PILL_W=330 local PILL_H=46 local prompt=
 createInstance('Frame',{Parent=screen,Name='GameDetection',AnchorPoint=Vector2.
@@ -7939,11 +7939,11 @@ clone_char_child_removed=nil,animation_hb=nil},real_chars={},callbacks={on_play=
 nil,on_stop=nil,on_deactivate=nil},animation={cache={},load_id=0,state={
 is_playing=false,current_url=nil,speed=1,keyframes=nil,total_duration=0,
 elapsed_time=0},original_motor_c0s={},joints={},ac_joint_map=nil,body=nil}}local
-API={}local ANIM_CACHE_DIR='Novoline/anim_cache'local function animCachePath(url
+API={}local ANIM_CACHE_DIR='MonK/anim_cache'local function animCachePath(url
 )local h=0 for i=1,#url do h=(h*31+string.byte(url,i))%2147483647 end return
 ANIM_CACHE_DIR..'/'..tostring(h)..'.lua'end local function ensureAnimCacheDir()
 pcall(function()if typeof(isfolder)=='function'and typeof(makefolder)==
-'function'then if not isfolder('Novoline')then makefolder('Novoline')end if not
+'function'then if not isfolder('MonK')then makefolder('MonK')end if not
 isfolder(ANIM_CACHE_DIR)then makefolder(ANIM_CACHE_DIR)end end end)end
 local function decodeAnimSource(src)if type(src)~='string'or src==''then return
 nil,'empty source'end local loaded_fn,load_err=_safeLoadstring(src)if not
@@ -8747,11 +8747,11 @@ Color=C.DIV,Transparency=0.5})end)statesSearchBox:GetPropertyChangedSignal(
 'Text'):Connect(function()if _RS.activeTab=='states'then _RS.reanimSearchBox.
 Text=statesSearchBox.Text _RS.reanimRefreshSearch()end end)_RS.statesSearchCard=
 statesSearchCard _RS.statesSearchBox=statesSearchBox end _RS.reanimDir=1 _RS.
-PLAY_BINDS_FILE='Novoline/reanim_play.json'_RS.playBinds={rewind='None',pause=
+PLAY_BINDS_FILE='MonK/reanim_play.json'_RS.playBinds={rewind='None',pause=
 'None',speedUp='None',speedDown='None',record='None',live='None',pole='None',
 poleHere='None',stretch='None',drive='LeftAlt',headTrack='None'}_RS.
-savePlayBinds=function()pcall(function()if isfolder and not isfolder('Novoline')
-and makefolder then makefolder('Novoline')end writefile(_RS.PLAY_BINDS_FILE,game
+savePlayBinds=function()pcall(function()if isfolder and not isfolder('MonK')
+and makefolder then makefolder('MonK')end writefile(_RS.PLAY_BINDS_FILE,game
 :GetService('HttpService'):JSONEncode(_RS.playBinds))end)end _RS.loadPlayBinds=
 function()pcall(function()if type(isfile)~='function'or not isfile(_RS.
 PLAY_BINDS_FILE)then return end local ok,data=pcall(function()return game:
@@ -8760,11 +8760,11 @@ or type(data)~='table'then return end for _,k in{'rewind','pause','speedUp',
 'speedDown','record','live','pole','poleHere','stretch','drive','headTrack'}do
 local v=data[k]if type(v)=='string'and v~=''and v~='Unknown'and v:sub(1,5)~=
 'Mouse'then if v~='None'or k=='drive'then _RS.playBinds[k]=v end end end end)end
-_RS.loadPlayBinds()_RS.SPEED_BINDS_FILE='Novoline/reanim_speeds.json'_RS.
+_RS.loadPlayBinds()_RS.SPEED_BINDS_FILE='MonK/reanim_speeds.json'_RS.
 speedBinds={}_RS.saveSpeedBinds=function()pcall(function()local out={}for _,sb
 in _RS.speedBinds do if not sb.fresh then out[#out+1]={key=sb.key or'None',speed
-=sb.speed}end end if isfolder and not isfolder('Novoline')and makefolder then
-makefolder('Novoline')end writefile(_RS.SPEED_BINDS_FILE,game:GetService(
+=sb.speed}end end if isfolder and not isfolder('MonK')and makefolder then
+makefolder('MonK')end writefile(_RS.SPEED_BINDS_FILE,game:GetService(
 'HttpService'):JSONEncode(out))end)end _RS.loadSpeedBinds=function()pcall(
 function()if type(isfile)~='function'or not isfile(_RS.SPEED_BINDS_FILE)then
 return end local ok,data=pcall(function()return game:GetService('HttpService'):
@@ -8947,13 +8947,13 @@ new(0,6)})local recEmpty=createInstance('TextLabel',{Parent=recList,
 BackgroundTransparency=1,Size=UDim2.new(1,0,0,40),Font=Enum.Font.GothamSemibold,
 TextSize=11,TextColor3=C.DIM,TextWrapped=true,TextXAlignment=Enum.TextXAlignment
 .Center,TextYAlignment=Enum.TextYAlignment.Top,Text='Nothing recorded yet',
-LayoutOrder=99,ZIndex=155})_RS.REANIM_RECENT_FILE='Novoline/reanim_recent.json'
-_RS.REANIM_RECORD_DIR='Novoline/recorded'_RS.REANIM_RECORDED_CUSTOM_DIR=
-'Novoline/custom/Recorded'_RS.recentRecordings={}_RS.recordActive=false _RS.
+LayoutOrder=99,ZIndex=155})_RS.REANIM_RECENT_FILE='MonK/reanim_recent.json'
+_RS.REANIM_RECORD_DIR='MonK/recorded'_RS.REANIM_RECORDED_CUSTOM_DIR=
+'MonK/custom/Recorded'_RS.recentRecordings={}_RS.recordActive=false _RS.
 recordFrames=nil _RS.recordConn=nil _RS.recordOrigC0s=nil _RS.recordLastStop=0
 local function ensureDir(path)pcall(function()if type(isfolder)~='function'or
-type(makefolder)~='function'then return end if not isfolder('Novoline')then
-makefolder('Novoline')end if path and path~='Novoline'and not isfolder(path)then
+type(makefolder)~='function'then return end if not isfolder('MonK')then
+makefolder('MonK')end if path and path~='MonK'and not isfolder(path)then
 makefolder(path)end end)end local function sanitizeName(s)s=tostring(s or''):
 gsub('[^%w %-_]',''):gsub('^%s+',''):gsub('%s+$','')if s==''then s='Recording'
 end return s end local function fmtDur(t)t=tonumber(t)or 0 local m=math.floor(t/
@@ -8963,7 +8963,7 @@ in _RS.customItems or{}do if it.category=='Recorded'and it.name==recName then
 return true end end if type(isfile)=='function'then local p=_RS.
 REANIM_RECORDED_CUSTOM_DIR..'/'..recName..'.json'local ok,exists=pcall(isfile,p)
 if ok and exists then return true end end return false end _RS.
-saveRecentRecordings=function()pcall(function()ensureDir('Novoline')if type(
+saveRecentRecordings=function()pcall(function()ensureDir('MonK')if type(
 writefile)~='function'then return end local data={}for i=1,math.min(3,#_RS.
 recentRecordings)do local rec=_RS.recentRecordings[i]if rec and type(rec.name)==
 'string'and type(rec.path)=='string'then data[#data+1]={name=rec.name,path=rec.
@@ -9065,8 +9065,8 @@ tostring(rec.name or'recording'):sub(1,24))end _RS.addRecordingToCustom=function
 'function'or type(writefile)~='function'then _nvL.notify('Reanim',
 'Filesystem not available')return end local ok,src=pcall(readfile,rec.path)if
 not ok or type(src)~='string'or src==''then _nvL.notify('Reanim',
-'Could not read recording')return end ensureDir('Novoline')ensureDir(
-'Novoline/custom')ensureDir(_RS.REANIM_RECORDED_CUSTOM_DIR)local nm=
+'Could not read recording')return end ensureDir('MonK')ensureDir(
+'MonK/custom')ensureDir(_RS.REANIM_RECORDED_CUSTOM_DIR)local nm=
 sanitizeName(rec.name)local dest=_RS.REANIM_RECORDED_CUSTOM_DIR..'/'..nm..(rec.
 path:match('%.%w+$')or'.json')local wok=pcall(writefile,dest,src)if not wok then
 _nvL.notify('Reanim','Failed to add to Custom')return end if _RS.localAnimCache
@@ -9081,7 +9081,7 @@ Time or 0 local defaultName='Rec '..os.date('%H-%M-%S')local encoded pcall(
 function()encoded=game:GetService('HttpService'):JSONEncode(frames)end)if type(
 encoded)~='string'or encoded==''then _nvL.notify('Reanim',
 'Failed to encode recording')return end local function persistRecording(nm)nm=
-sanitizeName(nm)ensureDir('Novoline')ensureDir(_RS.REANIM_RECORD_DIR)local base=
+sanitizeName(nm)ensureDir('MonK')ensureDir(_RS.REANIM_RECORD_DIR)local base=
 nm local path=_RS.REANIM_RECORD_DIR..'/'..base..'.json'if type(isfile)==
 'function'then local n=2 while n<=20 do local ok,exists=pcall(isfile,path)if not
 ok or not exists then break end nm=base..' '..n path=_RS.REANIM_RECORD_DIR..'/'
@@ -9549,10 +9549,10 @@ then if gp then return end local z=inp.Position.Z if z~=0 then lvNud(0,0,z*6*(
 _RS.liveSens or 1))end end end)userInputService.WindowFocusReleased:Connect(
 function()if _RS.setLiveDriving then _RS.setLiveDriving(false)end end)pcall(_RS.
 refreshLiveUI,true)end _RS.globalItems={}_RS.customItems={}_RS.favsItems={}_RS.
-favKeybinds={}_RS.REANIM_KEYBINDS_FILE='Novoline/reanim_keybinds.json'_RS.
-REANIM_FAVS_FILE='Novoline/reanim_favs.json'_RS.REANIM_STATES_FILE=
-'Novoline/reanim_states.json'_RS.savedReanimKeybinds={}_RS.saveReanimKeybinds=
-function()pcall(function()if not isfolder('Novoline')then makefolder('Novoline')
+favKeybinds={}_RS.REANIM_KEYBINDS_FILE='MonK/reanim_keybinds.json'_RS.
+REANIM_FAVS_FILE='MonK/reanim_favs.json'_RS.REANIM_STATES_FILE=
+'MonK/reanim_states.json'_RS.savedReanimKeybinds={}_RS.saveReanimKeybinds=
+function()pcall(function()if not isfolder('MonK')then makefolder('MonK')
 end local data={}for keyName,bind in _RS.favKeybinds do if type(keyName)==
 'string'and type(bind)=='table'and type(bind.name)=='string'and bind.name~=''
 then data[bind.name]=keyName end end _RS.savedReanimKeybinds=data writefile(_RS.
@@ -9563,8 +9563,8 @@ REANIM_KEYBINDS_FILE)then local ok,data=pcall(function()return game:GetService(
 data)=='table'then _RS.savedReanimKeybinds={}for emoteName,keyName in data do if
 type(emoteName)=='string'and type(keyName)=='string'and keyName~=''and keyName~=
 'Unknown'then _RS.savedReanimKeybinds[emoteName]=keyName end end end end end)end
-_RS.saveFavsItems=function()pcall(function()if not isfolder('Novoline')then
-makefolder('Novoline')end local data={}for _,it in _RS.favsItems do if type(it.
+_RS.saveFavsItems=function()pcall(function()if not isfolder('MonK')then
+makefolder('MonK')end local data={}for _,it in _RS.favsItems do if type(it.
 name)=='string'and it.name~=''then data[#data+1]={name=it.name,url=it.url}end
 end writefile(_RS.REANIM_FAVS_FILE,game:GetService('HttpService'):JSONEncode(
 data))end)end _RS.savedFavsData={}_RS.loadFavsData=function()pcall(function()if
@@ -9572,7 +9572,7 @@ isfile and isfile(_RS.REANIM_FAVS_FILE)then local ok,data=pcall(function()return
 game:GetService('HttpService'):JSONDecode(readfile(_RS.REANIM_FAVS_FILE))end)if
 ok and type(data)=='table'then _RS.savedFavsData=data end end end)end _RS.
 loadFavsData()_RS.saveStateAnims=function()pcall(function()if not isfolder(
-'Novoline')then makefolder('Novoline')end local data={}for slot,anim in _RS.
+'MonK')then makefolder('MonK')end local data={}for slot,anim in _RS.
 stateAnims do if anim and type(anim.name)=='string'and anim.name~=''then data[
 slot]={name=anim.name,url=anim.url}end end writefile(_RS.REANIM_STATES_FILE,game
 :GetService('HttpService'):JSONEncode(data))end)end _RS.savedStatesData={}_RS.
@@ -9844,11 +9844,11 @@ clone:FindFirstChild('Animate')if animScript then animScript.Enabled=true end
 end _RS.reanimCurrentName=nil _RS.reanimStatusLbl.Text='Idle'else _rawPlay(anim.
 name,anim.url,true)_RS.reanimStatusLbl.Text=slot:sub(1,1):upper()..slot:sub(2)..
 ': '..anim.name:sub(1,16)end end)end _RS.startStateLoop=startStateLoop _RS.
-stopStateLoop=stopStateLoop local SONGS_FOLDER='Novoline/Songs'local emoteSounds
+stopStateLoop=stopStateLoop local SONGS_FOLDER='MonK/Songs'local emoteSounds
 ={}local emoteSound=createInstance('Sound',{Volume=0.8,Looped=true})pcall(
 function()emoteSound.Parent=game:GetService('SoundService')end)local function
-ensureSongsFolder()pcall(function()if not isfolder('Novoline')then makefolder(
-'Novoline')end if not isfolder(SONGS_FOLDER)then makefolder(SONGS_FOLDER)end end
+ensureSongsFolder()pcall(function()if not isfolder('MonK')then makefolder(
+'MonK')end if not isfolder(SONGS_FOLDER)then makefolder(SONGS_FOLDER)end end
 )end local function scanSongsFolder()ensureSongsFolder()if not listfiles then
 return end local ok,files=pcall(listfiles,SONGS_FOLDER)if not ok or not files
 then return end for _,path in files do local ext=path:match('%.([^%.]+)$')if ext
@@ -10002,7 +10002,7 @@ _RS.customLoadLbl.TextSize=12 _RS.customLoadLbl.TextColor3=C.SUB _RS.
 customLoadLbl.Text=
 [[No custom animations found.
 Add .lua, .txt, or .json animation files to:
-workspace/Novoline/custom/]]
+workspace/MonK/custom/]]
 _RS.customLoadLbl.TextWrapped=true _RS.customLoadLbl.TextXAlignment=Enum.
 TextXAlignment.Center _RS.customLoadLbl.TextYAlignment=Enum.TextYAlignment.Top
 _RS.customLoadLbl.Visible=false _RS.customLoadLbl.ZIndex=153 local function
@@ -10030,11 +10030,11 @@ path end end return files end local function _reloadCustom()for _,it in _RS.
 customItems do it.row:Destroy()end table.clear(_RS.customItems)if _RS.
 customCatHeaders then for _,h in _RS.customCatHeaders do if type(h)=='table'and
 h.row then pcall(function()h.row:Destroy()end)end end end _RS.customCatHeaders={
-}if isfolder and makefolder then if not isfolder('Novoline')then makefolder(
-'Novoline')end if not isfolder('Novoline/custom')then makefolder(
-'Novoline/custom')end end local recFiles=_listAnimFiles(
-'Novoline/custom/Recorded')local files={}for _,path in _listAnimFiles(
-'Novoline/custom')do if not path:find('[/\\][Rr]ecorded[/\\]')then files[#files+
+}if isfolder and makefolder then if not isfolder('MonK')then makefolder(
+'MonK')end if not isfolder('MonK/custom')then makefolder(
+'MonK/custom')end end local recFiles=_listAnimFiles(
+'MonK/custom/Recorded')local files={}for _,path in _listAnimFiles(
+'MonK/custom')do if not path:find('[/\\][Rr]ecorded[/\\]')then files[#files+
 1]=path end end if#recFiles==0 and#files==0 then if _RS.activeTab=='custom'then
 _RS.customLoadLbl.Visible=true _RS.currentFilteredReanim={}if _RS.hideAllRows
 then pcall(_RS.hideAllRows)end _RS.reanimScroll.CanvasSize=UDim2.new(0,0,0,72)
@@ -10126,9 +10126,9 @@ local data=tostring(dataBox.Text or''):gsub('^%s+',''):gsub('%s+$','')if data==
 writefile then _nvL.notify('Reanim','writefile not available')return end local
 ext='lua'local okJson,decoded=pcall(function()return game:GetService(
 'HttpService'):JSONDecode(data)end)if okJson and type(decoded)=='table'then ext=
-'json'end if isfolder and makefolder then if not isfolder('Novoline')then
-makefolder('Novoline')end if not isfolder('Novoline/custom')then makefolder(
-'Novoline/custom')end end local path='Novoline/custom/'..nm..'.'..ext local wok,
+'json'end if isfolder and makefolder then if not isfolder('MonK')then
+makefolder('MonK')end if not isfolder('MonK/custom')then makefolder(
+'MonK/custom')end end local path='MonK/custom/'..nm..'.'..ext local wok,
 werr=pcall(writefile,path,data)if not wok then _nvL.notify('Reanim',
 'Save failed: '..tostring(werr))return end nameBox.Text=''dataBox.Text=''
 closePaste()if _nvL.reloadCustom then _nvL.reloadCustom()end _RS.setTab('custom'
@@ -10400,10 +10400,10 @@ end end if _G._reanimAPI then _G._reanimAPI.on_deactivate(_onReanimDeactivate)
 end local _origLoadAPI=_G.loadReanimAPI _G.loadReanimAPI=function(cb)
 _origLoadAPI(function()if _G._reanimAPI then _G._reanimAPI.on_deactivate(
 _onReanimDeactivate)end if cb then cb()end end)end end local okSetup,errSetup=
-pcall(_setup)if not okSetup then warn('Novoline: reanim _setup failed:',errSetup
+pcall(_setup)if not okSetup then warn('MonK: reanim _setup failed:',errSetup
 )if _G._reanimPanel then pcall(function()_G._reanimPanel:Destroy()end)end _G.
 _reanimPanel=nil _G._reanimSpeedPanel=nil return end local okLogic,errLogic=
-pcall(_logic)if not okLogic then warn('Novoline: reanim _logic failed:',errLogic
+pcall(_logic)if not okLogic then warn('MonK: reanim _logic failed:',errLogic
 )end pcall(function()_nvL.applyThemeTo(_G._reanimPanel)end)pcall(function()if _G
 ._reanimSpeedPanel then _nvL.applyThemeTo(_G._reanimSpeedPanel)end end)end end
 function __DARKLUA_BUNDLE_MODULES.Y():typeof(__modImpl())local v=
@@ -11211,7 +11211,7 @@ InputEnded:Connect(function(input)if abInputMatches(input)then abHolding=false
 abLockedTarget=nil end end)local fovRing,abUpdateFov,abTrigger function
 abUpdateFov()local show=ab.aimEnabled and ab.fovEnabled and not _G._nv_menuShown
 and screen~=nil if not fovRing and show then fovRing=createInstance('Frame',{
-Parent=screen,Name='NovolineFov',AnchorPoint=Vector2.new(0.5,0.5),Position=UDim2
+Parent=screen,Name='MonKFov',AnchorPoint=Vector2.new(0.5,0.5),Position=UDim2
 .fromScale(0.5,0.5),BackgroundTransparency=1,Active=false,ZIndex=30})
 createInstance('UICorner',{Parent=fovRing,CornerRadius=UDim.new(1,0)})
 createInstance('UIStroke',{Parent=fovRing,Color=Color3.new(1,1,1),Thickness=1.5,
@@ -11335,7 +11335,7 @@ _nvL local createInstance=env.createInstance local screen=env.screen local tween
 player=nil,shown=false,hideAt=0,hp=1}local function healthColor(hp)if hp>0.6
 then return Color3.fromRGB(78,229,154)end if hp>0.3 then return Color3.fromRGB(
 255,170,64)end return Color3.fromRGB(255,92,92)end local function build()local f
-=createInstance('Frame',{Parent=screen,Name='NovolineTargetHud',AnchorPoint=
+=createInstance('Frame',{Parent=screen,Name='MonKTargetHud',AnchorPoint=
 Vector2.new(0.5,0),Position=UDim2.new(0.5,0,0.64,0),Size=UDim2.fromOffset(250,72
 ),BackgroundTransparency=1,BorderSizePixel=0,Active=true,Visible=false,ZIndex=40
 })_G._nv_utilitySurface(f)local surface=f:FindFirstChild('UtilitySurface')for _,
@@ -11759,16 +11759,16 @@ name='Everybody Loves Me (Dougie)',id=114756515400742},{name='Penguin dance',id=
 '2013 Dance',id=110226648097430},{name='Golden Freddy Glitch Emote',id=
 122463450997235},{name='Play Dead',id=135564949884122}}local favEmotes={}
 local function loadFavEmotes()pcall(function()if readfile and isfile and isfile(
-'Novoline/ugc_favs.json')then local data=game:GetService('HttpService'):
-JSONDecode(readfile('Novoline/ugc_favs.json'))for _,id in data do favEmotes[
+'MonK/ugc_favs.json')then local data=game:GetService('HttpService'):
+JSONDecode(readfile('MonK/ugc_favs.json'))for _,id in data do favEmotes[
 tostring(id)]=true end end end)end local function saveFavEmotes()pcall(function(
 )if writefile then local data={}for id,state in favEmotes do if state then data[
-#data+1]=tonumber(id)end end if not isfolder('Novoline')then makefolder(
-'Novoline')end writefile('Novoline/ugc_favs.json',game:GetService('HttpService')
+#data+1]=tonumber(id)end end if not isfolder('MonK')then makefolder(
+'MonK')end writefile('MonK/ugc_favs.json',game:GetService('HttpService')
 :JSONEncode(data))end end)end loadFavEmotes()local function loadCustomEmotes()
-pcall(function()if readfile and isfile and isfile('Novoline/custom_emotes.json')
+pcall(function()if readfile and isfile and isfile('MonK/custom_emotes.json')
 then local data=game:GetService('HttpService'):JSONDecode(readfile(
-'Novoline/custom_emotes.json'))for _,em in data do emotesList[#emotesList+1]={
+'MonK/custom_emotes.json'))for _,em in data do emotesList[#emotesList+1]={
 name=tostring(em.name),id=tonumber(em.id)}end end end)end loadCustomEmotes()
 local ugcPool={}local ITEM_H=40 local currentSorted={}local function
 createUgcBtn()local btn=createInstance('TextButton',{Parent=scroll,Size=UDim2.
@@ -11818,11 +11818,11 @@ name:lower()<b.name:lower()end end)currentSorted=sorted scroll.CanvasSize=UDim2.
 new(0,0,0,#currentSorted*ITEM_H)updateVirtualList()end addBtn.MouseButton1Click:
 Connect(function()local n=customNameBox.Text local i=tonumber(customIdBox.Text)
 if n and n~=''and i then emotesList[#emotesList+1]={name=n,id=i}pcall(function()
-local custom={}if readfile and isfile and isfile('Novoline/custom_emotes.json')
+local custom={}if readfile and isfile and isfile('MonK/custom_emotes.json')
 then custom=game:GetService('HttpService'):JSONDecode(readfile(
-'Novoline/custom_emotes.json'))end custom[#custom+1]={name=n,id=i}if writefile
-then if not isfolder('Novoline')then makefolder('Novoline')end writefile(
-'Novoline/custom_emotes.json',game:GetService('HttpService'):JSONEncode(custom))
+'MonK/custom_emotes.json'))end custom[#custom+1]={name=n,id=i}if writefile
+then if not isfolder('MonK')then makefolder('MonK')end writefile(
+'MonK/custom_emotes.json',game:GetService('HttpService'):JSONEncode(custom))
 end end)customNameBox.Text=''customIdBox.Text=''_nvL.notify('UGC Emotes',
 'Saved custom emote!')populateList(searchBox.Text)else _nvL.notify('UGC Emotes',
 'Invalid Name or ID')end end)searchBox.FocusLost:Connect(function(enterPressed)
@@ -12051,15 +12051,15 @@ local makeFloatingPanel=env.makeFloatingPanel local makePanelTitleBar=env.
 makePanelTitleBar local runService=env.runService _G._automatePanel=nil local az
 =_G._nvAutomate or{rules={},conn=nil}_G._nvAutomate=az local hs=game:GetService(
 'HttpService')local tps=game:GetService('TeleportService')local FILE=
-'Novoline/automate_rules.json'local IF_DEFS={{id='game_id',label=
+'MonK/automate_rules.json'local IF_DEFS={{id='game_id',label=
 'Game Id equals',placeholder=tostring(game.PlaceId)},{id='health_lte',label=
 'Health <= ',placeholder='25'},{id='speed_gte',label='WalkSpeed >= ',placeholder
 ='24'}}local THEN_DEFS={{id='tp_place',label='Teleport to PlaceId',placeholder=
 'place id'},{id='tp_left',label='Teleport left studs',placeholder='30'},{id=
 'tp_right',label='Teleport right studs',placeholder='30'}}local function findDef
 (list,id)for _,d in list do if d.id==id then return d end end return list[1]end
-local function saveRules()pcall(function()if not isfolder('Novoline')then
-makefolder('Novoline')end writefile(FILE,hs:JSONEncode(az.rules))end)end
+local function saveRules()pcall(function()if not isfolder('MonK')then
+makefolder('MonK')end writefile(FILE,hs:JSONEncode(az.rules))end)end
 local function loadRules()pcall(function()if not(isfile and isfile(FILE))then
 return end local ok,data=pcall(hs.JSONDecode,hs,readfile(FILE))if ok and type(
 data)=='table'then az.rules={}for _,r in data do if type(r)=='table'then az.
@@ -12233,11 +12233,11 @@ fall=10921122579,jump=10921123517,idle=10921117521,swim=10921125160,climb=
 10921040576,jump=10921042494,idle=10921034824,swim=10921044000,climb=10921032124
 },{name='Pirate ',run=750783738,walk=750785693,fall=750780242,jump=750782230,
 idle=750781874,swim=750784579,climb=750779899}}local customAnims={}pcall(
-function()if readfile and isfile and isfile('Novoline/custom_anims.json')then
+function()if readfile and isfile and isfile('MonK/custom_anims.json')then
 customAnims=game:GetService('HttpService'):JSONDecode(readfile(
-'Novoline/custom_anims.json'))end end)local function saveCustomAnims()pcall(
-function()if writefile then if not isfolder('Novoline')then makefolder(
-'Novoline')end writefile('Novoline/custom_anims.json',game:GetService(
+'MonK/custom_anims.json'))end end)local function saveCustomAnims()pcall(
+function()if writefile then if not isfolder('MonK')then makefolder(
+'MonK')end writefile('MonK/custom_anims.json',game:GetService(
 'HttpService'):JSONEncode(customAnims))end end)end local defaultAnims=nil
 local function spoofAnimations(bundle)local char=_nvL.lp.Character if not char
 then return end local animate=char:FindFirstChild('Animate')if not animate then
@@ -12364,7 +12364,7 @@ makeDot(size,color,z)local d=createInstance('Frame',{Parent=field,AnchorPoint=
 Vector2.new(0.5,0.5),Position=UDim2.fromScale(0.5,0.5),Size=UDim2.fromOffset(
 size,size),BackgroundColor3=color,BorderSizePixel=0,ZIndex=z})createInstance(
 'UICorner',{Parent=d,CornerRadius=UDim.new(1,0)})return d end local function
-buildHud()hud=createInstance('Frame',{Parent=screen,Name='NovolineRadar',Size=
+buildHud()hud=createInstance('Frame',{Parent=screen,Name='MonKRadar',Size=
 UDim2.fromOffset(cfg.size,cfg.size),Position=UDim2.fromOffset(24,300),
 BackgroundTransparency=1,BorderSizePixel=0,Active=true,Visible=false,ZIndex=40})
 _G._nv_utilitySurface(hud)for _,horizontal in{true,false}do createInstance(
@@ -12445,12 +12445,12 @@ addrField=K.field(g3,UDim2.fromOffset(14,118),UDim2.new(1,-110,0,32),
 BackgroundTransparency=1,Size=UDim2.fromScale(1,1),Visible=false,ZIndex=20})
 local g4=K.group(done,0,146)local _,who,whoSub=K.row(g4,0,48,'Connected','',
 'check',20)K.line(g4,48)local srcRow=K.row(g4,49,48,'Play from Spotify',
-'Mirror it in Novoline','note')local paintSrc=K.switch(srcRow,_G.
+'Mirror it in MonK','note')local paintSrc=K.switch(srcRow,_G.
 _nv_musicSpotify==true)srcRow.MouseButton1Click:Connect(function()SP.setSource(
 not(_G._nv_musicSpotify==true))paintSrc(_G._nv_musicSpotify==true,true)end)K.
 line(g4,97)local outRow=K.row(g4,98,48,'Disconnect','Forget this Spotify login',
 'dismiss')words(done,
-[[Music plays in your Spotify app on your PC or phone. Novoline shows it, controls it and finds the lyrics.]]
+[[Music plays in your Spotify app on your PC or phone. MonK shows it, controls it and finds the lyrics.]]
 ,158,44).Position=UDim2.fromOffset(4,158)local function refresh()local on=SP.
 connected()and not SP.needsReconnect()if SP.needsReconnect()and status.Text==''
 then status.Text=
@@ -12551,9 +12551,9 @@ local len=string.unpack('>I2',b,i+2)if marker>=0xc0 and marker<=0xcf and marker
 ~=0xc4 and marker~=0xc8 and marker~=0xcc then return Vector2.new(string.unpack(
 '>I2',b,i+7),string.unpack('>I2',b,i+5))end i+=2+len end return nil end
 local function artFile(name,sp)if sp then local key=_G._nv_spotify.st.artKey
-return key and('Novoline/spotify/art/'..key:gsub('[^%w_]','')..'.jpg')or nil end
+return key and('MonK/spotify/art/'..key:gsub('[^%w_]','')..'.jpg')or nil end
 for _,ext in{'.art.jpg','.art.png','.png','.jpg','.jpeg'}do local path=
-'Novoline/songs/'..tostring(name)..ext local ok,yes=pcall(isfile,path)if ok and
+'MonK/songs/'..tostring(name)..ext local ok,yes=pcall(isfile,path)if ok and
 yes then return path end end return nil end local function applyBlur(asset,name,
 sp)if not asset then blur.Visible=false return end local path=artFile(name,sp)
 local size=path and imgSizes[path]if path and not size then local ok,bytes=
@@ -13605,10 +13605,10 @@ tpToolInstance=nil end end end)_nvL.notify('TP Tool',
 'Remove the teleport tool','',{'utpt'},function()if tpToolInstance and
 tpToolInstance.Parent then tpToolInstance:Destroy()end if tpToolConn then
 tpToolConn:Disconnect()tpToolConn=nil end tpToolInstance=nil _nvL.notify(
-'TP Tool','Removed')end)end do local WP_FILE='Novoline/waypoints.json'local
+'TP Tool','Removed')end)end do local WP_FILE='MonK/waypoints.json'local
 _nv_wps={}local _nv_wpVis={}local _nv_wpTool=nil local _nv_wpToolConn=nil local
 hs_wp=game:GetService('HttpService')local function wpSave()pcall(function()if
-not isfolder('Novoline')then makefolder('Novoline')end writefile(WP_FILE,hs_wp:
+not isfolder('MonK')then makefolder('MonK')end writefile(WP_FILE,hs_wp:
 JSONEncode(_nv_wps))end)end local function wpLoad()pcall(function()if not(isfile
 and isfile(WP_FILE))then return end local ok,data=pcall(hs_wp.JSONDecode,hs_wp,
 readfile(WP_FILE))if ok and type(data)=='table'then _nv_wps=data end end)end
@@ -14455,7 +14455,7 @@ HELI_ANIM})end heliAnim=anim local okLoad,track=pcall(function()return animator:
 LoadAnimation(anim)end)if okLoad and track then heliTrack=track heliTrack.
 Priority=Enum.AnimationPriority.Action4 heliTrack.Looped=true pcall(function()
 heliTrack:Play(0.1,1,1)end)end heliSound=createInstance('Sound',{Name=
-'NovolineHelicopter',SoundId='rbxassetid://'..HELI_SOUND,Volume=0.35,Looped=true
+'MonKHelicopter',SoundId='rbxassetid://'..HELI_SOUND,Volume=0.35,Looped=true
 ,RollOffMode=Enum.RollOffMode.InverseTapered,Parent=root})pcall(function()
 heliSound:Play()end)heliDiedConn=hum.Died:Connect(function()stopHelicopter(false
 )end)_nvL.notify('Helicopter','Enabled ,  ;unhelicopter to stop')end)reg(
@@ -15406,13 +15406,13 @@ grid={}end bpState.enabled=true ibpSpawnTiles()bpState.loopGen=bpState.loopGen+1
 local my=bpState.loopGen task.spawn(function()while my==bpState.loopGen and
 bpState.folder and bpState.folder.Parent do ibpSpawnTiles()task.wait(2)end end)
 end local function ibpLoadUrlAsset(url)url=tostring(url or'')local folder=
-'Novoline/ibp'local n=0 for i=1,#url do n=(n*33+string.byte(url,i))%2147483647
+'MonK/ibp'local n=0 for i=1,#url do n=(n*33+string.byte(url,i))%2147483647
 end local pathOnly=url:gsub('%?.*$',''):gsub('#.*$','')local ext=string.lower(
 pathOnly:match('%.([%a%d]+)$')or'png')if not({png=true,jpg=true,jpeg=true,webp=
 true,gif=true,bmp=true})[ext]then ext='png'end local file=folder..'/ibp_'..
 tostring(n)..'.'..ext pcall(function()if type(isfolder)=='function'and type(
-makefolder)=='function'then if not isfolder('Novoline')then makefolder(
-'Novoline')end if not isfolder(folder)then makefolder(folder)end end end)local
+makefolder)=='function'then if not isfolder('MonK')then makefolder(
+'MonK')end if not isfolder(folder)then makefolder(folder)end end end)local
 getAssetFn=(type(getcustomasset)=='function'and getcustomasset)or(type(
 getsynasset)=='function'and getsynasset)if type(isfile)=='function'and type(
 getAssetFn)=='function'then local okExists,exists=pcall(isfile,file)if okExists
@@ -15928,10 +15928,10 @@ sub(1,8)=='\137PNG\r\n\26\n'then ext='png'elseif body:sub(1,3)=='\255\216\255'
 then ext='jpg'else return nil,"That link isn't a PNG or JPG image"end if type(
 writefile)~='function'or type(getcustomasset)~='function'then return nil,
 "Your executor can't load images from links"end local h=0 for i=1,#url do h=(h*
-31+url:byte(i))%4294967296 end local path='Novoline/skybox/'..string.format(
+31+url:byte(i))%4294967296 end local path='MonK/skybox/'..string.format(
 '%08x',h)..'.'..ext local asset pcall(function()if isfolder and not isfolder(
-'Novoline')and makefolder then makefolder('Novoline')end if isfolder and not
-isfolder('Novoline/skybox')and makefolder then makefolder('Novoline/skybox')end
+'MonK')and makefolder then makefolder('MonK')end if isfolder and not
+isfolder('MonK/skybox')and makefolder then makefolder('MonK/skybox')end
 writefile(path,body)asset=getcustomasset(path)end)if type(asset)~='string'or
 asset==''then return nil,'Could not load that image'end return asset end
 local function skyImageFromInput(input)input=tostring(input):match(
@@ -16031,7 +16031,7 @@ Brightness=tonumber(a[2])or 5,Shadows=true})_selfLight=pl _nvL.notify('Light',
 _selfLight then _selfLight:Destroy()_selfLight=nil end _nvL.notify('Light',
 'Disabled')end)reg('r','repeat last command','',function()local last=_G.
 _nv_lastGameCmd if last and last~=''then _nvL.execCmd(last,false)end end)reg(
-'clearprofiles','Delete every saved Novoline profile','',{'cpf'},function()
+'clearprofiles','Delete every saved MonK profile','',{'cpf'},function()
 _nv_profileStore.data={version=1,order={},profiles={}}_nv_profileStore:save()
 _nvL.notify('Profiles','All profiles cleared')end)reg('autoexecute',
 'Toggle a command on/off the auto-run list','<s>',{'ae'},function(parts)local
@@ -16486,7 +16486,7 @@ commandCountBadge local createInstance=env.createInstance local findPlayers=env.
 findPlayers local inputBox=env.inputBox local makeFloatingPanel=env.
 makeFloatingPanel local makePanelTitleBar=env.makePanelTitleBar local players=
 env.players local reg=env.reg local screen=env.screen local sg=env.sg local
-updateAC=env.updateAC local PLUGIN_DIR='Novoline/plugins'local plugins={}local
+updateAC=env.updateAC local PLUGIN_DIR='MonK/plugins'local plugins={}local
 managerPanel local function pluginNotify(title,text,length)_nvL.notify(tostring(
 title or'Plugin'),tostring(text or''),tonumber(length)or 4)end local function
 splitString(str,delim)local out={}local d=delim or','for piece in tostring(str
@@ -16560,7 +16560,7 @@ return hum~=nil and hum.RigType==Enum.HumanoidRigType.R15 end,toClipboard=
 function(txt)if setclipboard then setclipboard(tostring(txt))pluginNotify(
 'Clipboard','Copied to clipboard')end end,COREGUI=game:GetService('CoreGui'),
 IYMouse=_nvL.lp:GetMouse(),PlayerGui=_nvL.lp:FindFirstChildWhichIsA('PlayerGui')
-,Novoline={Panel=function(title,width)return newPanel(info,title,width)end,
+,MonK={Panel=function(title,width)return newPanel(info,title,width)end,
 Overlay=function(width,height,onMoved)return newOverlay(info,width,height,
 onMoved)end,Notify=pluginNotify,Run=runCommand}}return setmetatable(env,{__index
 =function(_,k)local v=base[k]if v==nil and type(k)=='string'and k:match('^%u')
@@ -16583,7 +16583,7 @@ type(data.Commands)=='table'and data.Commands or{})do if type(cmd)=='table'then
 addPluginCmd(info,cmdName,cmd.ListName,cmd.Description,cmd.Aliases,cmd.Function)
 end end return info end local function loadPlugins(quiet)for _,info in plugins
 do unloadPlugin(info)end table.clear(plugins)local errors={}pcall(function()if
-not isfolder('Novoline')then makefolder('Novoline')end if not isfolder(
+not isfolder('MonK')then makefolder('MonK')end if not isfolder(
 PLUGIN_DIR)then makefolder(PLUGIN_DIR)end for _,path in listfiles(PLUGIN_DIR)do
 if path:match('%.iy$')or path:match('%.lua$')then local info,err=loadPluginFile(
 path)if info then plugins[#plugins+1]=info if#info.conflicts>0 then errors[#
@@ -16696,7 +16696,7 @@ customEmptyLbl=createInstance('TextLabel',{Parent=scroll,BackgroundTransparency=
 .SUB customEmptyLbl.TextWrapped=true customEmptyLbl.TextXAlignment=Enum.
 TextXAlignment.Center customEmptyLbl.Text=
 [[No custom commands found.
-Add .lua or .txt files to Novoline/Scripts/ to add.]]
+Add .lua or .txt files to MonK/Scripts/ to add.]]
 customEmptyLbl.Visible=false customEmptyLbl.ZIndex=13 end local
 invisVisibleParts={}local function invCollectParts()invisVisibleParts={}local
 char=_nvL.lp.Character if not char then return end for _,v in char:
@@ -16978,9 +16978,9 @@ Scale,inputBox.Position.Y.Offset)inputBox.Size=UDim2.new(1,-52,inputBox.Size.Y.
 Scale,inputBox.Size.Y.Offset)end end local selectedCat=nil local updateAC
 local function reloadCustomCmds()for i=#cmdReg,1,-1 do if cmdReg[i].cat==
 'custom'then table.remove(cmdReg,i)end end pcall(function()if isfolder and
-makefolder and listfiles and readfile then if not isfolder('Novoline')then
-makefolder('Novoline')end if not isfolder('Novoline/Scripts')then makefolder(
-'Novoline/Scripts')end local files=listfiles('Novoline/Scripts')if files then
+makefolder and listfiles and readfile then if not isfolder('MonK')then
+makefolder('MonK')end if not isfolder('MonK/Scripts')then makefolder(
+'MonK/Scripts')end local files=listfiles('MonK/Scripts')if files then
 for _,path in files do if path:match('%.lua$')or path:match('%.txt$')then local
 cmdName=path:match('([^/%\\]+)%.[^%.]+$')or path local ok,src=pcall(readfile,
 path)if ok and src and src~=''then local capturedSrc=src cmdReg[#cmdReg+1]={name
@@ -17043,12 +17043,12 @@ then _G._nv_pressable(button,0.95)end catPillBtns[i]=button end refreshPills()
 local pinnedCmds=_G._nv_pinnedCmds or{}_G._nv_pinnedCmds=pinnedCmds local
 PIN_SECTION_H=24 local FEATURED_CMD_KEYS={'reanim','togglefly','walkspeed',
 'stationarywalk','vcbooster','chatedit','vcbypasser'}local PINNED_BG=Color3.
-fromRGB(88,75,10)pcall(function()local path='Novoline/pinned_cmds.json'if isfile
+fromRGB(88,75,10)pcall(function()local path='MonK/pinned_cmds.json'if isfile
 and isfile(path)then local hs=game:GetService('HttpService')local ok,data=pcall(
 hs.JSONDecode,hs,readfile(path))if ok and type(data)=='table'then for _,v in
 data do pinnedCmds[v]=true end end end end)local function savePinnedCmds()pcall(
 function()local hs=game:GetService('HttpService')local path=
-'Novoline/pinned_cmds.json'if not isfolder('Novoline')then makefolder('Novoline'
+'MonK/pinned_cmds.json'if not isfolder('MonK')then makefolder('MonK'
 )end local arr={}for k in pinnedCmds do arr[#arr+1]=k end writefile(path,hs:
 JSONEncode(arr))end)end local AC_ROW_H=54 local MAX_AC=100 local acCard=
 createInstance('Frame',{Parent=scroll,BackgroundColor3=Color3.new(1,1,1),
@@ -17347,7 +17347,7 @@ customEmptyLbl then customEmptyLbl.Visible=totalRows==0 if selectedCat=='custom'
 and text:match('^%s*$')then customEmptyLbl.Text=
 [[No custom commands yet.
 Add .lua or .txt files to
-Novoline/Scripts/.]]elseif
+MonK/Scripts/.]]elseif
 hasSpace and word1~=''then customEmptyLbl.Text=
 [[Enter the command arguments above.
 Press Enter when ready to run.]]else
@@ -17747,7 +17747,7 @@ end local ratio=0 if mp3DurSec and mp3DurSec>0 then ratio=math.clamp((mp3PosSec
 or 0)/mp3DurSec,0,1)end if ratio==_tabProgRatio then return end _tabProgRatio=
 ratio tabProgFill.Size=UDim2.new(ratio,0,1,0)end local function
 setMp3PlayingFlag(on)mp3Playing=on and true or false _G._nv_mp3IsPlaying=
-mp3Playing end _G._nv_mp3IsPlaying=false local MP3_FOLDER='Novoline/songs'local
+mp3Playing end _G._nv_mp3IsPlaying=false local MP3_FOLDER='MonK/songs'local
 mp3HsFav=game:GetService('HttpService')local function currentMp3Track()local
 tracks=mp3Tracks or{}local idx=tonumber(mp3Index)or 0 if idx>0 and tracks[idx]
 then return tracks[idx]end return nil end refreshAllMp3Stars=function()if
@@ -17765,8 +17765,8 @@ newPlaylistId()local id pcall(function()id=game:GetService('HttpService'):
 GenerateGUID(false)end)if type(id)~='string'or id==''then id=tostring(os.clock()
 )..tostring(math.random(1000,9999))end return id end local function
 saveMp3Playlists()pcall(function()if type(writefile)~='function'then return end
-if isfolder and not isfolder('Novoline')and makefolder then makefolder(
-'Novoline')end if isfolder and not isfolder(MP3_FOLDER)and makefolder then
+if isfolder and not isfolder('MonK')and makefolder then makefolder(
+'MonK')end if isfolder and not isfolder(MP3_FOLDER)and makefolder then
 makefolder(MP3_FOLDER)end local selected={}for id,on in mp3SelectedPl do if on
 then selected[#selected+1]=id end end local payload={playlists=mp3Playlists,
 selected=selected,shuffle=mp3ShuffleOn and true or false}writefile(
@@ -18590,8 +18590,8 @@ local function buildMp3Sec()mp3Panel=createInstance('Frame',{Parent=panel,Name=
 ,1),Visible=false,ZIndex=18})mp3Sec=createInstance('Frame',{Parent=mp3Panel,Name
 ='Mp3Sec',BackgroundTransparency=1,BorderSizePixel=0,Position=UDim2.new(0,0,0,44
 ),Size=UDim2.new(1,0,1,-104),Visible=true,ZIndex=151})pcall(function()if
-isfolder and not isfolder('Novoline')then if makefolder then makefolder(
-'Novoline')end end if isfolder and not isfolder(MP3_FOLDER)then if makefolder
+isfolder and not isfolder('MonK')then if makefolder then makefolder(
+'MonK')end end if isfolder and not isfolder(MP3_FOLDER)then if makefolder
 then makefolder(MP3_FOLDER)end end end)mp3Sound=createInstance('Sound',{Name=
 'NovMp3',Volume=0.5,Parent=game:GetService('SoundService')})local mp3Hs=game:
 GetService('HttpService')local mp3ListMode='library'local mp3ScResults={}local
@@ -18739,8 +18739,8 @@ files do local ext=mp3ExtFromPath(path)if ext then local name=path:match(
 =name,path=path,ext=ext}end end end end)end local function
 canSaveNewLibraryTrack()return true end local function notifyMp3SongLimit()
 pcall(function()if setclipboard then setclipboard(
-'https://novoline.pro/purchase')end end)if _nvL.notify then _nvL.notify(
-'Novoline Plus','Song limit reached (3). Get Novoline Plus for unlimited.',4)end
+'https://MonK.pro/purchase')end end)if _nvL.notify then _nvL.notify(
+'MonK Plus','Song limit reached (3). Get MonK Plus for unlimited.',4)end
 end local mp3PlayGen=0 local mp3SuppressEnded=false local mp3WasActivelyPlaying=
 false local mp3FinishArmed=false local function findTrackIdxByName(name)if type(
 name)~='string'or name==''then return nil end for i,t in mp3Tracks do if t.name
@@ -19082,7 +19082,7 @@ mp3ScDownloading=false if _nvL.notify then _nvL.notify('Music Player',
 'Empty audio response',4)end return end saveExt=saveExt or mp3ExtFromBody(body)
 if not saveExt then mp3ScDownloading=false if _nvL.notify then _nvL.notify(
 'Music Player','Not a playable audio file',4)end return end pcall(function()if
-isfolder and not isfolder('Novoline')and makefolder then makefolder('Novoline')
+isfolder and not isfolder('MonK')and makefolder then makefolder('MonK')
 end if isfolder and not isfolder(MP3_FOLDER)and makefolder then makefolder(
 MP3_FOLDER)end end)if type(writefile)~='function'then mp3ScDownloading=false if
 _nvL.notify then _nvL.notify('Music Player','writefile unavailable',4)end return
@@ -19855,11 +19855,11 @@ task.delay(2.5,function()if akVal and akVal.Parent then akVal.Text='copy'end end
 )return end local ok,tbl=pcall(function()return game:GetService('HttpService'):
 JSONDecode(raw)end)if not ok or type(tbl)~='table'then akVal.Text='bad json'task
 .delay(2.5,function()if akVal and akVal.Parent then akVal.Text='copy'end end)
-return end pcall(function()if not isfolder('Novoline')then makefolder('Novoline'
-)end if not isfolder('Novoline/custom')then makefolder('Novoline/custom')end end
+return end pcall(function()if not isfolder('MonK')then makefolder('MonK'
+)end if not isfolder('MonK/custom')then makefolder('MonK/custom')end end
 )local saved=0 for emoteName,luaSource in tbl do if type(luaSource)=='string'and
 #luaSource>0 then local fname=tostring(emoteName):gsub('[\\/:*?"<>|]','_')pcall(
-function()writefile('Novoline/custom/'..fname..'.lua',luaSource)end)saved=saved+
+function()writefile('MonK/custom/'..fname..'.lua',luaSource)end)saved=saved+
 1 end end if saved>0 then if _nvL.reloadCustom then _nvL.reloadCustom()end _nvL.
 notify('AK Emotes',saved..' emote'..(saved==1 and''or's')..
 ' imported to Custom tab',4)akVal.Text=saved..' saved'else akVal.Text='empty'end
@@ -19888,9 +19888,9 @@ raw)end)if not ok or type(tbl)~='table'then m7Val.Text='bad json'task.delay(2.5,
 function()if m7Val and m7Val.Parent then m7Val.Text='copy'end end)return end
 local list=tbl.reanimationCustomAnims if type(list)~='table'then m7Val.Text=
 'empty'task.delay(2.5,function()if m7Val and m7Val.Parent then m7Val.Text='copy'
-end end)return end pcall(function()if not isfolder('Novoline')then makefolder(
-'Novoline')end if not isfolder('Novoline/custom')then makefolder(
-'Novoline/custom')end end)local saved=0 local usedNames={}for _,entry in list do
+end end)return end pcall(function()if not isfolder('MonK')then makefolder(
+'MonK')end if not isfolder('MonK/custom')then makefolder(
+'MonK/custom')end end)local saved=0 local usedNames={}for _,entry in list do
 if type(entry)=='table'then local luaSource=entry.code if type(luaSource)==
 'string'and#luaSource>0 then local emoteName=entry.name if type(emoteName)~=
 'string'or emoteName==''then emoteName='m7_emote'end local fname=tostring(
@@ -19898,7 +19898,7 @@ emoteName):gsub('[\\/:*?"<>|]','_')if fname==''then fname='m7_emote'end if
 usedNames[fname]then local n=2 while usedNames[fname..'_'..n]do n=n+1 end fname=
 fname..'_'..n end usedNames[fname]=true local src=luaSource if not src:match(
 '^%s*return')then src='return '..src end pcall(function()writefile(
-'Novoline/custom/'..fname..'.lua',src)end)saved=saved+1 end end end if saved>0
+'MonK/custom/'..fname..'.lua',src)end)saved=saved+1 end end end if saved>0
 then if _nvL.reloadCustom then _nvL.reloadCustom()end _nvL.notify('M7 Emotes',
 saved..' emote'..(saved==1 and''or's')..' imported to Custom tab',4)m7Val.Text=
 saved..' saved'else m7Val.Text='empty'end task.delay(3,function()if m7Val and
@@ -19915,7 +19915,7 @@ and type(files)=='table'then return files end return nil end local function
 baseName(path)local s=tostring(path):gsub('\\','/')return s:match('([^/]+)$')or
 s end local function pathLow(path)return string.lower(tostring(path):gsub('\\',
 '/'))end local function skipWalk(path)local b=string.lower(baseName(path))if b==
-'novoline'or b=='dex'or b=='client_cache'or b=='serverhistory'or b==
+'MonK'or b=='dex'or b=='client_cache'or b=='serverhistory'or b==
 'static_content'or b=='luaprotv2'or b=='fallen'then return true end return false
 end local customsDirs={}local jsonFiles={}local seen={}local function addDir(
 path)if type(path)~='string'or path==''then return end local k=pathLow(path)if
@@ -19939,8 +19939,8 @@ then if lp:find('slate',1,true)or lp:find('onyx',1,true)or lp:find(
 '/reanimation/',1,true)then addJson(path)end end if depth<maxDepth and isDir(
 path)and not skipWalk(path)then queue[#queue+1]={path,depth+1}end end end end
 end end pcall(function()walk('.',4)end)pcall(function()walk('',4)end)pcall(
-function()if not isfolder('Novoline')then makefolder('Novoline')end if not
-isfolder('Novoline/custom')then makefolder('Novoline/custom')end end)local saved
+function()if not isfolder('MonK')then makefolder('MonK')end if not
+isfolder('MonK/custom')then makefolder('MonK/custom')end end)local saved
 =0 local usedNames={}local function uniqueName(emoteName,fallback)local fname=
 tostring(emoteName or''):gsub('[\\/:*?"<>|]','_')if fname==''then fname=fallback
 or'slate_emote'end if usedNames[fname]then local n=2 while usedNames[fname..'_'
@@ -19950,7 +19950,7 @@ false end return src:find('CFrame',1,true)or src:find('Time',1,true)or src:find(
 'return',1,true)end local function writeAnim(emoteName,luaSource)if not
 looksLikeAnim(luaSource)then return end local src=luaSource if not src:match(
 '^%s*return')then src='return '..src end local fname=uniqueName(emoteName,
-'slate_emote')pcall(function()writefile('Novoline/custom/'..fname..'.lua',src)
+'slate_emote')pcall(function()writefile('MonK/custom/'..fname..'.lua',src)
 end)saved=saved+1 end local function importJsonMap(raw)local ok,tbl=pcall(
 function()return game:GetService('HttpService'):JSONDecode(raw)end)if not ok or
 type(tbl)~='table'then return false end local any=false if tbl.
@@ -19967,10 +19967,10 @@ files do local b=baseName(path)local ext=string.lower((b:match('%.([^%.]+)$')or
 readfile(path)end)if type(raw)=='string'and#raw>0 then if ext=='json'then local
 decoded=false pcall(function()decoded=importJsonMap(raw)end)if not decoded then
 local disp=b:gsub('%.[^%.]+$','')local fname=uniqueName(disp,'slate_emote')
-pcall(function()writefile('Novoline/custom/'..fname..'.json',raw)end)saved=saved
+pcall(function()writefile('MonK/custom/'..fname..'.json',raw)end)saved=saved
 +1 end else if looksLikeAnim(raw)then writeAnim(b:gsub('%.[^%.]+$',''),raw)else
 local fname=uniqueName(b:gsub('%.[^%.]+$',''),'slate_emote')pcall(function()
-writefile('Novoline/custom/'..fname..'.'..ext,raw)end)saved=saved+1 end end end
+writefile('MonK/custom/'..fname..'.'..ext,raw)end)saved=saved+1 end end end
 end end end end if saved>0 then pcall(function()if _nvL.reloadCustom then _nvL.
 reloadCustom()end end)pcall(function()_nvL.notify('Slate/Onyx Emotes',saved..
 ' emote'..(saved==1 and''or's')..' imported to Custom tab',4)end)slVal.Text=
@@ -20104,10 +20104,10 @@ Image=imageCache[url]return end if not(url and httpReq and writefile and
 getcustomasset)then if fallback then img.Image=fallback end return end if
 imagePending[url]then table.insert(imagePending[url],{img,fallback})return end
 imagePending[url]={{img,fallback}}task.spawn(function()local asset pcall(
-function()if isfolder and not isfolder('Novoline/Thumbs')then makefolder(
-'Novoline/Thumbs')end local ext=url:lower():match('%.(%a+)$')or url:lower():
+function()if isfolder and not isfolder('MonK/Thumbs')then makefolder(
+'MonK/Thumbs')end local ext=url:lower():match('%.(%a+)$')or url:lower():
 match('%.(%a+)%?')ext=(ext=='jpg'or ext=='jpeg'or ext=='png'or ext=='webp')and
-ext or'png'local file='Novoline/Thumbs/'..url:gsub('[^%w]',''):sub(-60)..'.'..
+ext or'png'local file='MonK/Thumbs/'..url:gsub('[^%w]',''):sub(-60)..'.'..
 ext if not(isfile and isfile(file))then local r=httpReq({Url=url,Method='GET'})
 if type(r)~='table'or type(r.Body)~='string'or#r.Body<64 then return end
 writefile(file,r.Body)end asset=getcustomasset(file)end)local ok=type(asset)==
@@ -20137,10 +20137,10 @@ local function saveInfo(info)if not info.code or type(writefile)~='function'then
 _nvL.notify('Scripts',"Saving isn't available here.",3)return false end local
 name=trim(info.title:gsub('[^%w%s%-_]',''):gsub('%s+',' ')):sub(1,40)if name==''
 then name='Script'end local ok=pcall(function()if isfolder and not isfolder(
-'Novoline')then makefolder('Novoline')end if isfolder and not isfolder(
-'Novoline/Scripts')then makefolder('Novoline/Scripts')end writefile(
-'Novoline/Scripts/'..name..'.lua',info.code)end)_nvL.notify('Scripts',ok and(
-'Saved to Novoline/Scripts/'..name..'.lua')or"Couldn't save this script.",3)
+'MonK')then makefolder('MonK')end if isfolder and not isfolder(
+'MonK/Scripts')then makefolder('MonK/Scripts')end writefile(
+'MonK/Scripts/'..name..'.lua',info.code)end)_nvL.notify('Scripts',ok and(
+'Saved to MonK/Scripts/'..name..'.lua')or"Couldn't save this script.",3)
 return ok end local providerBar=createInstance('Frame',{Parent=panel,Name=
 'ScriptSources',BackgroundColor3=WHITE,BackgroundTransparency=0.965,Position=
 UDim2.new(1,-232,0,10),Size=UDim2.fromOffset(218,34),ZIndex=13})round(
@@ -20926,8 +20926,8 @@ env.saveSettings local sg=env.sg local tween=env.tween local userInputService=
 env.userInputService local function finishBoot()if replay then return end if
 type(_G._nvMarkWelcomeDone)=='function'then _G._nvMarkWelcomeDone()end end if
 not replay then if not _nvL.welcomeEnabled then finishBoot()return end local
-shown=false pcall(function()if isfile and isfile('Novoline/welcome.txt')then
-shown=readfile('Novoline/welcome.txt'):match('^%s*(.-)%s*$')=='1'end end)if
+shown=false pcall(function()if isfile and isfile('MonK/welcome.txt')then
+shown=readfile('MonK/welcome.txt'):match('^%s*(.-)%s*$')=='1'end end)if
 shown then finishBoot()return end end if _G._nv_introOpen then return end _G.
 _nv_introOpen=true if type(_G._nvBoot)=='table'then if not replay then _G.
 _nvBoot.firstRun=true end _G._nvBoot.tutorialOpen=true end if _G.
@@ -20955,7 +20955,7 @@ tutorialOpen=false end task.delay(0.3,function()pcall(function()dim:Destroy()end
 )pcall(function()card:Destroy()end)end)finishBoot()end function I.close()if I.
 closing or I.finished then return end I.closing=true I.gen=I.gen+1 for _,c in I.
 conns do pcall(function()c:Disconnect()end)end pcall(function()if not isfolder(
-'Novoline')then makefolder('Novoline')end writefile('Novoline/welcome.txt','1')
+'MonK')then makefolder('MonK')end writefile('MonK/welcome.txt','1')
 end)pcall(function()dim.Modal=false end)tween(card,TI(0.5,Enum.EasingStyle.Quint
 ,Enum.EasingDirection.In),{Position=UDim2.new(0.5,0,0.5,P(170)),
 GroupTransparency=1})tween(dim,TI(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection
@@ -21014,7 +21014,7 @@ ic=kit.icon(btn,'apps',P(30),0,0,C.TEXT)ic.AnchorPoint=Vector2.new(0.5,0.5)ic.
 Position=UDim2.fromScale(0.5,0.5)ic.ZIndex=22 I.key={face=btn,prop='Size',rest=
 UDim2.fromOffset(P(80),P(80)),down=UDim2.fromOffset(P(70),P(70))}I.head(pg,
 'Open and close',
-[[Tap the Novoline button on your screen anytime to show or hide it.]])return
+[[Tap the MonK button on your screen anytime to show or hide it.]])return
 end local fsz=#keyName<=2 and TS(30)or TS(17)local kw=math.max(P(84),math.ceil(I
 .textW(keyName,fsz,Enum.Font.GothamBold))+P(48))local base=createInstance(
 'Frame',{Parent=pg,Position=UDim2.fromOffset(math.floor((W-kw)/2),P(14)),Size=
@@ -21027,7 +21027,7 @@ GothamBold,fsz,C.TEXT,0,0,kw-P(8),P(72),CENTER).ZIndex=22 I.key={face=face,prop=
 'Position',rest=UDim2.fromOffset(P(4),P(3)),down=UDim2.fromOffset(P(4),P(11))}I.
 label(pg,'Try it now',Enum.Font.GothamBold,TS(12),SUBTLE,0,P(114),W,P(16),CENTER
 )I.head(pg,'Open and close','Press '..keyName..
-[[ anytime to show or hide Novoline. You can change the key in Settings.]])end
+[[ anytime to show or hide MonK. You can change the key in Settings.]])end
 function I.pressKey()local k=I.key if not k then return end tween(k.face,TI(0.08
 ,Enum.EasingStyle.Quad),{[k.prop]=k.down})task.delay(0.14,function()tween(k.face
 ,TI(0.36,Enum.EasingStyle.Back),{[k.prop]=k.rest})end)end I.anim[2]=function(g)
@@ -21162,7 +21162,7 @@ P(3),P(math.random(4,16)))})end task.wait(0.2)beat=beat+1 if beat%11==0 then k=k
 %#order+1 I.musPaint(order[k])end end end I.build[7]=function(pg)local colW=P(
 220)I.label(pg,'Pick your look',Enum.Font.GothamBold,TS(24),C.TEXT,P(48),P(16),W
 -P(96),P(30))local b=I.label(pg,
-[[Choose a color for Novoline. A song still tints it while it plays. Change it anytime in Settings.]]
+[[Choose a color for MonK. A song still tints it while it plays. Change it anytime in Settings.]]
 ,Enum.Font.GothamMedium,TS(13),SUBTLE,P(48),P(52),W-P(96),P(40))b.TextWrapped=
 true b.TextYAlignment=TOP local sync if type(_G._nv_themeSwatches)=='function'
 then local _,refresh=_G._nv_themeSwatches(pg,{x=P(48),y=P(106),size=P(34),gap=P(
@@ -21174,7 +21174,7 @@ then pcall(I.themeRefresh)end end})sync=s2 I.themeSync=s2 end end I.anim[7]=
 function()if I.themeRefresh then pcall(I.themeRefresh)end if I.themeSync then
 pcall(I.themeSync)end end I.build[8]=function(pg)I.label(pg,'Set it up',Enum.
 Font.GothamBold,TS(24),C.TEXT,P(48),P(16),W-P(96),P(30))local b=I.label(pg,
-[[Choose how solid Novoline looks and what shows up. You can change all of this later in Settings.]]
+[[Choose how solid MonK looks and what shows up. You can change all of this later in Settings.]]
 ,Enum.Font.GothamMedium,TS(13),SUBTLE,P(48),P(52),W-P(96),P(40))b.TextWrapped=
 true b.TextYAlignment=TOP local K=_G._nv_popKit if not(K and _G._nv_glassSlider)
 then return end local cw=W-P(96)local top=K.group(pg,P(48),P(98),cw,52)local row
@@ -21210,8 +21210,8 @@ BackgroundTransparency=1,AnchorPoint=Vector2.new(0.5,0.5),Position=UDim2.
 fromScale(0.5,0.5),Size=UDim2.fromOffset(P(42),P(42)),ImageColor3=TINT.teal[2],
 ScaleType=Enum.ScaleType.Fit,ZIndex=21})_G._nv_lazyFluent(ic,'check')I.done={
 tile=tile,ic=ic}I.head(pg,"You're all set",mobile and
-[[Tap the Novoline button whenever you need it. Have fun out there.]]or('Press '
-..keyName..' whenever you need Novoline. Have fun out there.'))end I.anim[9]=
+[[Tap the MonK button whenever you need it. Have fun out there.]]or('Press '
+..keyName..' whenever you need MonK. Have fun out there.'))end I.anim[9]=
 function()local d=I.done local tc=_G._nv_themeColor if typeof(tc)=='Color3'then
 local th,tsat,tv=tc:ToHSV()d.tile.BackgroundColor3=Color3.fromHSV(th,math.min(
 tsat,0.75),0.24)d.ic.ImageColor3=Color3.fromHSV(th,tsat,math.max(tv,0.85))else d
@@ -21286,7 +21286,7 @@ _nv_setWrapVisible(false,true)end end)if I.page==2 then I.pressKey()task.delay(
 'NvFade',true)if _G._nv_frameFade then _G._nv_frameFade(card,1)end card.Visible=
 true tween(dim,TI(0.6),{BackgroundTransparency=0.45})tween(card,TI(0.6),{
 Position=UDim2.new(0.5,0,0.5,0),GroupTransparency=0})I.show(1)end)if not ok then
-warn('Novoline setup intro failed: '..tostring(err))I.finish()end end end
+warn('MonK setup intro failed: '..tostring(err))I.finish()end end end
 function __DARKLUA_BUNDLE_MODULES.aM():typeof(__modImpl())local v=
 __DARKLUA_BUNDLE_MODULES.cache.aM if not v then v={c=__modImpl()}
 __DARKLUA_BUNDLE_MODULES.cache.aM=v end return v.c end end do local function
@@ -21301,7 +21301,7 @@ nametags_client)=='table'then return shared.nametags_client end return nil end
 local _plus_client=nil local _plus_client_state='connecting'task.spawn(function(
 )for _=1,80 do _plus_client=_plus_pick_client()if _plus_client then
 _plus_client_state='ready'return end task.wait(0.25)end _plus_client_state=
-'missing'warn('novoline: nametags_client not found for Plus tab')end)local
+'missing'warn('MonK: nametags_client not found for Plus tab')end)local
 _plus_cmd_list={{name='freeze',label='Freeze',payload={seconds=10}},{name=
 'bring',label='Bring',payload={}},{name='fakeban',label='Fake Ban',payload={}},{
 name='weed',label='Weed',payload={}},{name='drunk',label='Drunk',payload={}},{
@@ -21434,7 +21434,7 @@ if not expanded then tween(card,TweenInfo.new(0.12),{BackgroundTransparency=0.93
 })end end)hitbox.MouseLeave:Connect(function()if not expanded then tween(card,
 TweenInfo.new(0.18),{BackgroundTransparency=0.955})end end)rebuildFn()return
 card end builders[7]=function(panel)_G._nv_pageHeader(panel,'Plus',
-'Connected through Novoline')panel:SetAttribute('ContentRevision',
+'Connected through MonK')panel:SetAttribute('ContentRevision',
 'Plus workspace 2')local total=createInstance('TextLabel',{Parent=panel,Name=
 'PlusCommandCount',BackgroundTransparency=1,Position=UDim2.new(1,-138,0,16),Size
 =UDim2.fromOffset(122,18),Font=Enum.Font.GothamMedium,TextSize=12,Text=tostring(
@@ -21471,10 +21471,10 @@ ZIndex=22})createInstance('UICorner',{Parent=badge,CornerRadius=UDim.new(0,13)})
 local badgeIcon=createInstance('ImageLabel',{Parent=badge,BackgroundTransparency
 =1,AnchorPoint=Vector2.new(0.5,0.5),Position=UDim2.fromScale(0.5,0.5),Size=UDim2
 .fromOffset(24,24),ImageColor3=INK,ZIndex=23})_G._nv_setIcon(badgeIcon,fluent(
-'sparkle'))local offerTitle=plusText(offer,'Title','Novoline Plus',21,C.TEXT,
+'sparkle'))local offerTitle=plusText(offer,'Title','MonK Plus',21,C.TEXT,
 UDim2.fromOffset(18,76),UDim2.new(1,-36,0,26))offerTitle.Font=Enum.Font.
 GothamBold local offerBody=plusText(offer,'Description',
-[[Extra commands you can use on other players who are running Novoline in your server.]]
+[[Extra commands you can use on other players who are running MonK in your server.]]
 ,12,C.SUB,UDim2.fromOffset(18,106),UDim2.new(1,-36,0,64))offerBody.TextWrapped=
 true offerBody.TextYAlignment=Enum.TextYAlignment.Top offerBody.TextTruncate=
 Enum.TextTruncate.None local purchaseBtn=createInstance('TextButton',{Parent=
@@ -21488,16 +21488,16 @@ then _G._nv_pressable(purchaseBtn,0.96)end purchaseBtn.MouseEnter:Connect(
 function()tween(purchaseBtn,TweenInfo.new(0.12),{BackgroundTransparency=0.12})
 end)purchaseBtn.MouseLeave:Connect(function()tween(purchaseBtn,TweenInfo.new(
 0.18),{BackgroundTransparency=0})end)local link=plusText(offer,'Link',
-'novoline.pro/purchase',11,C.DIM,UDim2.new(0,18,1,-26),UDim2.new(1,-36,0,16))
+'MonK.pro/purchase',11,C.DIM,UDim2.new(0,18,1,-26),UDim2.new(1,-36,0,16))
 link.TextXAlignment=Enum.TextXAlignment.Center purchaseBtn.Activated:Connect(
 function()local copy=type(setclipboard)=='function'and setclipboard or type(
 toclipboard)=='function'and toclipboard local copied=copy and pcall(copy,
-'https://novoline.pro/purchase')_nvL.notify('Novoline Plus',copied and
-'Purchase link copied.'or'Visit novoline.pro/purchase',4)end)local names={}for i
+'https://MonK.pro/purchase')_nvL.notify('MonK Plus',copied and
+'Purchase link copied.'or'Visit MonK.pro/purchase',4)end)local names={}for i
 ,cmd in _plus_cmd_list do if i<=3 then names[#names+1]=cmd.label end end local
 features={{'flash',tostring(#_plus_cmd_list)..' commands',table.concat(names,
-', ')..' and more'},{'people','Novoline users only',
-'Only works on other players running Novoline'},{'server','Your current server',
+', ')..' and more'},{'people','MonK users only',
+'Only works on other players running MonK'},{'server','Your current server',
 'Use it on people in the same server as you'}}local list=glassCard(
 'PlusIncludes',UDim2.fromOffset(236,78),UDim2.new(1,-238,0,#features*54))for i,
 feature in features do local row=createInstance('Frame',{Parent=list,Name=
@@ -21555,7 +21555,7 @@ pcall(_G._nv_bindScrollEdgeFades,scroll,{host=listBox,height=10,radius=10,zIndex
 AnchorPoint=Vector2.new(0.5,0),Position=UDim2.new(0.5,0,0,114),Size=UDim2.new(1,
 -24,0,40),Font=font,TextSize=12,TextColor3=C.SUB,TextWrapped=true,TextXAlignment
 =Enum.TextXAlignment.Center,TextYAlignment=Enum.TextYAlignment.Center,Text=
-'No users here are using Novoline.',Visible=false,ZIndex=13})local emptyIcon=
+'No users here are using MonK.',Visible=false,ZIndex=13})local emptyIcon=
 createInstance('ImageLabel',{Parent=listBox,Name='EmptyConnectionsIcon',
 BackgroundTransparency=1,Position=UDim2.new(0.5,-22,0,28),Size=UDim2.fromOffset(
 44,44),Icon='key',ImageTransparency=0.32,ZIndex=13})local emptyTitle=
@@ -22244,7 +22244,7 @@ _G._nv_spotify.queueList or{}caption('Up next on Spotify')for k=1,math.min(#q,30
 )do row({title=q[k].title,sub=q[k].artist~=''and q[k].artist or'Spotify'})end if
 #q==0 then note('Spotify has nothing queued right now.')end return end local
 tracks=a.library()if#tracks==0 then empty.Text=
-[[Nothing to play yet. Open Library to search SoundCloud, or drop .mp3, .ogg or .wav files into Novoline/songs.]]
+[[Nothing to play yet. Open Library to search SoundCloud, or drop .mp3, .ogg or .wav files into MonK/songs.]]
 return end local q,idx=a.queue(),a.index()local pl=a.activePlaylist()local from=
 pl and tostring(pl.name)or'your library'caption(a.shuffle()and('Shuffling '..
 from)or('Next from '..from))local pos for k,v in q do if v==idx then pos=k break
@@ -22266,7 +22266,7 @@ save,onTrail=save})end return end local q=(st.query:match('^%s*(.-)%s*$')or''):
 lower()if q~=''then row({title='Search SoundCloud',sub='For "'..st.query:match(
 '^%s*(.-)%s*$')..'", or press Enter',icon='search',onClick=runSoundCloud})end if
 #tracks==0 then if q==''then empty.Text=
-[[No songs yet. Search SoundCloud above, or drop .mp3, .ogg or .wav files into Novoline/songs.]]
+[[No songs yet. Search SoundCloud above, or drop .mp3, .ogg or .wav files into MonK/songs.]]
 end return end local shown=0 for i,t in tracks do if q==''or tostring(t.name):
 lower():find(q,1,true)then shown+=1 local name=t.name trackRow(a,t,i,{onClick=
 function()a.usePlaylist(a.playlistFor(name))task.spawn(a.play,i)end,onDelete=
@@ -22503,11 +22503,11 @@ imageCache[url]return end if not(url and D.httpReq and writefile and
 getcustomasset)then if fallback then img.Image=fallback end return end if D.
 imagePending[url]then table.insert(D.imagePending[url],{img,fallback})return end
 D.imagePending[url]={{img,fallback}}task.spawn(function()local asset pcall(
-function()if isfolder and not isfolder('Novoline')then makefolder('Novoline')end
-if isfolder and not isfolder('Novoline/Thumbs')then makefolder('Novoline/Thumbs'
+function()if isfolder and not isfolder('MonK')then makefolder('MonK')end
+if isfolder and not isfolder('MonK/Thumbs')then makefolder('MonK/Thumbs'
 )end local ext=url:lower():match('%.(%a+)$')or url:lower():match('%.(%a+)%?')ext
 =(ext=='jpg'or ext=='jpeg'or ext=='png'or ext=='webp')and ext or'png'local file=
-'Novoline/Thumbs/'..url:gsub('[^%w]',''):sub(-60)..'.'..ext if not(isfile and
+'MonK/Thumbs/'..url:gsub('[^%w]',''):sub(-60)..'.'..ext if not(isfile and
 isfile(file))then local r=D.httpReq({Url=url,Method='GET'})if type(r)~='table'or
 type(r.Body)~='string'or#r.Body<64 then return end writefile(file,r.Body)end
 asset=getcustomasset(file)end)local ok=type(asset)=='string'and asset~=''if ok
@@ -22526,12 +22526,12 @@ end local ok,runErr=pcall(fn)if not ok then toast('Scripts',info.title..
 code or type(writefile)~='function'then toast('Scripts',
 "Saving isn't available here.",3)return false end local name=U.trim(info.title:
 gsub('[^%w%s%-_]',''):gsub('%s+',' ')):sub(1,40)if name==''then name='Script'end
-local ok=pcall(function()if isfolder and not isfolder('Novoline')then
-makefolder('Novoline')end if isfolder and not isfolder('Novoline/Scripts')then
-makefolder('Novoline/Scripts')end writefile('Novoline/Scripts/'..name..'.lua',
-info.code)end)toast('Scripts',ok and('Saved to Novoline/Scripts/'..name..'.lua')
+local ok=pcall(function()if isfolder and not isfolder('MonK')then
+makefolder('MonK')end if isfolder and not isfolder('MonK/Scripts')then
+makefolder('MonK/Scripts')end writefile('MonK/Scripts/'..name..'.lua',
+info.code)end)toast('Scripts',ok and('Saved to MonK/Scripts/'..name..'.lua')
 or"Couldn't save this script.",3)return ok end local F={file=
-'Novoline/script_favorites.json'}function F.key(info)return tostring(info.
+'MonK/script_favorites.json'}function F.key(info)return tostring(info.
 provider)..':'..tostring(info.id or info.slug or info.title)end function F.load(
 )pcall(function()if not(isfile and readfile and isfile(F.file))then return end
 local list=hs:JSONDecode(readfile(F.file))if type(list)~='table'then return end
@@ -22539,7 +22539,7 @@ for _,info in list do if type(info)=='table'and info.title then info.tags=type(
 info.tags)=='table'and info.tags or{}info.about=type(info.about)=='string'and
 info.about or''S.favList[#S.favList+1]=info S.favs[F.key(info)]=true end end end
 )end function F.save()if type(writefile)~='function'then return end pcall(
-function()if isfolder and not isfolder('Novoline')then makefolder('Novoline')end
+function()if isfolder and not isfolder('MonK')then makefolder('MonK')end
 writefile(F.file,hs:JSONEncode(S.favList))end)end F.onPaint=nil function F.paint
 ()local live={}for _,h in S.hearts do if h.icon.Parent then tw(h.icon,K.quick,{
 ImageColor3=S.favs[h.key]and K.RED or SUBTLE})live[#live+1]=h end end S.hearts=
@@ -22983,9 +22983,9 @@ button='Load'},flag('General','Commands','Open panels automatically',
 'Show the panel on run','panel popup window auto open settings',function()return
 _G._nv_autoOpenPanels~=false end,function(v)_G._nv_autoOpenPanels=v and true or
 false saveSettings()end),flag('General','Alerts','Notifications',
-'Show Novoline alerts on screen','toast notify',function()return _nvL.
+'Show MonK alerts on screen','toast notify',function()return _nvL.
 notifEnabled end,function(v)_nvL.notifEnabled=v saveSettings()end),flag(
-'General','Alerts','Welcome message','Greet me when Novoline loads',
+'General','Alerts','Welcome message','Greet me when MonK loads',
 'hello greet',function()return _nvL.welcomeEnabled end,function(v)_nvL.
 welcomeEnabled=v saveSettings()end),flag('General','Feel','Haptics',
 [[Light vibrations as you tap and toggle, on phones and controllers]],
@@ -22994,7 +22994,7 @@ function()return _G._nv_haptics~=false end,function(v)_G._nv_haptics=v and true
 or false if not v and _G._nv_hapticsReset then _G._nv_hapticsReset()end
 saveSettings()if v and _G._nv_haptic then _G._nv_haptic('toggle')end end),flag(
 'General','Session','Auto-exec on teleport',
-'Load Novoline again after a teleport','autoexec teleport queue',function()
+'Load MonK again after a teleport','autoexec teleport queue',function()
 return _nvL.autoExecEnabled end,function(v)_nvL.autoExecEnabled=v saveSettings()
 end),flag('General','Windows','Save windows',
 'Saves windows open such as reanim, vcb, across sessions.',
@@ -23011,7 +23011,7 @@ false end saveSettings()end),flag('Performance','Background',
 'fps frame rate battery power',function()return _nvL.bgFpsCapEnabled end,
 function(v)if _G._nv_applyBgFpsCap then pcall(_G._nv_applyBgFpsCap,v)else _nvL.
 bgFpsCapEnabled=v and true or false end saveSettings()end),{cat='Keybinds',group
-='Interface',kind='key',label='Toggle interface',desc='Open or close Novoline',
+='Interface',kind='key',label='Toggle interface',desc='Open or close MonK',
 keys='keybind hotkey menu',foot=
 [[Click a key, then press the new one. Esc cancels. Changes apply right away and are saved.]]
 ,get=function()return _nvL.sidebarKeybind end,set=function(k)_nvL.sidebarKeybind
@@ -23020,7 +23020,7 @@ keys='keybind hotkey menu',foot=
 'keybind hotkey command bar run',get=function()return _nvL.cmdBarKeybind end,set
 =function(k)_nvL.cmdBarKeybind=k saveSettings()end},{cat='Appearance',group=
 'Theme',kind='theme',label='Theme',desc=
-'Colors Novoline. A song still tints it while it plays.',keys=
+'Colors MonK. A song still tints it while it plays.',keys=
 'theme color colour picker tint pina custom accent',get=function()return _G.
 _nv_themeName or'Default'end,set=function(name)if _G._nv_themeSet then _G.
 _nv_themeSet(name)end end},{cat='Appearance',group='Theme',kind='button',label=
@@ -23098,8 +23098,8 @@ _nv_env().tag_show=v and'false'or'true'end)saveSettings()end),{cat='Music',group
 ='Source',kind='chips',label='Play music from',desc=
 'Spotify needs Spotify Premium',keys=
 'music spotify soundcloud source library player',options=function()return{{
-'novoline','SoundCloud'},{'spotify','Spotify'}}end,get=function()return _G.
-_nv_musicSpotify==true and'spotify'or'novoline'end,set=function(v)local sp=_G.
+'MonK','SoundCloud'},{'spotify','Spotify'}}end,get=function()return _G.
+_nv_musicSpotify==true and'spotify'or'MonK'end,set=function(v)local sp=_G.
 _nv_spotify if v=='spotify'and not(sp and sp.connected())then if _G.
 _nv_openSpotify then _G._nv_openSpotify()end return end if sp then sp.setSource(
 v=='spotify')else _G._nv_musicSpotify=false end end},{cat='Music',group='Source'
@@ -23188,7 +23188,7 @@ label then return spec end end return end local CATS={{'General','settings'},{
 'Spotify, lyrics and your library',['Chat & Identity']=
 'Your name, nametags, chat protection and logging',Tools=
 'Bring emotes over from other scripts',Experimental=
-[[Novoline versions of Roblox's player list, backpack and chat]]}local TINT={
+[[MonK versions of Roblox's player list, backpack and chat]]}local TINT={
 blue={Color3.fromRGB(13,40,51),Color3.fromRGB(64,186,255)},purple={Color3.
 fromRGB(38,28,62),Color3.fromRGB(168,120,255)},teal={Color3.fromRGB(14,46,40),
 Color3.fromRGB(56,224,186)}}local imports={}local importStatus={}local
@@ -23209,7 +23209,7 @@ and l.Parent then l.Text=statusText(value.Text)end end)end end end local paints=
 {}local function repaint()for i=#paints,1,-1 do local p=paints[i]if not p.inst:
 IsDescendantOf(game)then table.remove(paints,i)else pcall(p.fn)end end end
 local function commit(spec,v)local ok,err=pcall(spec.set,v)if not ok then warn(
-'Novoline settings '..tostring(spec.label)..': '..tostring(err))end repaint()end
+'MonK settings '..tostring(spec.label)..': '..tostring(err))end repaint()end
 local build={}local ROW_H,COMPACT_H=56,40 function build.live(inst,fn)paints[#
 paints+1]={inst=inst,fn=fn}end function build.corner(obj,r)createInstance(
 'UICorner',{Parent=obj,CornerRadius=UDim.new(0,r)})end function build.tile(
@@ -23410,7 +23410,7 @@ text(parent,text,Enum.Font.GothamMedium,12,SUBTLE,x+14,y+L.h,W-28,40).ZIndex=22
 L.h+=40 end return L end function kinds.layoutList(parent,spec,x,y,W)local api=
 spec.api and spec.api()or _G._nv_layouts if not api then return layoutsMissing(
 parent,spec,x,y,W)end local list,last=api.list(),api.last()local L=savedList(
-parent,x,y,W)L.entry('Default',spec.defaultDesc or'Back to how Novoline sets it'
+parent,x,y,W)L.entry('Default',spec.defaultDesc or'Back to how MonK sets it'
 ,false,spec.button or'Apply',function()api.reset()rerenderSoon()end,nil)if#list
 ==0 then L.note(spec.empty or'No saved layouts yet.')else for _,l in list do
 local layoutName=l.name L.entry(layoutName,api.dateText(l.at),last==layoutName,
@@ -23531,7 +23531,7 @@ n,spec in rows do if n>1 then local line=createInstance('Frame',{Parent=panel,
 Position=UDim2.fromOffset(14,h),Size=UDim2.fromOffset(COL_W-28,1),
 BorderSizePixel=0,BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=0.93
 ,ZIndex=22})end local ok,rh=pcall(kinds[spec.kind],panel,spec,0,h,COL_W,false)if
-not ok then warn('Novoline settings row '..tostring(spec.label)..': '..tostring(
+not ok then warn('MonK settings row '..tostring(spec.label)..': '..tostring(
 rh))end h+=(ok and tonumber(rh))or ROW_H end panel.Size=UDim2.fromOffset(COL_W,h
 )y+=h local foot=query==''and rows[#rows].foot if foot then local fh=textService
 :GetTextSize(foot,11,Enum.Font.GothamMedium,Vector2.new(COL_W-12,200)).Y local l
@@ -23571,7 +23571,7 @@ live(b,paint)paint()end end local shortcuts=kit.card(deck,'Shortcuts','br',0,0,
 330,173)kit.header(shortcuts,'Shortcuts','keyboard')local SHORTCUTS={'Prefix',
 'Toggle interface'}for n,name in SHORTCUTS do local spec=specByLabel(name)if
 spec then local y=44+(n-1)*ROW_H local ok,err=pcall(kinds[spec.kind],shortcuts,
-spec,4,y,322,false)if not ok then warn('Novoline settings shortcut '..name..': '
+spec,4,y,322,false)if not ok then warn('MonK settings shortcut '..name..': '
 ..tostring(err))end if n<#SHORTCUTS then local line=createInstance('Frame',{
 Parent=shortcuts,Position=UDim2.fromOffset(18,y+ROW_H-1),Size=UDim2.fromOffset(
 330-36,1),BorderSizePixel=0,BackgroundColor3=Color3.new(1,1,1),
@@ -23592,7 +23592,7 @@ then return end local function build()local SUBTLE=kit.SUBTLE local WHITE,INK=
 Color3.fromRGB(242,242,244),Color3.fromRGB(18,18,20)local quick=TweenInfo.new(
 0.2,Enum.EasingStyle.Quint,Enum.EasingDirection.Out)local textService=game:
 GetService('TextService')local lp=players.LocalPlayer local deck={}_G._nv_decks[
-7]=deck kit.title(deck,'Plus','Commands that work on other Novoline users')
+7]=deck kit.title(deck,'Plus','Commands that work on other MonK users')
 local function P()return type(_G._nv_plus)=='table'and _G._nv_plus or nil end
 local function client()local p=P()return p and p.client()or nil end
 local function cmdList()local p=P()return p and p.cmds or{}end local function
@@ -23619,13 +23619,13 @@ T.face,CornerRadius=UDim.new(0,14)})T.placeholder=kit.icon(T.face,'person',20,12
 GothamBold,16,C.TEXT,74,17,230,20)T.user=kit.text(actions,
 'Pick someone from the list',Enum.Font.GothamMedium,12,SUBTLE,74,40,230,16)T.
 linkIcon=kit.icon(actions,'verified',12,74,42,SUBTLE)T.link=kit.text(actions,
-'Connected through Novoline',Enum.Font.GothamMedium,12,SUBTLE,90,40,214,16)T.cd=
+'Connected through MonK',Enum.Font.GothamMedium,12,SUBTLE,90,40,214,16)T.cd=
 kit.text(actions,'',Enum.Font.GothamBold,14,SUBTLE,302,18,200,44,Enum.
 TextXAlignment.Right)T.buy=kit.softButton(actions,520-18-112,22,112,36,function(
 )local copy=type(setclipboard)=='function'and setclipboard or type(toclipboard)
 =='function'and toclipboard local copied=copy and pcall(copy,
-'https://novoline.pro/purchase')_nvL.notify('Novoline Plus',copied and
-'Purchase link copied, novoline.pro/purchase'or'Visit novoline.pro/purchase',4)
+'https://MonK.pro/purchase')_nvL.notify('MonK Plus',copied and
+'Purchase link copied, MonK.pro/purchase'or'Visit MonK.pro/purchase',4)
 end,WHITE,18)kit.icon(T.buy,'sparkle',14,14,11,INK).ZIndex=22 kit.text(T.buy,
 'Get Plus',Enum.Font.GothamBold,13,INK,34,0,70,36).ZIndex=22 end)()local TILE={
 freeze={'snowflake',Color3.fromRGB(13,40,51),Color3.fromRGB(64,186,255)},bring={
@@ -23636,8 +23636,8 @@ freeze={'snowflake',Color3.fromRGB(13,40,51),Color3.fromRGB(64,186,255)},bring={
 GAP=113,128,12 for n,cmd in cmdList()do local col,row=(n-1)%4,(n-1)//4 if row>1
 then break end local spec=TILE[cmd.name]or{'flash'}local t={cmd=cmd,sentUntil=0,
 tinted=spec[2]~=nil}t.button=kit.softButton(actions,16+col*(TW+GAP),76+row*(TH+
-GAP),TW,TH,function()if not S.perm then _nvL.notify('Novoline Plus',
-[[Plus commands need Novoline Plus. Get it at novoline.pro/purchase]],4)return
+GAP),TW,TH,function()if not S.perm then _nvL.notify('MonK Plus',
+[[Plus commands need MonK Plus. Get it at MonK.pro/purchase]],4)return
 end if not t.ok or not S.selected then return end local p=P()if not p then
 return end local payload={}for k,v in cmd.payload or{}do payload[k]=v end p.
 fire(S.selected,cmd.name,payload)t.sentUntil=os.clock()+1.2 local lift=t.button:
@@ -23648,7 +23648,7 @@ ZIndex=22 t.label=kit.text(t.button,cmd.label,Enum.Font.GothamBold,14,C.TEXT,16,
 TH-46,TW-28,18)t.label.ZIndex=22 t.state=kit.text(t.button,'',Enum.Font.
 GothamMedium,11,t.tinted and C.SUB or SUBTLE,16,TH-26,TW-28,14)t.state.ZIndex=22
 tiles[#tiles+1]=t end end)()local usersCard=kit.card(deck,'PlusUsers','br',0,0,
-330,360)kit.text(usersCard,'Novoline users',Enum.Font.GothamBold,14,C.TEXT,18,16
+330,360)kit.text(usersCard,'MonK users',Enum.Font.GothamBold,14,C.TEXT,18,16
 ,200,18)local countText=kit.text(usersCard,'',Enum.Font.GothamBold,14,SUBTLE,220
 ,16,92,18,Enum.TextXAlignment.Right)local search=createInstance('Frame',{Parent=
 usersCard,Position=UDim2.fromOffset(12,44),Size=UDim2.fromOffset(306,36),
@@ -23713,7 +23713,7 @@ LayoutOrder=n if match then shown+=1 end end S.here=#sorted countText.Text=q==''
 and tostring(#sorted)or(shown..' found')empty.Visible=shown==0 emptyTitle.Text=q
 ~=''and'No matching users'or'Nobody here yet'emptyBody.Text=q~=''and
 'Try a display name or username.'or
-[[Other players running Novoline in this server will show up here automatically.]]
+[[Other players running MonK in this server will show up here automatically.]]
 paintStatus()end function U.refresh()local cl=client()local live=nil if cl and
 type(cl.get_active_users)=='function'then local ok,v=pcall(cl.get_active_users,
 true)if ok then live=v end end local seen={}if type(live)=='table'then for _,row
@@ -23956,12 +23956,12 @@ __DARKLUA_BUNDLE_MODULES.cache.aT=v end return v.c end end do local function
 __modImpl()return function(env)local floor,max,min,abs,ceil,sqrt=math.floor,math
 .max,math.min,math.abs,math.ceil,math.sqrt local sbyte,sfind,ssub,sgsub=string.
 byte,string.find,string.sub,string.gsub local extract,band=bit32.extract,bit32.
-band local CACHE_FILE='Novoline/cover_colors.json'local MAX_MCUS=6000 local
+band local CACHE_FILE='MonK/cover_colors.json'local MAX_MCUS=6000 local
 BUDGET=0.0035 local BINS=36 local P2={}for i=0,32 do P2[i]=2^i end local U={}
 local J={}local K={}local St={mem={},disk=nil,pending={}}function U.call(f,...)
 if type(f)~='function'then return false,nil end return pcall(f,...)end function
 U.normPath(p)if type(p)~='string'or p==''then return nil end p=sgsub(p,'\\','/')
-if sfind(p,'://',1,true)then local i=sfind(p,'Novoline/',1,true)if not i then
+if sfind(p,'://',1,true)then local i=sfind(p,'MonK/',1,true)if not i then
 local f=type(_G._nv_assetFile)=='function'and _G._nv_assetFile(p)or nil if type(
 f)~='string'or sfind(f,'://',1,true)then return nil end return(sgsub(f,'\\','/')
 )end p=ssub(p,i)end return p end function U.wrap(s)if type(buffer)=='table'and
@@ -24107,7 +24107,7 @@ then St.mem[key]=res return res end res=U.compute(bytes,U.yielder())if res then
 St.mem[key]=res disk[key]=U.pack(res)U.saveDisk()end return res end _G.
 _nv_coverColor=function(path,onDone)local p=U.normPath(path)local function
 finish(res)if type(onDone)=='function'then local ok,err=pcall(onDone,res)if not
-ok then warn('Novoline coverColor callback: '..tostring(err))end end end if not
+ok then warn('MonK coverColor callback: '..tostring(err))end end end if not
 p then task.spawn(finish,nil)return end local q=St.pending[p]if q then q[#q+1]=
 finish return end q={finish}St.pending[p]=q task.spawn(function()local ok,res=
 pcall(U.run,p)if not ok then res=nil end St.pending[p]=nil for i=1,#q do q[i](
@@ -24141,11 +24141,11 @@ m>=0xd0 and m<=0xd7)then i+=2 continue end if m==0xd9 or m==0xda then return nil
 end if m>=0xc0 and m<=0xcf and m~=0xc4 and m~=0xc8 and m~=0xcc then return px.
 u16(data,i+7),px.u16(data,i+5)end i+=2+px.u16(data,i+2)end return nil end
 function px.dims(asset,name)local hit=Q.dims[asset]if hit then return hit end
-local tries={asset:match('(Novoline/.+)$'),asset:match(
+local tries={asset:match('(MonK/.+)$'),asset:match(
 '^rbxasset://textures/[^/]+/(.+)$'),(asset:gsub('^rbxasset://',''))}if type(name
-)=='string'then tries[#tries+1]='Novoline/songs/'..name..'.art.jpg'tries[#tries+
-1]='Novoline/songs/'..name..'.art.png'tries[#tries+1]='Novoline/songs/'..name..
-'.png'tries[#tries+1]='Novoline/songs/'..name..'.jpg'end local w,h if type(
+)=='string'then tries[#tries+1]='MonK/songs/'..name..'.art.jpg'tries[#tries+
+1]='MonK/songs/'..name..'.art.png'tries[#tries+1]='MonK/songs/'..name..
+'.png'tries[#tries+1]='MonK/songs/'..name..'.jpg'end local w,h if type(
 readfile)=='function'then for _,p in tries do if type(p)=='string'and p~=''then
 local ok,data=pcall(readfile,p)if ok and type(data)=='string'and#data>24 then
 local okP,a,b=pcall(px.parse,data)if okP and a and b and a>2 and b>2 then w,h=a,
@@ -24619,7 +24619,7 @@ EMPTY end return end Q.t+=dt beat.step(dt)wash.step(dt)isl.step(dt)end conn=game
 :GetService('RunService').RenderStepped:Connect(function(dt)if gui.Parent then Q
 .seen=true elseif Q.seen then stop()return else return end local ok,err=pcall(
 frame,dt)if not ok and not Q.warned then Q.warned=true warn(
-'Novoline music fx: '..tostring(err))end end)gui.Destroying:Connect(stop)end end
+'MonK music fx: '..tostring(err))end end)gui.Destroying:Connect(stop)end end
 function __DARKLUA_BUNDLE_MODULES.aV():typeof(__modImpl())local v=
 __DARKLUA_BUNDLE_MODULES.cache.aV if not v then v={c=__modImpl()}
 __DARKLUA_BUNDLE_MODULES.cache.aV=v end return v.c end end do local function
@@ -24631,7 +24631,7 @@ Enum.Font.GothamBold,Enum.Font.GothamMedium local uis=game:GetService(
 'UserInputService')local tweenService=game:GetService('TweenService')local
 textService=game:GetService('TextService')local hs=game:GetService('HttpService'
 )local DISCORD,INVITE='https://discord.gg/prismsoftworks','prismsoftworks'local
-PURCHASE='https://novoline.pro/purchase'local STATE_FILE='Novoline/promo.txt'
+PURCHASE='https://MonK.pro/purchase'local STATE_FILE='MonK/promo.txt'
 local DUR,HC,HE=6.5,74,118 local gatedRun=_G._nvDiscordHoldUi==true local P={i=0
 ,t=0,state='wait',open=false,a=0,rowA=0,geo='',hold=0,segs={},chips={},rowW=0,w=
 {x=120,v=0,g=120},h={x=36,v=0,g=36},y={x=-44,v=0,g=10}}local M={}local slides={}
@@ -24655,7 +24655,7 @@ local function copy(s)local f=setclipboard or toclipboard if f then pcall(f,s)
 end end local function copiedBefore()local ok,v=pcall(function()return isfile(
 STATE_FILE)and readfile(STATE_FILE)or''end)return ok and type(v)=='string'and v:
 find('discord=1',1,true)~=nil end local function rememberCopied()pcall(function(
-)if not isfolder('Novoline')then makefolder('Novoline')end writefile(STATE_FILE,
+)if not isfolder('MonK')then makefolder('MonK')end writefile(STATE_FILE,
 'discord=1')end)end local function openInApp()task.spawn(function()pcall(
 function()local req=(syn and syn.request)or(http and http.request)or
 http_request or request if type(req)~='function'then return end req({Url=
@@ -24670,12 +24670,12 @@ _nv_setWrapVisible,true)end task.delay(0.08,function()if type(_nvL.setActiveTab)
 'Giveaways, early updates and help',btn='Copy invite',doneBtn='Copied',doneSub=
 'Invite copied, paste it in Discord'},{key='plus',icon='sparkle',btnIcon=
 'sparkle',chip='Plus',bg=Color3.fromRGB(38,28,62),fg=Color3.fromRGB(168,120,255)
-,title='Novoline Plus',sub='Exclusive commands, perks and early features',btn=
-'Get Plus',doneBtn='Link copied',doneSub='Open novoline.pro/purchase'},{key=
+,title='MonK Plus',sub='Exclusive commands, perks and early features',btn=
+'Get Plus',doneBtn='Link copied',doneSub='Open MonK.pro/purchase'},{key=
 'tags',icon='verified',btnIcon='link',chip='Nametags',bg=Color3.fromRGB(56,46,12
 ),fg=Color3.fromRGB(245,197,66),title='Custom nametags',sub=
 'Stand out in every server with your own tag',btn='Get a tag',doneBtn=
-'Link copied',doneSub='Open novoline.pro/purchase'}}function M.find()local r=M.
+'Link copied',doneSub='Open MonK.pro/purchase'}}function M.find()local r=M.
 root if r and r.Parent and r.Parent.Parent then return r end M.root=nil if os.
 clock()-(M.at or-9)<1 then return nil end M.at=os.clock()pcall(function()local
 hosts={}if _G._nv_getHui then hosts[#hosts+1]=_G._nv_getHui()end hosts[#hosts+1]
@@ -24835,14 +24835,14 @@ if tail then slides[#slides+1]=tail end P.build()for _,s in slides do P.
 buildSlide(s)end P.buildRow()P.wire()P.state='live'P.show(1)P.conn=game:
 GetService('RunService').RenderStepped:Connect(function(dt)if not gui.Parent
 then P.stop()return end local ok,err=pcall(frame,dt)if not ok and not P.warned
-then P.warned=true warn('Novoline promo: '..tostring(err))end end)end task.
+then P.warned=true warn('MonK promo: '..tostring(err))end end)end task.
 spawn(function()local t0=os.clock()while gui.Parent and not(type(_G._nvBoot)==
 'table'and _G._nvBoot.welcomeDone)and os.clock()-t0<50 do task.wait(0.25)end
 task.wait(1)local t1=os.clock()while gui.Parent and os.clock()-t1<300 and(_G.
 _nvDiscordHoldUi==true or(type(_G._nvBoot)=='table'and _G._nvBoot.tutorialOpen==
 true))do task.wait(0.25)end task.wait(gatedRun and 2.5 or 1.2)if not gui.Parent
 then return end local ok,err=pcall(P.start)if not ok then warn(
-'Novoline promo: '..tostring(err))pcall(P.stop)end end)gui.Destroying:Connect(
+'MonK promo: '..tostring(err))pcall(P.stop)end end)gui.Destroying:Connect(
 function()pcall(P.stop)end)end end function __DARKLUA_BUNDLE_MODULES.aW():
 typeof(__modImpl())local v=__DARKLUA_BUNDLE_MODULES.cache.aW if not v then v={c=
 __modImpl()}__DARKLUA_BUNDLE_MODULES.cache.aW=v end return v.c end end do
@@ -24874,9 +24874,9 @@ CATALOG_EVENTS and vars.CATALOG_EVENTS:FindFirstChild('CatalogGuiRemote')vars.
 SAVED_OUTFITS_REMOTE=vars.CATALOG_EVENTS and vars.CATALOG_EVENTS:FindFirstChild(
 'SavedOutfitsRemote')vars.LocalPlayer=vars.Players.LocalPlayer if not vars.
 LocalPlayer then error('LocalPlayer was not available.')end vars.FOLDER_NAME=
-'Novoline'vars.FILE_PATH=vars.FOLDER_NAME..'/SavedAvatars.json'vars.
+'MonK'vars.FILE_PATH=vars.FOLDER_NAME..'/SavedAvatars.json'vars.
 AVATARS_FOLDER='Avatars'vars.AVATAR_FILE_PREFIX='Avatar'vars.
-AVATAR_FILE_EXTENSION='.ava'vars.SCREEN_GUI_NAME='NovolineCharUnused'vars.uiFont
+AVATAR_FILE_EXTENSION='.ava'vars.SCREEN_GUI_NAME='MonKCharUnused'vars.uiFont
 =function(weight)local ok,font=pcall(function()return Font.new(vars.
 UI_FONT_FAMILY,weight or Enum.FontWeight.Regular)end)if ok then return font end
 return Font.new(Enum.Font.Gotham,weight or Enum.FontWeight.Regular)end vars.
@@ -25017,11 +25017,11 @@ gethui())end table.insert(roots,vars.CoreGui)if vars.LocalPlayer then table.
 insert(roots,vars.LocalPlayer:FindFirstChildOfClass('PlayerGui'))end for _,root
 in roots do if root then local screenUi=root:FindFirstChild(vars.SCREEN_GUI_NAME
 )if screenUi then screenUi:Destroy()end end end end)pcall(function()if type(
-getgenv)=='function'and getgenv().__NovolineCharCleanup==vars.cleanup then
-getgenv().__NovolineCharCleanup=nil end end)end pcall(function()if type(getgenv)
-=='function'and type(getgenv().__NovolineCharCleanup)=='function'then pcall(
-getgenv().__NovolineCharCleanup)end end)vars.cleanup()vars.scriptAlive=true
-pcall(function()if type(getgenv)=='function'then getgenv().__NovolineCharCleanup
+getgenv)=='function'and getgenv().__MonKCharCleanup==vars.cleanup then
+getgenv().__MonKCharCleanup=nil end end)end pcall(function()if type(getgenv)
+=='function'and type(getgenv().__MonKCharCleanup)=='function'then pcall(
+getgenv().__MonKCharCleanup)end end)vars.cleanup()vars.scriptAlive=true
+pcall(function()if type(getgenv)=='function'then getgenv().__MonKCharCleanup
 =vars.cleanup end end)vars.mainCamera=vars.Workspace.CurrentCamera vars.
 viewportSize=vars.mainCamera and vars.mainCamera.ViewportSize or Vector2.new(
 1024,768)vars.mainWidth=500 vars.mainHeight=400 vars.minimizedWidth=180 vars.
@@ -26010,7 +26010,7 @@ roots={}pcall(function()roots[#roots+1]=vars.CoreGui end)pcall(function()roots[#
 roots+1]=vars.LocalPlayer:WaitForChild('PlayerGui',5)end)for _,root in roots do
 pcall(function()for _,obj in root:GetDescendants()do watch(obj)end root.
 DescendantAdded:Connect(function(obj)pcall(watch,obj)end)end)end pcall(function(
-)vars.RunService:BindToRenderStep('NovolineCharTags',Enum.RenderPriority.Last.
+)vars.RunService:BindToRenderStep('MonKCharTags',Enum.RenderPriority.Last.
 Value+1,function()if vars.scriptAlive then pcall(retarget)end end)end)end
 local function refreshPictures()if _G._nv_refreshSelfThumbs then pcall(_G.
 _nv_refreshSelfThumbs)end pcall(refreshImages)end _G._nv_charWear=function(
@@ -26037,7 +26037,7 @@ end return end local picked=vars.ui.selectedAvatar if picked and picked.Username
 character=me.Character or me.CharacterAdded:Wait()character:WaitForChild(
 'HumanoidRootPart',10)if _G._nv_charName~=name then return end local ok,problem=
 _G._nv_charWear(name)if not ok then say(problem)end end)end task.defer(_G.
-_nv_charApply)end)if not ok then warn('Novoline char: '..tostring(err))end end
+_nv_charApply)end)if not ok then warn('MonK char: '..tostring(err))end end
 end function __DARKLUA_BUNDLE_MODULES.aX():typeof(__modImpl())local v=
 __DARKLUA_BUNDLE_MODULES.cache.aX if not v then v={c=__modImpl()}
 __DARKLUA_BUNDLE_MODULES.cache.aX=v end return v.c end end do local function
@@ -26046,11 +26046,11 @@ env._fabIcon local _genv=env._genv local _isMobile=env._isMobile local _nvL=env.
 _nvL local _nv_createTabFrame=env._nv_createTabFrame local _nv_ensureTabBuilt=
 env._nv_ensureTabBuilt local contentFrames=env.contentFrames local
 createInstance=env.createInstance _G._nv_bootPulse=os.clock()local DIR=
-'Novoline/cache'local function stage(text)_G._nv_bootPulse=os.clock()if _G.
+'MonK/cache'local function stage(text)_G._nv_bootPulse=os.clock()if _G.
 _nv_ls_setstage then _G._nv_ls_setstage(text)elseif _G._nv_ls_status then _G.
 _nv_ls_status.Text=text end end local function ensureDir()pcall(function()if
 type(makefolder)~='function'then return end if type(isfolder)~='function'or not
-isfolder('Novoline')then makefolder('Novoline')end if not isfolder(DIR)then
+isfolder('MonK')then makefolder('MonK')end if not isfolder(DIR)then
 makefolder(DIR)end end)end local function flagOn(name)if type(isfile)~=
 'function'or type(readfile)~='function'then return false end local ok,body=
 pcall(function()local path=DIR..'/'..name..'.txt'if not isfile(path)then return
@@ -26067,7 +26067,7 @@ end local bootOk,bootErr=pcall(function()stage('Loading resources..')task.wait()
 local iconAt=os.clock()while not _G._nv_moltoReady and os.clock()-iconAt<4 do _G
 ._nv_bootPulse=os.clock()task.wait(0.05)end if not flagOn('artwork')then stage(
 'Loading resources..')local urls={}local cfg=type(_genv)=='table'and _genv.
-NovolineArtwork or nil local function push(id)local digits=tostring(id or''):
+MonKArtwork or nil local function push(id)local digits=tostring(id or''):
 match('%d+')if digits then urls[#urls+1]='rbxassetid://'..digits end end if
 type(cfg)=='table'then push(cfg.Home)push(cfg.Commands)push(cfg.Players)push(cfg
 .Scripts)push(cfg.Music)push(cfg.Plus)push(cfg.Settings)end if#urls==0 then
@@ -26077,7 +26077,7 @@ end _G._nv_bootPulse=os.clock()preload(urls)flagSet('artwork',true)task.wait()
 end stage('Loading resources..')task.wait()if not contentFrames[1]then
 _nv_createTabFrame(1,false)end local homeOk=_nv_ensureTabBuilt(1)==true flagSet(
 'home',homeOk)_G._nv_bootPulse=os.clock()task.wait()end)if not bootOk then warn(
-'Novoline boot: '..tostring(bootErr))end _G._nv_bootHold=false _G._nv_bootDone=
+'MonK boot: '..tostring(bootErr))end _G._nv_bootHold=false _G._nv_bootDone=
 true _G._nv_bootPulse=os.clock()if not _G._nvDiscordHoldUi then _nvL.isOpen=true
 _nvL._savedTabIndex=1 if _G._nv_setWrapVisible then _G._nv_setWrapVisible(true)
 end if _isMobile then _fab.Visible=true _fabIcon.ImageColor3=C.ACCENT end end
@@ -26264,7 +26264,7 @@ local h=bag[i]if not(h and h.p and h.p.Parent)then table.remove(bag,i)else _G.
 _nv_syncPageGlow(h.p,h.r,h.z,h.rot)end end end local font=Enum.Font.
 GothamSemibold do __DARKLUA_BUNDLE_MODULES.e()({_nvL=_nvL})end do if type(_G.
 _nv_previewCleanup)=='function'then pcall(_G._nv_previewCleanup)end local roots=
-setmetatable({},{__mode='k'})local enabled=_genv.NovolinePreviewBackdrop==true
+setmetatable({},{__mode='k'})local enabled=_genv.MonKPreviewBackdrop==true
 local shown=true local backdrop=createInstance('ScreenGui',{Name=
 'NV_PreviewBackdrop',IgnoreGuiInset=true,ResetOnSpawn=false,DisplayOrder=1000000
 ,ZIndexBehavior=Enum.ZIndexBehavior.Sibling})pcall(function()backdrop.
@@ -26312,7 +26312,7 @@ _nv_refreshSelfThumbs=function()local me=game:GetService('Players').LocalPlayer
 if not me then return end for img,spec in _G._nv_selfThumbs do if img.Parent
 then img.Image=_G._nv_thumbFor(me.UserId,spec[1],spec[2])end end end _nvL.
 _nv_binds={}_nvL._nv_autoexec={}_G._nv_bindsEnabled=(_G._nv_bindsEnabled~=false)
-local _nv_profileStore=_G._nv_profileStore or{path='Novoline/profiles.json',data
+local _nv_profileStore=_G._nv_profileStore or{path='MonK/profiles.json',data
 ={version=1,order={},profiles={}},defaults={notifEnabled=true,welcomeEnabled=
 true,singleTabEnabled=false,autoHideNavbar=false,placeWindows=false,saveWindows=
 false,immersiveMusic=true,haptics=true,autoOpenPanels=true,snapCards=true,
@@ -26405,29 +26405,29 @@ type(value)~='table'then return value end local out={}for k,v in value do out[k]
 and type(data)=='table')then return end if type(data.profiles)~='table'then data
 .profiles={}end if type(data.order)~='table'then data.order={}end if type(data.
 version)~='number'then data.version=1 end self.data=data end)end function
-_nv_profileStore:save()pcall(function()if not isfolder('Novoline')then
-makefolder('Novoline')end local hs=game:GetService('HttpService')writefile(self.
+_nv_profileStore:save()pcall(function()if not isfolder('MonK')then
+makefolder('MonK')end local hs=game:GetService('HttpService')writefile(self.
 path,hs:JSONEncode(self.data))end)end _nv_profileStore:load()local saveSettings=
 function()pcall(function()local hs=game:GetService('HttpService')local path=
-'Novoline/settings.json'if not isfolder('Novoline')then makefolder('Novoline')
+'MonK/settings.json'if not isfolder('MonK')then makefolder('MonK')
 end writefile(path,hs:JSONEncode(_nv_profileStore:captureSettings()))end)end _G.
 _nv_saveSettings=saveSettings _nvL.loadSettings=function()pcall(function()local
-path='Novoline/settings.json'if not(isfile and isfile(path))then return end
+path='MonK/settings.json'if not(isfile and isfile(path))then return end
 local hs=game:GetService('HttpService')local ok,data=pcall(hs.JSONDecode,hs,
 readfile(path))if not(ok and type(data)=='table')then return end
 _nv_profileStore:applySettings(data)end)end local sfx={tabOpen=function()end,
 tabClose=function()end,hover=function()end,scroll=function()end,notify=function(
 )end}pcall(_nvL.loadSettings)pcall(function()local saved if type(isfile)==
-'function'and isfile('Novoline/theme.txt')and type(readfile)=='function'then
-saved=readfile('Novoline/theme.txt'):match('^%s*(.-)%s*$')or''end if saved==
+'function'and isfile('MonK/theme.txt')and type(readfile)=='function'then
+saved=readfile('MonK/theme.txt'):match('^%s*(.-)%s*$')or''end if saved==
 'Dark'then saved='Fluent'end local migrated=false pcall(function()migrated=type(
-isfile)=='function'and isfile('Novoline/theme_default_modern.txt')end)if not
+isfile)=='function'and isfile('MonK/theme_default_modern.txt')end)if not
 migrated then saved='Modern'pcall(function()if type(makefolder)=='function'and
-not isfolder('Novoline')then makefolder('Novoline')end if type(writefile)==
-'function'then writefile('Novoline/theme.txt','Modern')writefile(
-'Novoline/theme_default_modern.txt','1')end end)elseif saved~='Fluent'and saved
+not isfolder('MonK')then makefolder('MonK')end if type(writefile)==
+'function'then writefile('MonK/theme.txt','Modern')writefile(
+'MonK/theme_default_modern.txt','1')end end)elseif saved~='Fluent'and saved
 ~='Modern'then saved='Modern'pcall(function()if type(writefile)=='function'then
-writefile('Novoline/theme.txt','Modern')end end)end _nvL.currentThemeName=saved
+writefile('MonK/theme.txt','Modern')end end)end _nvL.currentThemeName=saved
 _G._nvThemeName=saved end)pcall(_G._nvSeedPalette,_nvL.currentThemeName)if _G.
 _nv_ls_setstage then _G._nv_ls_setstage('Loading resources..',0.58)elseif _G.
 _nv_ls_status then _G._nv_ls_status.Text='Loading resources..'end _G.
@@ -26522,28 +26522,28 @@ end sendWebhook(_nv_safety.webhookJoinUrl,{content=p.DisplayName..' (@'..p.Name
 '&width=420&height=420&format=png',allowed_mentions={parse={}}})end)table.
 insert(_webhookConns,ca)table.insert(_webhookConns,cr)end end hookWebhooks()
 pcall(function()local hs=game:GetService('HttpService')if isfile and isfile(
-'Novoline/binds.json')then local ok,data=pcall(hs.JSONDecode,hs,readfile(
-'Novoline/binds.json'))if ok and type(data)=='table'then _nvL._nv_binds=data end
+'MonK/binds.json')then local ok,data=pcall(hs.JSONDecode,hs,readfile(
+'MonK/binds.json'))if ok and type(data)=='table'then _nvL._nv_binds=data end
 end end)pcall(function()local hs=game:GetService('HttpService')if isfile and
-isfile('Novoline/autoexecute.json')then local ok,data=pcall(hs.JSONDecode,hs,
-readfile('Novoline/autoexecute.json'))if ok and type(data)=='table'then _nvL.
+isfile('MonK/autoexecute.json')then local ok,data=pcall(hs.JSONDecode,hs,
+readfile('MonK/autoexecute.json'))if ok and type(data)=='table'then _nvL.
 _nv_autoexec=data end end end)do local qot=queue_on_teleport or queueonteleport
 if type(qot)=='function'then local _s={104,116,116,112,115,58,47,47,110,111,118,
 111,108,105,110,101,46,112,114,111}local _u=''for _,v in _s do _u=_u..string.
 char(v)end qot(
 [[            do
-                local LOCK = "Novoline/.exec_lock"
+                local LOCK = "MonK/.exec_lock"
                 local now = os.time()
                 local ok, raw = pcall(readfile, LOCK)
                 if ok and tonumber(raw) and (now - tonumber(raw)) < 10 then return end
                 pcall(function()
-                    if not isfolder("Novoline") then makefolder("Novoline") end
+                    if not isfolder("MonK") then makefolder("MonK") end
                     writefile(LOCK, tostring(now))
                 end)
             end
             local ok, data = pcall(function()
                 local hs = game:GetService("HttpService")
-                return hs:JSONDecode(readfile("Novoline/settings.json"))
+                return hs:JSONDecode(readfile("MonK/settings.json"))
             end)
             if ok and type(data) == "table" and data.autoExecEnabled == false then return end
             if not game:IsLoaded() then game.Loaded:Wait() end
@@ -26785,7 +26785,7 @@ _nv_unloadTab(i)end end local function _nv_ensureTabBuilt(idx)if _tabBuilt[idx]
 then return true end local cf=contentFrames[idx]if not cf or not cf.Parent then
 return false end if not builders[idx]then return false end _tabBuilt[idx]=true
 local _ok,_err=pcall(builders[idx],cf)if not _ok then _tabBuilt[idx]=false warn(
-'Novoline: Tab builder error for '..tostring(ICONS[idx]and ICONS[idx].name)..
+'MonK: Tab builder error for '..tostring(ICONS[idx]and ICONS[idx].name)..
 ': '..tostring(_err))return false end task.defer(function()pcall(_nvL.
 applyThemeTo,cf)end)task.defer(function()if _G._nv_scrollFadeAll then pcall(_G.
 _nv_scrollFadeAll,cf)end end)return true end _G._nv_tabMotionToken=0 do function
@@ -26934,14 +26934,14 @@ createInstance,hideMusicCover=hideMusicCover,logo=logo,main=main,players=players
 ,runService=runService,saveSettings=saveSettings,tween=tween,tweenService=
 tweenService,userInputService=userInputService})end do __DARKLUA_BUNDLE_MODULES.
 q()({_isMobile=_isMobile,_nvL=_nvL,userInputService=userInputService})end do
-local HINT_FILE='Novoline/interface_hint.txt'_G._nv_openHint=function()local
+local HINT_FILE='MonK/interface_hint.txt'_G._nv_openHint=function()local
 seen=false pcall(function()if type(readfile)~='function'or type(isfile)~=
 'function'or not isfile(HINT_FILE)then return end local data=readfile(HINT_FILE)
 seen=type(data)=='string'and data~=''end)if seen then return end _nvL.notify(
 'Interface','Press '..tostring(_nvL.sidebarKeybind)..' to open the interface.',5
 )pcall(function()if type(writefile)~='function'then return end if type(isfolder)
-=='function'and type(makefolder)=='function'and not isfolder('Novoline')then
-makefolder('Novoline')end writefile(HINT_FILE,'1')end)end end userInputService.
+=='function'and type(makefolder)=='function'and not isfolder('MonK')then
+makefolder('MonK')end writefile(HINT_FILE,'1')end)end end userInputService.
 InputBegan:Connect(function(input_obj,gameProcessed)if gameProcessed then return
 end if input_obj.UserInputType~=Enum.UserInputType.Keyboard then return end
 local ok,kc=pcall(function()return Enum.KeyCode[_nvL.sidebarKeybind]end)if ok
@@ -26959,20 +26959,20 @@ homeOverlay.Visible)then if(homeOverlay and homeOverlay.Visible)then _nvL.
 closeHomeOverlay()end else _nvL.isOpen=false if _G._nv_setWrapVisible then _G.
 _nv_setWrapVisible(false)end if _isMobile then _fabIcon.ImageColor3=Color3.
 fromRGB(255,255,255)end _G._nv_openHint()end end end)task.spawn(function()local
-INVITE_CODE='prismsoftworks'local FLAG_FILE='Novoline/discord_invited.txt'if not
-(isfile and isfile(FLAG_FILE))then pcall(function()if not isfolder('Novoline')
-then makefolder('Novoline')end writefile(FLAG_FILE,'1')local hs=game:GetService(
+INVITE_CODE='prismsoftworks'local FLAG_FILE='MonK/discord_invited.txt'if not
+(isfile and isfile(FLAG_FILE))then pcall(function()if not isfolder('MonK')
+then makefolder('MonK')end writefile(FLAG_FILE,'1')local hs=game:GetService(
 'HttpService')local request=(syn and syn.request)or(http and http.request)or
 http_request or request if request then request({Url=
 'http://127.0.0.1:6463/rpc?v=1',Method='POST',Headers={['Content-Type']=
 'application/json',['Origin']='https://discord.com'},Body=hs:JSONEncode({cmd=
 'INVITE_BROWSER',args={code=INVITE_CODE},nonce=hs:GenerateGUID(false)})})end end
 )end end)local function saveBinds()pcall(function()local hs=game:GetService(
-'HttpService')if not isfolder('Novoline')then makefolder('Novoline')end
-writefile('Novoline/binds.json',hs:JSONEncode(_nvL._nv_binds))end)end
+'HttpService')if not isfolder('MonK')then makefolder('MonK')end
+writefile('MonK/binds.json',hs:JSONEncode(_nvL._nv_binds))end)end
 local function saveAutoExec()pcall(function()local hs=game:GetService(
-'HttpService')if not isfolder('Novoline')then makefolder('Novoline')end
-writefile('Novoline/autoexecute.json',hs:JSONEncode(_nvL._nv_autoexec))end)end
+'HttpService')if not isfolder('MonK')then makefolder('MonK')end
+writefile('MonK/autoexecute.json',hs:JSONEncode(_nvL._nv_autoexec))end)end
 userInputService.InputBegan:Connect(function(inp,gp)if gp then return end if
 _nvL.keybindListening then return end if inp.UserInputType~=Enum.UserInputType.
 Keyboard then return end if userInputService:GetFocusedTextBox()then return end
@@ -27008,8 +27008,8 @@ AnchorPoint=Vector2.new(0,1),Position=UDim2.new(0,14,1,-1),Size=UDim2.new(1,-28,
 active=default btn.MouseButton1Click:Connect(function()active=not active
 setSwitch(active,true)if callback then callback(active)end end)if callback then
 task.spawn(callback,default)end return div end do end function _G._nv_pageHeader
-(panel,title,subtitle)local artwork=type(_genv.NovolineArtwork)=='table'and
-_genv.NovolineArtwork[title]local header=artwork and _G._nv_mountArtwork(panel,
+(panel,title,subtitle)local artwork=type(_genv.MonKArtwork)=='table'and
+_genv.MonKArtwork[title]local header=artwork and _G._nv_mountArtwork(panel,
 title,UDim2.fromOffset(0,0),UDim2.new(1,0,0,128),12)or createInstance('Frame',{
 Parent=panel})header.Name='Header'header.BackgroundTransparency=1 header.
 BorderSizePixel=0 header.Size=UDim2.new(1,0,0,66)header.ZIndex=12 local name=
@@ -27588,7 +27588,7 @@ _reanimSpeedPanel==nil then pcall(function()_G._reanimPanel:Destroy()end)_G.
 _reanimPanel=nil end if _G[panelKey]~=nil then return _G[panelKey]end local fn=
 initFn if type(fn)~='function'and type(_G[initFn])=='function'then fn=_G[initFn]
 end if type(fn)=='function'then local ok,err=pcall(fn)if not ok then warn(
-'Novoline: ensurePanel failed:',panelKey,err)if panelKey=='_reanimPanel'then if
+'MonK: ensurePanel failed:',panelKey,err)if panelKey=='_reanimPanel'then if
 _G._reanimPanel then pcall(function()_G._reanimPanel:Destroy()end)end _G.
 _reanimPanel=nil _G._reanimSpeedPanel=nil end end end return _G[panelKey]end _G.
 _nvEnsurePanel=ensurePanel end _G._nvEffectPanels=_G._nvEffectPanels or{}_G.
@@ -27857,8 +27857,8 @@ generalCard,288+yShift,'Theme',(_nvL.currentThemeName=='Modern')and'Modern'or
 Parent,BackgroundTransparency=1,Size=UDim2.new(1,0,1,0),Text='',ZIndex=15})
 themeBtn.MouseButton1Click:Connect(function()local nextName=(_nvL.
 currentThemeName=='Modern')and'Fluent'or'Modern'pcall(_nvL.applyTheme,nextName)
-themeVal.Text=nextName pcall(function()if not isfolder('Novoline')then
-makefolder('Novoline')end writefile('Novoline/theme.txt',nextName)end)
+themeVal.Text=nextName pcall(function()if not isfolder('MonK')then
+makefolder('MonK')end writefile('MonK/theme.txt',nextName)end)
 saveSettings()if sfx.scroll then sfx.scroll()end end)end function
 buildSettingsAkWallpaperSections(scroll,startY)return __DARKLUA_BUNDLE_MODULES.
 aI()({C=C,_nvL=_nvL,createInstance=createInstance,font=font,makeCard=makeCard,
@@ -27885,13 +27885,13 @@ GetService('TextChatService')if tcs.ChatVersion==Enum.ChatVersion.
 TextChatService then tcs.SendingMessage:Connect(function(msg)_dispatchChat(msg.
 Text or'')end)_hookedModern=true end end)if not _hookedModern then _nvL.lp.
 Chatted:Connect(_dispatchChat)end end)()pcall(function()local saved if isfile
-and isfile('Novoline/theme.txt')then saved=readfile('Novoline/theme.txt'):match(
+and isfile('MonK/theme.txt')then saved=readfile('MonK/theme.txt'):match(
 '^%s*(.-)%s*$')end if saved=='Dark'then saved='Fluent'end local migrated=false
-pcall(function()migrated=isfile and isfile('Novoline/theme_default_modern.txt')
+pcall(function()migrated=isfile and isfile('MonK/theme_default_modern.txt')
 end)if not migrated then saved='Modern'pcall(function()if type(makefolder)==
-'function'and not isfolder('Novoline')then makefolder('Novoline')end if type(
-writefile)=='function'then writefile('Novoline/theme.txt','Modern')writefile(
-'Novoline/theme_default_modern.txt','1')end end)elseif saved~='Fluent'and saved
+'function'and not isfolder('MonK')then makefolder('MonK')end if type(
+writefile)=='function'then writefile('MonK/theme.txt','Modern')writefile(
+'MonK/theme_default_modern.txt','1')end end)elseif saved~='Fluent'and saved
 ~='Modern'then saved='Modern'end _nvL.currentThemeName=saved _G._nvThemeName=
 saved end)pcall(_nvL.applyTheme,_nvL.currentThemeName)_G._nvAfterBoot(function()
 local DISCORD='discord.gg/prismsoftworks'if type(_nvL.xnotify)~='function'then
@@ -27899,10 +27899,10 @@ return end task.wait(_G._nvBoot.firstRun and 5.5 or 9.5)_nvL.xnotify(
 'Join the Discord','Click to copy '..DISCORD,{persistKey='discord_invite',
 onClick=function()local cb=setclipboard or toclipboard if cb then pcall(cb,
 DISCORD)end end,clickedText='Copied to clipboard!'})end)_G._nvAfterBoot(0.8,
-function()pcall(function()local folder='Novoline'local file=folder..
+function()pcall(function()local folder='MonK'local file=folder..
 '/version.txt'if not isfolder(folder)then makefolder(folder)end local lastVer=
 isfile and isfile(file)and readfile(file)or nil if lastVer and lastVer~=
-_nv_version then _nvL.notify('Novoline Updated','Updated from '..lastVer..' - '
+_nv_version then _nvL.notify('MonK Updated','Updated from '..lastVer..' - '
 .._nv_version,6)end if writefile then writefile(file,_nv_version)end end)end)
 local function runIntro(replay)return __DARKLUA_BUNDLE_MODULES.aM()({C=C,
 _isMobile=_isMobile,_nvL=_nvL,_nv_version=_nv_version,createInstance=
@@ -27910,7 +27910,7 @@ createInstance,players=players,saveSettings=saveSettings,sg=sg,tween=tween,
 userInputService=userInputService},replay)end _G._nv_replayIntro=function()if _G
 ._nv_introOpen then return end task.spawn(runIntro,true)end _nvL.BOOT_SOUND=
 'rbxassetid://6958727243'function _nvL.bootFx()local snd=Instance.new('Sound')
-snd.Name='NovolineBoot'snd.SoundId=_nvL.BOOT_SOUND snd.Volume=1 snd.Parent=game:
+snd.Name='MonKBoot'snd.SoundId=_nvL.BOOT_SOUND snd.Volume=1 snd.Parent=game:
 GetService('SoundService')snd:Play()game:GetService('Debris'):AddItem(snd,8)
 local cam=workspace.CurrentCamera if not cam then return end local fov=cam.
 FieldOfView local zoomIn=TweenInfo.new(0.7,Enum.EasingStyle.Quint,Enum.
