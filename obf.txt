@@ -81,7 +81,7 @@ NumberSequenceKeypoint.new(0.3,0.62),NumberSequenceKeypoint.new(0.62,0.94),
 NumberSequenceKeypoint.new(1,1)})}}}}},{'TextLabel',ref='title',Name='Title',
 BackgroundTransparency=1,Position=UDim2.fromOffset(16,20),Size=UDim2.fromOffset(
 176,18),Font=Enum.Font.GothamBold,TextSize=14,TextColor3=Color3.fromRGB(244,244,
-244),Text='Novoline',TextXAlignment=Enum.TextXAlignment.Center,TextYAlignment=
+244),Text='MonK',TextXAlignment=Enum.TextXAlignment.Center,TextYAlignment=
 Enum.TextYAlignment.Center,ZIndex=4},{'Frame',ref='host',Name='Mark',AnchorPoint
 =Vector2.new(0.5,0.5),Position=UDim2.fromOffset(104,92),Size=UDim2.fromOffset(64
 ,64),BackgroundTransparency=1,BorderSizePixel=0,ZIndex=5,children={{'Frame',ref=
@@ -1643,7 +1643,7 @@ if spec.id=='nvfps'then for _,p in spec.pieces do if p.type=='stat'and p.label==
 'FPS Counter'then p.label='FPS'made=true end end end end if not seededFps then
 local has=false for _,spec in store.list do if spec.id=='nvfps'then has=true
 break end end if not has and#store.list<WG.MAX then store.list[#store.list+1]={
-id='nvfps',pieces={{type='heading',text='Novoline'},{type='stat',stat='fps',
+id='nvfps',pieces={{type='heading',text='MonK'},{type='stat',stat='fps',
 label='FPS'}}}end seededFps=true made=true end local stale=type(raw)=='table'and
 raw.v~=2 if WG.assignSlots(store.list)or made or stale then store.save()end end
 function store.save()local keep={}for _,spec in store.list do if#spec.pieces>0
@@ -6673,7 +6673,7 @@ _nv_toastLift)or 0))/T.MS end function T.width(s,size,font)if s==''then return 0
 end local ok,v=pcall(function()return T.ts:GetTextSize(s,size,font,Vector2.new(
 4000,400)).X end)return ok and v or#s*size*0.55 end function T.build(spec)local
 holder=T.gui()local o={hovered=false,gone=false}local title=tostring(spec.title
-or'Novoline')local text=tostring(spec.text or'')local plain=(title:gsub(
+or'MonK')local text=tostring(spec.text or'')local plain=(title:gsub(
 '<[^>]+>',''))local actions=type(spec.actions)=='table'and spec.actions or nil
 local side=T.TEXT_X+T.PAD_R+(spec.closable and 30 or 0)+(actions and#actions*36
 or 0)local widest=math.max(T.width(plain,13,Enum.Font.GothamBold),T.width(text,
@@ -20464,7 +20464,7 @@ env.hookWebhooks local makeCard=env.makeCard local makeKeybind=env.makeKeybind
 local makeToggle=env.makeToggle local saveSettings=env.saveSettings local
 spamGuard=env.spamGuard local startSpatialShield=env.startSpatialShield local
 stopSpatialShield=env.stopSpatialShield local tween=env.tween _G._nv_pageHeader(
-panel,'Settings','Make Novoline feel like yours')panel:SetAttribute(
+panel,'Settings','Make MonK feel like yours')panel:SetAttribute(
 'ContentRevision','Settings workspace 2')local scroll=_nvL.makeScroll(panel,78,0
 )scroll.Name='SettingsScroll'scroll.Position=UDim2.fromOffset(132,78)scroll.Size
 =UDim2.new(1,-132,1,-78)scroll.AutomaticCanvasSize=Enum.AutomaticSize.None local
@@ -20996,7 +20996,7 @@ BorderSizePixel=0,ZIndex=20})_G._nv_setThumb(face,lp.UserId,'AvatarHeadShot',150
 )I.corner(face)local ring=createInstance('UIStroke',{Parent=face,Color=Color3.
 new(1,1,1),Transparency=0.86,Thickness=1})I.name=lp.DisplayName I.hello=I.label(
 pg,'Hello, '..I.name,Enum.Font.GothamBlack,TS(40),C.TEXT,P(24),P(86),W-P(48),P(
-48),CENTER)I.label(pg,'Welcome to Novoline '..tostring(_nv_version),Enum.Font.
+48),CENTER)I.label(pg,'Welcome to MonK '..tostring(_nv_version),Enum.Font.
 GothamBold,TS(16),C.TEXT,P(24),P(138),W-P(48),P(22),CENTER)local b=I.label(pg,
 [[300+ commands, a music player, a player list and a script library, all one ]]
 ..(mobile and'tap'or'key')..' away.',Enum.Font.GothamMedium,TS(14),SUBTLE,P(70),
@@ -22964,7 +22964,7 @@ PLACEHOLDER=Color3.fromRGB(118,118,124)local quick=TweenInfo.new(0.22,Enum.
 EasingStyle.Quint,Enum.EasingDirection.Out)local catPan=TweenInfo.new(0.26,Enum.
 EasingStyle.Quint,Enum.EasingDirection.Out)local uis=game:GetService(
 'UserInputService')local textService=game:GetService('TextService')local deck={}
-_G._nv_decks[6]=deck kit.title(deck,'Settings','Make Novoline feel like yours')
+_G._nv_decks[6]=deck kit.title(deck,'Settings','Make MonK feel like yours')
 local SPECS=(function()local function respoof()if _G._nv_disableSpoof then _G.
 _nv_disableSpoof()end if(_nvL.spoofEnabled or _nvL.spoofVerified)and _G.
 _nv_enableSpoof then _G._nv_enableSpoof()end end local function flag(cat,group,
@@ -26666,7 +26666,7 @@ BackgroundTransparency=1,AnchorPoint=Vector2.new(0,0.5),Position=UDim2.new(0,11,
 ImageColor3=Color3.fromRGB(255,255,255),ScaleType=Enum.ScaleType.Fit,ZIndex=201}
 )do local label=createInstance('TextLabel',{Parent=_fab,BackgroundTransparency=1
 ,AnchorPoint=Vector2.new(0,0.5),Position=UDim2.new(0,35,0.5,0),Size=UDim2.new(1,
--46,1,0),Font=Enum.Font.GothamBold,TextSize=13,Text='Novoline',TextColor3=Color3
+-46,1,0),Font=Enum.Font.GothamBold,TextSize=13,Text='MonK',TextColor3=Color3
 .fromRGB(255,255,255),TextXAlignment=Enum.TextXAlignment.Left,ZIndex=201})
 _fabIcon:GetPropertyChangedSignal('ImageColor3'):Connect(function()label.
 TextColor3=_fabIcon.ImageColor3 end)end do local _fabBtn=createInstance(
