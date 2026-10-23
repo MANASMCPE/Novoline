@@ -81,7 +81,7 @@ NumberSequenceKeypoint.new(0.3,0.62),NumberSequenceKeypoint.new(0.62,0.94),
 NumberSequenceKeypoint.new(1,1)})}}}}},{'TextLabel',ref='title',Name='Title',
 BackgroundTransparency=1,Position=UDim2.fromOffset(16,20),Size=UDim2.fromOffset(
 176,18),Font=Enum.Font.GothamBold,TextSize=14,TextColor3=Color3.fromRGB(244,244,
-244),Text='MonK',TextXAlignment=Enum.TextXAlignment.Center,TextYAlignment=
+244),Text='Novoline',TextXAlignment=Enum.TextXAlignment.Center,TextYAlignment=
 Enum.TextYAlignment.Center,ZIndex=4},{'Frame',ref='host',Name='Mark',AnchorPoint
 =Vector2.new(0.5,0.5),Position=UDim2.fromOffset(104,92),Size=UDim2.fromOffset(64
 ,64),BackgroundTransparency=1,BorderSizePixel=0,ZIndex=5,children={{'Frame',ref=
@@ -139,7 +139,7 @@ _nv_ls_fade=fade _G._nv_bootPulse=os.clock()task.spawn(function()while gui.
 Parent and not dying and not _G._nv_bootDone do task.wait(3)if dying or _G.
 _nv_bootDone or not gui.Parent then return end if os.clock()-(_G._nv_bootPulse
 or 0)>20 then fade()return end end end)pcall(function()runService.Heartbeat:
-Wait()end)end)if not _nvLoadOk then warn('MonK loader: '..tostring(
+Wait()end)end)if not _nvLoadOk then warn('Novoline loader: '..tostring(
 _nvLoadResult))end if _nvLoadOk and _nvLoadResult==false then error('aborted',0)
 end end end function __DARKLUA_BUNDLE_MODULES.b():typeof(__modImpl())local v=
 __DARKLUA_BUNDLE_MODULES.cache.b if not v then v={c=__modImpl()}
@@ -6886,18 +6886,18 @@ __DARKLUA_BUNDLE_MODULES.cache.M=v end return v.c end end do local function
 __modImpl()return function(env)local C=env.C local _nvL=env._nvL local
 createInstance=env.createInstance local screen=env.screen local sfx=env.sfx
 local tween=env.tween _G._nvGameScriptPromptTable=_G._nvGameScriptPromptTable or
-{}_G._nvGameScriptPromptTable[2809202155]={title='MonK',text=
+{}_G._nvGameScriptPromptTable[2809202155]={title='Novoline',text=
 'Game-specific script found, execute?',yes='Yes',url='https://vanta.my/premium'}
-_G._nvGameScriptPromptTable[891852901]={title='MonK',text=
+_G._nvGameScriptPromptTable[891852901]={title='Novoline',text=
 'Game-specific script found, no externals allowed. Execute?',yes='Yes',url=
 [[https://api.xnexus.cc/request/12d2fd60e7a67b48ece6f8fce7167a1d]]}
 local function _nv_showGameDetection(entry,onRun)if _G._nv_gameDetectShown then
 return end _G._nv_gameDetectShown=true local gameName=entry.name if not gameName
-or gameName==''or gameName=='MonK'then pcall(function()local info=_nvL.
+or gameName==''or gameName=='Novoline'then pcall(function()local info=_nvL.
 marketplaceService:GetProductInfo(game.PlaceId)if info and info.Name and info.
 Name~=''then gameName=info.Name end end)end gameName=gameName or
 'Unknown Experience'local subtitleText=entry.description or
-'MonK found a script for this experience. Run it?'local thumbId=
+'Novoline found a script for this experience. Run it?'local thumbId=
 'rbxthumb://type=Asset&id='..tostring(game.PlaceId)..'&w=420&h=420'local CARD_W=
 470 local CARD_H=150 local PILL_W=330 local PILL_H=46 local prompt=
 createInstance('Frame',{Parent=screen,Name='GameDetection',AnchorPoint=Vector2.
@@ -11211,7 +11211,7 @@ InputEnded:Connect(function(input)if abInputMatches(input)then abHolding=false
 abLockedTarget=nil end end)local fovRing,abUpdateFov,abTrigger function
 abUpdateFov()local show=ab.aimEnabled and ab.fovEnabled and not _G._nv_menuShown
 and screen~=nil if not fovRing and show then fovRing=createInstance('Frame',{
-Parent=screen,Name='MonKFov',AnchorPoint=Vector2.new(0.5,0.5),Position=UDim2
+Parent=screen,Name='NovolineFov',AnchorPoint=Vector2.new(0.5,0.5),Position=UDim2
 .fromScale(0.5,0.5),BackgroundTransparency=1,Active=false,ZIndex=30})
 createInstance('UICorner',{Parent=fovRing,CornerRadius=UDim.new(1,0)})
 createInstance('UIStroke',{Parent=fovRing,Color=Color3.new(1,1,1),Thickness=1.5,
@@ -11335,7 +11335,7 @@ _nvL local createInstance=env.createInstance local screen=env.screen local tween
 player=nil,shown=false,hideAt=0,hp=1}local function healthColor(hp)if hp>0.6
 then return Color3.fromRGB(78,229,154)end if hp>0.3 then return Color3.fromRGB(
 255,170,64)end return Color3.fromRGB(255,92,92)end local function build()local f
-=createInstance('Frame',{Parent=screen,Name='MonKTargetHud',AnchorPoint=
+=createInstance('Frame',{Parent=screen,Name='NovolineTargetHud',AnchorPoint=
 Vector2.new(0.5,0),Position=UDim2.new(0.5,0,0.64,0),Size=UDim2.fromOffset(250,72
 ),BackgroundTransparency=1,BorderSizePixel=0,Active=true,Visible=false,ZIndex=40
 })_G._nv_utilitySurface(f)local surface=f:FindFirstChild('UtilitySurface')for _,
@@ -12364,7 +12364,7 @@ makeDot(size,color,z)local d=createInstance('Frame',{Parent=field,AnchorPoint=
 Vector2.new(0.5,0.5),Position=UDim2.fromScale(0.5,0.5),Size=UDim2.fromOffset(
 size,size),BackgroundColor3=color,BorderSizePixel=0,ZIndex=z})createInstance(
 'UICorner',{Parent=d,CornerRadius=UDim.new(1,0)})return d end local function
-buildHud()hud=createInstance('Frame',{Parent=screen,Name='MonKRadar',Size=
+buildHud()hud=createInstance('Frame',{Parent=screen,Name='NovolineRadar',Size=
 UDim2.fromOffset(cfg.size,cfg.size),Position=UDim2.fromOffset(24,300),
 BackgroundTransparency=1,BorderSizePixel=0,Active=true,Visible=false,ZIndex=40})
 _G._nv_utilitySurface(hud)for _,horizontal in{true,false}do createInstance(
@@ -12445,12 +12445,12 @@ addrField=K.field(g3,UDim2.fromOffset(14,118),UDim2.new(1,-110,0,32),
 BackgroundTransparency=1,Size=UDim2.fromScale(1,1),Visible=false,ZIndex=20})
 local g4=K.group(done,0,146)local _,who,whoSub=K.row(g4,0,48,'Connected','',
 'check',20)K.line(g4,48)local srcRow=K.row(g4,49,48,'Play from Spotify',
-'Mirror it in MonK','note')local paintSrc=K.switch(srcRow,_G.
+'Mirror it in Novoline','note')local paintSrc=K.switch(srcRow,_G.
 _nv_musicSpotify==true)srcRow.MouseButton1Click:Connect(function()SP.setSource(
 not(_G._nv_musicSpotify==true))paintSrc(_G._nv_musicSpotify==true,true)end)K.
 line(g4,97)local outRow=K.row(g4,98,48,'Disconnect','Forget this Spotify login',
 'dismiss')words(done,
-[[Music plays in your Spotify app on your PC or phone. MonK shows it, controls it and finds the lyrics.]]
+[[Music plays in your Spotify app on your PC or phone. Novoline shows it, controls it and finds the lyrics.]]
 ,158,44).Position=UDim2.fromOffset(4,158)local function refresh()local on=SP.
 connected()and not SP.needsReconnect()if SP.needsReconnect()and status.Text==''
 then status.Text=
@@ -20464,7 +20464,7 @@ env.hookWebhooks local makeCard=env.makeCard local makeKeybind=env.makeKeybind
 local makeToggle=env.makeToggle local saveSettings=env.saveSettings local
 spamGuard=env.spamGuard local startSpatialShield=env.startSpatialShield local
 stopSpatialShield=env.stopSpatialShield local tween=env.tween _G._nv_pageHeader(
-panel,'Settings','Make MonK feel like yours')panel:SetAttribute(
+panel,'Settings','Make Novoline feel like yours')panel:SetAttribute(
 'ContentRevision','Settings workspace 2')local scroll=_nvL.makeScroll(panel,78,0
 )scroll.Name='SettingsScroll'scroll.Position=UDim2.fromOffset(132,78)scroll.Size
 =UDim2.new(1,-132,1,-78)scroll.AutomaticCanvasSize=Enum.AutomaticSize.None local
@@ -21014,7 +21014,7 @@ ic=kit.icon(btn,'apps',P(30),0,0,C.TEXT)ic.AnchorPoint=Vector2.new(0.5,0.5)ic.
 Position=UDim2.fromScale(0.5,0.5)ic.ZIndex=22 I.key={face=btn,prop='Size',rest=
 UDim2.fromOffset(P(80),P(80)),down=UDim2.fromOffset(P(70),P(70))}I.head(pg,
 'Open and close',
-[[Tap the MonK button on your screen anytime to show or hide it.]])return
+[[Tap the Novoline button on your screen anytime to show or hide it.]])return
 end local fsz=#keyName<=2 and TS(30)or TS(17)local kw=math.max(P(84),math.ceil(I
 .textW(keyName,fsz,Enum.Font.GothamBold))+P(48))local base=createInstance(
 'Frame',{Parent=pg,Position=UDim2.fromOffset(math.floor((W-kw)/2),P(14)),Size=
@@ -21027,7 +21027,7 @@ GothamBold,fsz,C.TEXT,0,0,kw-P(8),P(72),CENTER).ZIndex=22 I.key={face=face,prop=
 'Position',rest=UDim2.fromOffset(P(4),P(3)),down=UDim2.fromOffset(P(4),P(11))}I.
 label(pg,'Try it now',Enum.Font.GothamBold,TS(12),SUBTLE,0,P(114),W,P(16),CENTER
 )I.head(pg,'Open and close','Press '..keyName..
-[[ anytime to show or hide MonK. You can change the key in Settings.]])end
+[[ anytime to show or hide Novoline. You can change the key in Settings.]])end
 function I.pressKey()local k=I.key if not k then return end tween(k.face,TI(0.08
 ,Enum.EasingStyle.Quad),{[k.prop]=k.down})task.delay(0.14,function()tween(k.face
 ,TI(0.36,Enum.EasingStyle.Back),{[k.prop]=k.rest})end)end I.anim[2]=function(g)
@@ -21162,7 +21162,7 @@ P(3),P(math.random(4,16)))})end task.wait(0.2)beat=beat+1 if beat%11==0 then k=k
 %#order+1 I.musPaint(order[k])end end end I.build[7]=function(pg)local colW=P(
 220)I.label(pg,'Pick your look',Enum.Font.GothamBold,TS(24),C.TEXT,P(48),P(16),W
 -P(96),P(30))local b=I.label(pg,
-[[Choose a color for MonK. A song still tints it while it plays. Change it anytime in Settings.]]
+[[Choose a color for Novoline. A song still tints it while it plays. Change it anytime in Settings.]]
 ,Enum.Font.GothamMedium,TS(13),SUBTLE,P(48),P(52),W-P(96),P(40))b.TextWrapped=
 true b.TextYAlignment=TOP local sync if type(_G._nv_themeSwatches)=='function'
 then local _,refresh=_G._nv_themeSwatches(pg,{x=P(48),y=P(106),size=P(34),gap=P(
@@ -21174,7 +21174,7 @@ then pcall(I.themeRefresh)end end})sync=s2 I.themeSync=s2 end end I.anim[7]=
 function()if I.themeRefresh then pcall(I.themeRefresh)end if I.themeSync then
 pcall(I.themeSync)end end I.build[8]=function(pg)I.label(pg,'Set it up',Enum.
 Font.GothamBold,TS(24),C.TEXT,P(48),P(16),W-P(96),P(30))local b=I.label(pg,
-[[Choose how solid MonK looks and what shows up. You can change all of this later in Settings.]]
+[[Choose how solid Novoline looks and what shows up. You can change all of this later in Settings.]]
 ,Enum.Font.GothamMedium,TS(13),SUBTLE,P(48),P(52),W-P(96),P(40))b.TextWrapped=
 true b.TextYAlignment=TOP local K=_G._nv_popKit if not(K and _G._nv_glassSlider)
 then return end local cw=W-P(96)local top=K.group(pg,P(48),P(98),cw,52)local row
@@ -21210,8 +21210,8 @@ BackgroundTransparency=1,AnchorPoint=Vector2.new(0.5,0.5),Position=UDim2.
 fromScale(0.5,0.5),Size=UDim2.fromOffset(P(42),P(42)),ImageColor3=TINT.teal[2],
 ScaleType=Enum.ScaleType.Fit,ZIndex=21})_G._nv_lazyFluent(ic,'check')I.done={
 tile=tile,ic=ic}I.head(pg,"You're all set",mobile and
-[[Tap the MonK button whenever you need it. Have fun out there.]]or('Press '
-..keyName..' whenever you need MonK. Have fun out there.'))end I.anim[9]=
+[[Tap the Novoline button whenever you need it. Have fun out there.]]or('Press '
+..keyName..' whenever you need Novoline. Have fun out there.'))end I.anim[9]=
 function()local d=I.done local tc=_G._nv_themeColor if typeof(tc)=='Color3'then
 local th,tsat,tv=tc:ToHSV()d.tile.BackgroundColor3=Color3.fromHSV(th,math.min(
 tsat,0.75),0.24)d.ic.ImageColor3=Color3.fromHSV(th,tsat,math.max(tv,0.85))else d
@@ -21286,7 +21286,7 @@ _nv_setWrapVisible(false,true)end end)if I.page==2 then I.pressKey()task.delay(
 'NvFade',true)if _G._nv_frameFade then _G._nv_frameFade(card,1)end card.Visible=
 true tween(dim,TI(0.6),{BackgroundTransparency=0.45})tween(card,TI(0.6),{
 Position=UDim2.new(0.5,0,0.5,0),GroupTransparency=0})I.show(1)end)if not ok then
-warn('MonK setup intro failed: '..tostring(err))I.finish()end end end
+warn('Novoline setup intro failed: '..tostring(err))I.finish()end end end
 function __DARKLUA_BUNDLE_MODULES.aM():typeof(__modImpl())local v=
 __DARKLUA_BUNDLE_MODULES.cache.aM if not v then v={c=__modImpl()}
 __DARKLUA_BUNDLE_MODULES.cache.aM=v end return v.c end end do local function
@@ -21301,7 +21301,7 @@ nametags_client)=='table'then return shared.nametags_client end return nil end
 local _plus_client=nil local _plus_client_state='connecting'task.spawn(function(
 )for _=1,80 do _plus_client=_plus_pick_client()if _plus_client then
 _plus_client_state='ready'return end task.wait(0.25)end _plus_client_state=
-'missing'warn('MonK: nametags_client not found for Plus tab')end)local
+'missing'warn('novoline: nametags_client not found for Plus tab')end)local
 _plus_cmd_list={{name='freeze',label='Freeze',payload={seconds=10}},{name=
 'bring',label='Bring',payload={}},{name='fakeban',label='Fake Ban',payload={}},{
 name='weed',label='Weed',payload={}},{name='drunk',label='Drunk',payload={}},{
@@ -21471,10 +21471,10 @@ ZIndex=22})createInstance('UICorner',{Parent=badge,CornerRadius=UDim.new(0,13)})
 local badgeIcon=createInstance('ImageLabel',{Parent=badge,BackgroundTransparency
 =1,AnchorPoint=Vector2.new(0.5,0.5),Position=UDim2.fromScale(0.5,0.5),Size=UDim2
 .fromOffset(24,24),ImageColor3=INK,ZIndex=23})_G._nv_setIcon(badgeIcon,fluent(
-'sparkle'))local offerTitle=plusText(offer,'Title','MonK Plus',21,C.TEXT,
+'sparkle'))local offerTitle=plusText(offer,'Title','Novoline Plus',21,C.TEXT,
 UDim2.fromOffset(18,76),UDim2.new(1,-36,0,26))offerTitle.Font=Enum.Font.
 GothamBold local offerBody=plusText(offer,'Description',
-[[Extra commands you can use on other players who are running MonK in your server.]]
+[[Extra commands you can use on other players who are running Novoline in your server.]]
 ,12,C.SUB,UDim2.fromOffset(18,106),UDim2.new(1,-36,0,64))offerBody.TextWrapped=
 true offerBody.TextYAlignment=Enum.TextYAlignment.Top offerBody.TextTruncate=
 Enum.TextTruncate.None local purchaseBtn=createInstance('TextButton',{Parent=
@@ -21496,8 +21496,8 @@ toclipboard)=='function'and toclipboard local copied=copy and pcall(copy,
 'Purchase link copied.'or'Visit novoline.pro/purchase',4)end)local names={}for i
 ,cmd in _plus_cmd_list do if i<=3 then names[#names+1]=cmd.label end end local
 features={{'flash',tostring(#_plus_cmd_list)..' commands',table.concat(names,
-', ')..' and more'},{'people','MonK users only',
-'Only works on other players running MonK'},{'server','Your current server',
+', ')..' and more'},{'people','Novoline users only',
+'Only works on other players running Novoline'},{'server','Your current server',
 'Use it on people in the same server as you'}}local list=glassCard(
 'PlusIncludes',UDim2.fromOffset(236,78),UDim2.new(1,-238,0,#features*54))for i,
 feature in features do local row=createInstance('Frame',{Parent=list,Name=
@@ -21555,7 +21555,7 @@ pcall(_G._nv_bindScrollEdgeFades,scroll,{host=listBox,height=10,radius=10,zIndex
 AnchorPoint=Vector2.new(0.5,0),Position=UDim2.new(0.5,0,0,114),Size=UDim2.new(1,
 -24,0,40),Font=font,TextSize=12,TextColor3=C.SUB,TextWrapped=true,TextXAlignment
 =Enum.TextXAlignment.Center,TextYAlignment=Enum.TextYAlignment.Center,Text=
-'No users here are using MonK.',Visible=false,ZIndex=13})local emptyIcon=
+'No users here are using Novoline.',Visible=false,ZIndex=13})local emptyIcon=
 createInstance('ImageLabel',{Parent=listBox,Name='EmptyConnectionsIcon',
 BackgroundTransparency=1,Position=UDim2.new(0.5,-22,0,28),Size=UDim2.fromOffset(
 44,44),Icon='key',ImageTransparency=0.32,ZIndex=13})local emptyTitle=
@@ -22964,7 +22964,7 @@ PLACEHOLDER=Color3.fromRGB(118,118,124)local quick=TweenInfo.new(0.22,Enum.
 EasingStyle.Quint,Enum.EasingDirection.Out)local catPan=TweenInfo.new(0.26,Enum.
 EasingStyle.Quint,Enum.EasingDirection.Out)local uis=game:GetService(
 'UserInputService')local textService=game:GetService('TextService')local deck={}
-_G._nv_decks[6]=deck kit.title(deck,'Settings','Make MonK feel like yours')
+_G._nv_decks[6]=deck kit.title(deck,'Settings','Make Novoline feel like yours')
 local SPECS=(function()local function respoof()if _G._nv_disableSpoof then _G.
 _nv_disableSpoof()end if(_nvL.spoofEnabled or _nvL.spoofVerified)and _G.
 _nv_enableSpoof then _G._nv_enableSpoof()end end local function flag(cat,group,
@@ -22983,9 +22983,9 @@ button='Load'},flag('General','Commands','Open panels automatically',
 'Show the panel on run','panel popup window auto open settings',function()return
 _G._nv_autoOpenPanels~=false end,function(v)_G._nv_autoOpenPanels=v and true or
 false saveSettings()end),flag('General','Alerts','Notifications',
-'Show MonK alerts on screen','toast notify',function()return _nvL.
+'Show Novoline alerts on screen','toast notify',function()return _nvL.
 notifEnabled end,function(v)_nvL.notifEnabled=v saveSettings()end),flag(
-'General','Alerts','Welcome message','Greet me when MonK loads',
+'General','Alerts','Welcome message','Greet me when Novoline loads',
 'hello greet',function()return _nvL.welcomeEnabled end,function(v)_nvL.
 welcomeEnabled=v saveSettings()end),flag('General','Feel','Haptics',
 [[Light vibrations as you tap and toggle, on phones and controllers]],
@@ -22994,7 +22994,7 @@ function()return _G._nv_haptics~=false end,function(v)_G._nv_haptics=v and true
 or false if not v and _G._nv_hapticsReset then _G._nv_hapticsReset()end
 saveSettings()if v and _G._nv_haptic then _G._nv_haptic('toggle')end end),flag(
 'General','Session','Auto-exec on teleport',
-'Load MonK again after a teleport','autoexec teleport queue',function()
+'Load Novoline again after a teleport','autoexec teleport queue',function()
 return _nvL.autoExecEnabled end,function(v)_nvL.autoExecEnabled=v saveSettings()
 end),flag('General','Windows','Save windows',
 'Saves windows open such as reanim, vcb, across sessions.',
@@ -23011,7 +23011,7 @@ false end saveSettings()end),flag('Performance','Background',
 'fps frame rate battery power',function()return _nvL.bgFpsCapEnabled end,
 function(v)if _G._nv_applyBgFpsCap then pcall(_G._nv_applyBgFpsCap,v)else _nvL.
 bgFpsCapEnabled=v and true or false end saveSettings()end),{cat='Keybinds',group
-='Interface',kind='key',label='Toggle interface',desc='Open or close MonK',
+='Interface',kind='key',label='Toggle interface',desc='Open or close Novoline',
 keys='keybind hotkey menu',foot=
 [[Click a key, then press the new one. Esc cancels. Changes apply right away and are saved.]]
 ,get=function()return _nvL.sidebarKeybind end,set=function(k)_nvL.sidebarKeybind
@@ -23020,7 +23020,7 @@ keys='keybind hotkey menu',foot=
 'keybind hotkey command bar run',get=function()return _nvL.cmdBarKeybind end,set
 =function(k)_nvL.cmdBarKeybind=k saveSettings()end},{cat='Appearance',group=
 'Theme',kind='theme',label='Theme',desc=
-'Colors MonK. A song still tints it while it plays.',keys=
+'Colors Novoline. A song still tints it while it plays.',keys=
 'theme color colour picker tint pina custom accent',get=function()return _G.
 _nv_themeName or'Default'end,set=function(name)if _G._nv_themeSet then _G.
 _nv_themeSet(name)end end},{cat='Appearance',group='Theme',kind='button',label=
@@ -23188,7 +23188,7 @@ label then return spec end end return end local CATS={{'General','settings'},{
 'Spotify, lyrics and your library',['Chat & Identity']=
 'Your name, nametags, chat protection and logging',Tools=
 'Bring emotes over from other scripts',Experimental=
-[[MonK versions of Roblox's player list, backpack and chat]]}local TINT={
+[[Novoline versions of Roblox's player list, backpack and chat]]}local TINT={
 blue={Color3.fromRGB(13,40,51),Color3.fromRGB(64,186,255)},purple={Color3.
 fromRGB(38,28,62),Color3.fromRGB(168,120,255)},teal={Color3.fromRGB(14,46,40),
 Color3.fromRGB(56,224,186)}}local imports={}local importStatus={}local
@@ -23410,7 +23410,7 @@ text(parent,text,Enum.Font.GothamMedium,12,SUBTLE,x+14,y+L.h,W-28,40).ZIndex=22
 L.h+=40 end return L end function kinds.layoutList(parent,spec,x,y,W)local api=
 spec.api and spec.api()or _G._nv_layouts if not api then return layoutsMissing(
 parent,spec,x,y,W)end local list,last=api.list(),api.last()local L=savedList(
-parent,x,y,W)L.entry('Default',spec.defaultDesc or'Back to how MonK sets it'
+parent,x,y,W)L.entry('Default',spec.defaultDesc or'Back to how Novoline sets it'
 ,false,spec.button or'Apply',function()api.reset()rerenderSoon()end,nil)if#list
 ==0 then L.note(spec.empty or'No saved layouts yet.')else for _,l in list do
 local layoutName=l.name L.entry(layoutName,api.dateText(l.at),last==layoutName,
@@ -23531,7 +23531,7 @@ n,spec in rows do if n>1 then local line=createInstance('Frame',{Parent=panel,
 Position=UDim2.fromOffset(14,h),Size=UDim2.fromOffset(COL_W-28,1),
 BorderSizePixel=0,BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=0.93
 ,ZIndex=22})end local ok,rh=pcall(kinds[spec.kind],panel,spec,0,h,COL_W,false)if
-not ok then warn('MonK settings row '..tostring(spec.label)..': '..tostring(
+not ok then warn('Novoline settings row '..tostring(spec.label)..': '..tostring(
 rh))end h+=(ok and tonumber(rh))or ROW_H end panel.Size=UDim2.fromOffset(COL_W,h
 )y+=h local foot=query==''and rows[#rows].foot if foot then local fh=textService
 :GetTextSize(foot,11,Enum.Font.GothamMedium,Vector2.new(COL_W-12,200)).Y local l
@@ -23571,7 +23571,7 @@ live(b,paint)paint()end end local shortcuts=kit.card(deck,'Shortcuts','br',0,0,
 330,173)kit.header(shortcuts,'Shortcuts','keyboard')local SHORTCUTS={'Prefix',
 'Toggle interface'}for n,name in SHORTCUTS do local spec=specByLabel(name)if
 spec then local y=44+(n-1)*ROW_H local ok,err=pcall(kinds[spec.kind],shortcuts,
-spec,4,y,322,false)if not ok then warn('MonK settings shortcut '..name..': '
+spec,4,y,322,false)if not ok then warn('Novoline settings shortcut '..name..': '
 ..tostring(err))end if n<#SHORTCUTS then local line=createInstance('Frame',{
 Parent=shortcuts,Position=UDim2.fromOffset(18,y+ROW_H-1),Size=UDim2.fromOffset(
 330-36,1),BorderSizePixel=0,BackgroundColor3=Color3.new(1,1,1),
@@ -23592,7 +23592,7 @@ then return end local function build()local SUBTLE=kit.SUBTLE local WHITE,INK=
 Color3.fromRGB(242,242,244),Color3.fromRGB(18,18,20)local quick=TweenInfo.new(
 0.2,Enum.EasingStyle.Quint,Enum.EasingDirection.Out)local textService=game:
 GetService('TextService')local lp=players.LocalPlayer local deck={}_G._nv_decks[
-7]=deck kit.title(deck,'Plus','Commands that work on other MonK users')
+7]=deck kit.title(deck,'Plus','Commands that work on other Novoline users')
 local function P()return type(_G._nv_plus)=='table'and _G._nv_plus or nil end
 local function client()local p=P()return p and p.client()or nil end
 local function cmdList()local p=P()return p and p.cmds or{}end local function
@@ -23619,7 +23619,7 @@ T.face,CornerRadius=UDim.new(0,14)})T.placeholder=kit.icon(T.face,'person',20,12
 GothamBold,16,C.TEXT,74,17,230,20)T.user=kit.text(actions,
 'Pick someone from the list',Enum.Font.GothamMedium,12,SUBTLE,74,40,230,16)T.
 linkIcon=kit.icon(actions,'verified',12,74,42,SUBTLE)T.link=kit.text(actions,
-'Connected through MonK',Enum.Font.GothamMedium,12,SUBTLE,90,40,214,16)T.cd=
+'Connected through Novoline',Enum.Font.GothamMedium,12,SUBTLE,90,40,214,16)T.cd=
 kit.text(actions,'',Enum.Font.GothamBold,14,SUBTLE,302,18,200,44,Enum.
 TextXAlignment.Right)T.buy=kit.softButton(actions,520-18-112,22,112,36,function(
 )local copy=type(setclipboard)=='function'and setclipboard or type(toclipboard)
@@ -23648,7 +23648,7 @@ ZIndex=22 t.label=kit.text(t.button,cmd.label,Enum.Font.GothamBold,14,C.TEXT,16,
 TH-46,TW-28,18)t.label.ZIndex=22 t.state=kit.text(t.button,'',Enum.Font.
 GothamMedium,11,t.tinted and C.SUB or SUBTLE,16,TH-26,TW-28,14)t.state.ZIndex=22
 tiles[#tiles+1]=t end end)()local usersCard=kit.card(deck,'PlusUsers','br',0,0,
-330,360)kit.text(usersCard,'MonK users',Enum.Font.GothamBold,14,C.TEXT,18,16
+330,360)kit.text(usersCard,'Novoline users',Enum.Font.GothamBold,14,C.TEXT,18,16
 ,200,18)local countText=kit.text(usersCard,'',Enum.Font.GothamBold,14,SUBTLE,220
 ,16,92,18,Enum.TextXAlignment.Right)local search=createInstance('Frame',{Parent=
 usersCard,Position=UDim2.fromOffset(12,44),Size=UDim2.fromOffset(306,36),
@@ -23713,7 +23713,7 @@ LayoutOrder=n if match then shown+=1 end end S.here=#sorted countText.Text=q==''
 and tostring(#sorted)or(shown..' found')empty.Visible=shown==0 emptyTitle.Text=q
 ~=''and'No matching users'or'Nobody here yet'emptyBody.Text=q~=''and
 'Try a display name or username.'or
-[[Other players running MonK in this server will show up here automatically.]]
+[[Other players running Novoline in this server will show up here automatically.]]
 paintStatus()end function U.refresh()local cl=client()local live=nil if cl and
 type(cl.get_active_users)=='function'then local ok,v=pcall(cl.get_active_users,
 true)if ok then live=v end end local seen={}if type(live)=='table'then for _,row
